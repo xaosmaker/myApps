@@ -1,0 +1,47 @@
+---
+services:
+  myapp_server:
+    container_name: myapps_server
+    build:
+      context: ./app/server
+      dockerfile: ../../docker/django/local/Dockerfile
+      args:
+        UID: "1000"
+        GID: "1000"
+
+    env_file:
+      - ./.envs/.local
+    expose:
+      - "8000"
+
+    ports:
+      - "0.0.0.0:8001:8000"
+    volumes:
+      - ./app/server:/app:z
+    networks:
+      - myApps-net
+    command: >
+      sh -c 'python manage.py runserver 0.0.0.0:8000'
+    depends_on:
+      - myapps_db
+
+      # sh -c 'python manage.py wait_for_db && python manage.py migrate && python manage.py runserver 0.0.0.0:8000'
+  myapps_db:
+    container_name: myapps_db
+    build:
+      context: .
+      dockerfile: ./docker/postgres/local/Dockerfile
+    volumes:
+      - myapps_db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - myApps-net
+    env_file:
+      - ./.envs/.local
+
+networks:
+  myApps-net:
+
+volumes:
+  myapps_db_data: {}

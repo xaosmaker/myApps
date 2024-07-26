@@ -1,0 +1,38 @@
+---
+name: Checks
+
+on:
+  push:
+    branches: ["main", "develop"]
+
+jobs:
+  test:
+    name: Test server side
+    runs-on: ubuntu-latest
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+    steps:
+      - uses: act10ns/slack@v2
+        with:
+          status: starting
+          channel: "#mar-2024-weekend-batch"
+          message: Starting Docker Build image...
+        if: always()
+      - name: Login to Docker
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USER }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Test
+        # run: docker-compose -f local.yml run --rm myapp_server python manage.py test -v 2
+        run: docker-compose -f local.yml run --rm myapp_server sh -c 'pytest --no-cov -p no:cacheprovider'
+
+      - uses: act10ns/slack@v2
+        with:
+          channel: "#myapps"
+          status: ${{ job.status }}
+          steps: ${{ toJson(steps) }}
+        if: always()
