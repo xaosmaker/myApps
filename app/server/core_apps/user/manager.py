@@ -61,5 +61,7 @@ class UserManager(DjangoUserManager):
 
         if extra_fields.get("is_superuser") is not True:
             raise ValueError(_("Superuser must have is_superuser=True."))
+        if extra_fields.get("is_active") is not True:
+            raise ValueError(_("Superuser must have is_active=True."))
 
         return self._create_user(username, email, password, **extra_fields)

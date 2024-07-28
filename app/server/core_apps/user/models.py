@@ -35,3 +35,6 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name = _("User")
         verbose_name_plural = _("Users")
         ordering = ["-created_at"]
+
+    def __str__(self) -> str:
+        return str(self.email)
