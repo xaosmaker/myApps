@@ -1,47 +1,43 @@
 ---
 services:
-  myapp_server:
-    container_name: myapps_server
-    build:
-      context: ./app/server
-      dockerfile: ../../docker/django/local/Dockerfile
-      args:
-        UID: "1000"
-        GID: "1000"
-
-    env_file:
-      - ./.envs/.local
-    expose:
-      - "8000"
-
-    ports:
-      - "0.0.0.0:8001:8000"
-    volumes:
-      - ./app/server:/app:z
-    networks:
-      - myApps-net
-    command: >
-      sh -c 'python manage.py runserver 0.0.0.0:8000'
-    depends_on:
-      - myapps_db
-
-      # sh -c 'python manage.py wait_for_db && python manage.py migrate && python manage.py runserver 0.0.0.0:8000'
-  myapps_db:
-    container_name: myapps_db
+  myapps_api:
     build:
       context: .
-      dockerfile: ./docker/postgres/local/Dockerfile
+      dockerfile: ./docker/local/django/Dockerfile
+    image: myapps_api
+    container_name: myapps_api
     volumes:
-      - myapps_db_data:/var/lib/postgresql/data
+      - ./api:/app:z
+      - ./api/static:/app/static
+    ports:
+      - "8001:8000"
+    # expose:
+    #   - "8000"
+    env_file:
+      - ./.envs/.env.local
+    depends_on:
+      - myapps_postgres_db
+    command: /start
+    networks:
+      - myApps_nw
+
+  myapps_postgres_db:
+    build:
+      context: .
+      dockerfile: ./docker/local/postgres/Dockerfile
+    image: myapps_postgres_db
+    container_name: myapps_postgres_db
     ports:
       - "5432:5432"
-    networks:
-      - myApps-net
+    volumes:
+      - myapps_postgres_db_data:/var/lib/postgresql/data
     env_file:
-      - ./.envs/.local
+      - ./.envs/.env.local
+    networks:
+      - myApps_nw
 
 networks:
-  myApps-net:
+  myApps_nw:
 
 volumes:
-  myapps_db_data: {}
+  myapps_postgres_db_data: {}
