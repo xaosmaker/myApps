@@ -19,6 +19,8 @@ makemigrations:
 migrate:
 	docker-compose -f local.yml run --rm myapps_api python manage.py migrate
 
+pytest:
+	docker-compose -f local.yml run --rm myapps_api pytest
 config:
 	docker-compose -f local.yml config
 
