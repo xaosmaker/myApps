@@ -28,7 +28,7 @@ jobs:
 
       - name: Test
         # run: docker-compose -f local.yml run --rm myapp_server python manage.py test -v 2
-        run: docker-compose -f local.yml run --rm myapp_api sh -c 'pytest --no-cov -p no:cacheprovider'
+        run: docker compose -f local.yml run --rm myapps_api sh -c 'pytest --no-cov -p no:cacheprovider'
 
       - uses: act10ns/slack@v2
         with:
