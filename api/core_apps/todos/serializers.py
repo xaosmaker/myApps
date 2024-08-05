@@ -6,7 +6,7 @@ from core_apps.todos.models import Todo, TodoTasks
 class TodoSerializer(ModelSerializer):
     class Meta:
         model = TodoTasks
-        fields = ["pkid", "name", "todo", "is_completed"]
+        fields = ["pkid", "name", "is_completed"]
         read_only_fields = ["pkid"]
 
 
@@ -33,9 +33,28 @@ class TodoListSerializer(ModelSerializer):
 
     def create(self, validated_data):
         user = self.context["request"].user
-        print(validated_data)
-        todo_tasks = validated_data.pop("todo", None)
-        print(todo_tasks)
+        validated_data.pop("todo", None)
 
         instance = Todo.objects.create(profile=user.profile, **validated_data)
+        return instance
+
+    def update(self, instance, validated_data):
+        todo_tasks = validated_data.pop("todo", None)
+        for todo in todo_tasks:
+            try:
+                todo_task = TodoTasks.objects.get(
+                    todo_list=instance,
+                    name=todo["name"],
+                )
+
+            except TodoTasks.DoesNotExist:
+                pass
+                todo_task = TodoTasks.objects.create(
+                    todo_list=instance, name=todo["name"]
+                )
+
+            todo_task.is_completed = todo["is_completed"]
+            todo_task.save()
+
+        instance.finish_model()
         return instance

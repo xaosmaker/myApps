@@ -16,12 +16,19 @@ const todoSlice = createSlice({
   initialState: initialTodoState,
   reducers: {
     addTodoTask: (state, action: PayloadAction<string>) => {
-      const todoTask: TodoTaskData = {
-        name: action.payload,
-        is_completed: false,
-      };
-      state.todo_tasks.push(todoTask);
-      state.todo_tasks = sortTodo(state.todo_tasks);
+      const name = state.todo_tasks.find(
+        (data) => data.name === action.payload
+      );
+      if (name === undefined) {
+        const todoTask: TodoTaskData = {
+          pkid: null,
+          name: action.payload,
+          is_completed: false,
+        };
+        state.todo_tasks.push(todoTask);
+
+        state.todo_tasks = sortTodo(state.todo_tasks);
+      }
     },
     removeTodoTask: (state, action: PayloadAction<string>) => {
       state.todo_tasks = state.todo_tasks.filter(
@@ -34,9 +41,22 @@ const todoSlice = createSlice({
       state.pkid = ac.pkid;
       state.title = ac.title;
       state.completed = ac.completed;
+      state.expired = ac.expired;
       state.completed = ac.completed_in_time;
       state.complete_until = ac.complete_until;
       state.todo_tasks = [...action.payload.todo_tasks];
+
+      state.todo_tasks = sortTodo(state.todo_tasks);
+    },
+    setTodoTaskCompleted: (state, action) => {
+      for (const i of state.todo_tasks) {
+        if (i.name === action.payload) {
+          i.is_completed = true;
+          break;
+        }
+      }
+
+      state.todo_tasks = sortTodo(state.todo_tasks);
     },
   },
 });
@@ -48,4 +68,9 @@ function sortTodo(data: TodoTaskData[]) {
 }
 
 export default todoSlice.reducer;
-export const { setTodoState, removeTodoTask, addTodoTask } = todoSlice.actions;
+export const {
+  setTodoState,
+  removeTodoTask,
+  addTodoTask,
+  setTodoTaskCompleted,
+} = todoSlice.actions;

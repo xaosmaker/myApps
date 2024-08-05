@@ -41,4 +41,14 @@ async function apiCreateTodos(todosList: TodoData) {
   }
 }
 
-export { apiTodosList, apiCreateTodos, apiTodo };
+async function apiPatchTodos(todosList: TodoData) {
+  try {
+    const res = await axios.patch(`/api/todos/${todosList.pkid}/`, todosList);
+    const data = res.data;
+    return data;
+  } catch (error) {
+    throw new Error(error.response.data.detail);
+  }
+}
+
+export { apiTodosList, apiCreateTodos, apiTodo, apiPatchTodos };

@@ -2,10 +2,7 @@ import { NavLink } from "react-router-dom";
 
 const navLingDecoration = " flex items-center justify-start gap-4 px-2 py-2";
 const active = "rounded-md bg-slate-800";
-<<<<<<< HEAD
 //TODO: make a burger menu here
-=======
->>>>>>> 7731070 (feat: add the client configure authentication and start writing my todos)
 export default function NavBar() {
   return (
     <div className="flex h-16 items-center justify-between bg-slate-950 px-4  ">
@@ -41,7 +38,6 @@ export default function NavBar() {
             Work hours
           </NavLink>
         </li>
-<<<<<<< HEAD
         {/**/}
         {/* <li> */}
         {/*   <button>Houses</button> */}
@@ -49,15 +45,6 @@ export default function NavBar() {
         {/* <li> */}
         {/*   <button>Vehicles</button> */}
         {/* </li> */}
-=======
-
-        <li>
-          <button>Houses</button>
-        </li>
-        <li>
-          <button>Vehicles</button>
-        </li>
->>>>>>> 7731070 (feat: add the client configure authentication and start writing my todos)
       </ul>
     </div>
   );

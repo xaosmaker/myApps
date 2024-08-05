@@ -38,7 +38,7 @@ export interface TodoListData {
 }
 
 export interface TodoTaskData {
-  pkid?: number;
+  pkid: number | null;
   name: string;
   is_completed: boolean;
 }

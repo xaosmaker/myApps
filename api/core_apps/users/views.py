@@ -9,6 +9,7 @@ from rest_framework.views import APIView
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 logger = logging.getLogger(__name__)
+# TODO: make when the refresh_token expire remove all tokkens
 
 
 def set_auth_cookies(

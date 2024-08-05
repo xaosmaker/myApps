@@ -6,11 +6,11 @@ import { apiCreateTodos } from "../../services/todosApi";
 import { useNavigate } from "react-router-dom";
 import { TodoData } from "../../types/dataTypes";
 
-export default function AddToDoList() {
+export default function AddTodo() {
   const navigate = useNavigate();
   const { mutate } = useMutation({
-    mutationFn: (todoData: TodolistData) => apiCreateTodos(todoData),
-    onSuccess: (data: TodolistData) => {
+    mutationFn: (todoData: TodoData) => apiCreateTodos(todoData),
+    onSuccess: (data: TodoData) => {
       if (data.pkid) {
         navigate(`/todos/${data.pkid}/add-edit-todo`);
       }
