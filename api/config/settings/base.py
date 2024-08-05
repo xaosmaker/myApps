@@ -32,7 +32,10 @@ THIRD_PARTY_APPS = [
     "djoser",
     "drf_spectacular",
 ]
-LOCAL_APPS = ["core_apps.users"]
+LOCAL_APPS = [
+    "core_apps.users",
+    "core_apps.common",
+]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 MIDDLEWARE = [
@@ -136,19 +139,47 @@ MEDIA_ROOT = path.join(BASE_DIR, "mediafiles")
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = "users.User"
-REST_FRAMEWORK = {
-    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
-}
 
 SPECTACULAR_SETTINGS = {
     "TITLE": "My bundle of apps",
     "DESCRIPTION": "bundle of personal use apps one is todo list",
     "VERSION": "1.0.0",
 }
+
+COOKIE_NAME = "access"
+COOKIE_SAMESITE = "Lax"
+COOKIE_PATH = "/"
+COOKIE_HTTPONLY = True
+COOKIE_SECURE = getenv("COOKIE_SECURE", "True") == "True"
+
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "core_apps.common.cookie_auth.CookieAuthentication",
+        # "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ),
+    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    # "DEFAULT_FILTER_BACKENDS": [
+    #     "django_filters.rest_framework.DjangoFilterBackend",
+    # ],
+    "PAGE_SIZE": 10,
+    # "DEFAULT_THROTTLE_CLASSES": (
+    #     "rest_framework.throttling.AnonRateThrottle",
+    #     "rest_framework.throttling.UserRateThrottle",
+    # ),
+    # "DEFAULT_THROTTLE_RATES": {
+    #     "anon": "2/day",
+    #     "user": "500/day",
+    # },
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+
 SIMPLE_JWT = {
     "SIGNING_KEY": getenv("SIGNING_KEY"),
+    # "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
-    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "REFRESH_TOKEN_LIFETIME": timedelta(hours=1),
     "ROTATE_REFRESH_TOKENS": True,
     "USER_ID_FIELD": "id",
     "USER_ID_CLAIM": "user_id",
@@ -164,4 +195,7 @@ DJOSER = {
     "PASSWORD_RESET_CONFIRM_RETYPE": True,
     "ACTIVATION_URL": "activate/{uid}/{token}",
     "PASSWORD_RESET_CONFIRM_URL": "password-reset/{uid}/{token}",
+    "PERMISSIONS": {
+        "user_list": ["rest_framework.permissions.IsAdminUser"],
+    },
 }

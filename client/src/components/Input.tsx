@@ -1,11 +1,19 @@
 import { UseFormRegisterReturn } from "react-hook-form";
 
 interface loginInput {
+<<<<<<< HEAD
   htmlType: "text" | "password" | string;
   name: string;
   error: string | undefined;
   required?: boolean;
   displayName?: string | null;
+=======
+  htmlType: string;
+  name: string;
+  error: string | undefined;
+  required?: boolean;
+  displayName?: string[] | null;
+>>>>>>> 7731070 (feat: add the client configure authentication and start writing my todos)
 
   register: UseFormRegisterReturn;
 }
@@ -25,16 +33,24 @@ export default function Input({
         id={name}
         {...register}
         placeholder=""
+<<<<<<< HEAD
         className={`peer block w-full transform border-b-2  bg-transparent px-0 py-2.5 caret-slate-100 outline-none  ${
           error
             ? "border-red-600 focus:border-red-600"
             : "border-slate-800 autofill:duration-[50000s] focus:border-blue-600"
         }`}
+=======
+        className={`peer block w-full transform border-b-2  bg-transparent px-0 py-2.5 caret-slate-100 outline-none  ${error ? "border-red-600 focus:border-red-600" : "border-slate-800 focus:border-blue-600 autofill:duration-[50000s]"}`}
+>>>>>>> 7731070 (feat: add the client configure authentication and start writing my todos)
         required={required}
       />
       <label
         htmlFor={name}
+<<<<<<< HEAD
         className="absolute left-0 top-3 origin-[0] -translate-y-7 capitalize peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-150 peer-placeholder-shown:text-slate-700 peer-focus:-translate-y-6 peer-focus:scale-100 peer-focus:text-blue-600"
+=======
+        className="absolute left-0 top-3 origin-[0] -translate-y-6 capitalize peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-150 peer-placeholder-shown:text-slate-700 peer-focus:-translate-y-6 peer-focus:scale-100 peer-focus:text-blue-600"
+>>>>>>> 7731070 (feat: add the client configure authentication and start writing my todos)
       >
         {displayName ? displayName : name}
       </label>

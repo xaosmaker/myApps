@@ -2,7 +2,6 @@ import axiosInstance from "axios";
 import { store } from "../store/store";
 import { logOut } from "../store/authSlice";
 import { refresh } from "./authApiCalls";
-import { Cookies } from "react-cookie";
 const axios = axiosInstance.create({});
 
 const wrongCredentials = "No active account found with the given credentials";
@@ -10,7 +9,6 @@ const authCredNotProvided = "Authentication credentials were not provided.";
 const tokenRefreshSuccessfull = "Access tokens refresh successfully.";
 const noToken = "This field is required.";
 const invalidToken = "Given token not valid for any token type";
-const userNotFount = "User not found";
 
 axios.interceptors.response.use(
   function (res) {
