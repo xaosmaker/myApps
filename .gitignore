@@ -99,7 +99,7 @@ api/pyrightconfig.json
 
 
 
-client/node_modules
+client/node_modules/*
 client/.pnp
 client/coverage
 client/.next/

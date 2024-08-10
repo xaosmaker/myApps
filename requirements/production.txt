@@ -1,0 +1,4 @@
+-r base.txt
+
+psycopg==3.2.1
+gunicorn==22.0.0

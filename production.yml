@@ -3,18 +3,18 @@ services:
   myapps_api:
     build:
       context: .
-      dockerfile: ./docker/local/django/Dockerfile
+      dockerfile: ./docker/production/django/Dockerfile
     image: myapps_api
     container_name: myapps_api
+    restart: always
     volumes:
-      - ./api:/app:z
-      - ./api/static:/app/static
+      - static_volume:/app/static
     # ports:
     #   - "8001:8000"
     expose:
       - "8000"
     env_file:
-      - ./.envs/.env.local
+      - ./.envs/.env.production
     depends_on:
       - myapps_postgres_db
     command: /start
@@ -24,7 +24,7 @@ services:
   myapps_postgres_db:
     build:
       context: .
-      dockerfile: ./docker/local/postgres/Dockerfile
+      dockerfile: ./docker/production/postgres/Dockerfile
     image: myapps_postgres_db
     container_name: myapps_postgres_db
     ports:
@@ -32,7 +32,8 @@ services:
     volumes:
       - myapps_postgres_db_data:/var/lib/postgresql/data
     env_file:
-      - ./.envs/.env.local
+      - ./.envs/.env.production
+    restart: always
     networks:
       - myApps_nw
   myapps_client:
@@ -45,8 +46,8 @@ services:
     #   - "3000:5173"
     expose:
       - "5173"
+    restart: always
     volumes:
-      - ./client:/app
       - /app/node_modules
     networks:
       - myApps_nw
@@ -56,11 +57,11 @@ services:
       dockerfile: Dockerfile
     image: myapps_nginx
     container_name: myapps_nginx
+    restart: always
     ports:
       - "8080:80"
     volumes:
-      - ./static:/app/static
-      - ./api/static:/app/static
+      - static_volume:/app/static
       - myapps_logs_store:/var/log/nginx
     depends_on:
       - myapps_api
@@ -73,3 +74,4 @@ networks:
 volumes:
   myapps_postgres_db_data: {}
   myapps_logs_store: {}
+  static_volume: {}

@@ -8,7 +8,6 @@ from core_apps.profiles.models import Profile
 
 # Create your models here.
 # TODO: need test for todos and  todos admin
-<<<<<<< HEAD
 
 
 class Todo(TimeStampedModel):
@@ -38,12 +37,7 @@ class Todo(TimeStampedModel):
     # TODO: make a method who calculates if the doto is completed at all
 
     def finish_model(self):
-        print("run")
-        print(datetime.datetime.now(tz=datetime.UTC) > self.complete_until)
-        print(self.completed is False)
-        print(self.expired is False)
         if self.completed is False and self.expired is False:
-            print(datetime.datetime.now(tz=datetime.UTC) > self.complete_until)
             if datetime.datetime.now(tz=datetime.UTC) > self.complete_until:
                 self.expired = True
 
@@ -66,40 +60,6 @@ class TodoTasks(TimeStampedModel):
         Todo,
         on_delete=models.CASCADE,
         related_name="todo",
-=======
-
-
-class TodosList(TimeStampedModel):
-    profile = models.ForeignKey(
-        Profile,
-        on_delete=models.CASCADE,
-        related_name="profile",
-    )
-    title = models.CharField(max_length=50, verbose_name=_("Todo List Title"))
-    complete_until = models.DateTimeField(verbose_name=_("Todo Complete Time"))
-    is_completed_in_time = models.BooleanField(
-        default=False, verbose_name=_("Is Completed In Time")
-    )
-    is_completed = models.BooleanField(
-        default=False,
-        verbose_name=_("Is Completed"),
-    )
-
-    def __str__(self) -> str:
-        return str(self.title)
-
-    # TODO: make a method who calculates if the doto is completed in time
-    # TODO: make a method who calculates if the doto is completed at all
-
-
-class Todos(TimeStampedModel):
-    name = models.CharField(max_length=50, verbose_name=_("Todo Name"))
-    is_completed = models.BooleanField(default=False)
-    todos_list = models.ForeignKey(
-        TodosList,
-        on_delete=models.CASCADE,
-        related_name="todos",
->>>>>>> acc0c38 (chore: finish the models of todos and profiles)
     )
 
     def __str__(self) -> str:

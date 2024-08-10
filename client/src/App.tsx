@@ -18,8 +18,8 @@ import Error404 from "./pages/Error404";
 import AuthLayout from "./features/authentication/AuthLayout";
 import ShowUser from "./features/user/ShowUser";
 import ShowToDoList from "./features/todo/ShowToDoList";
-import AddToDoList from "./features/todo/AddToDoList";
-import AddEditTodo from "./features/todo/AddEditTodo";
+import AddEditTodoTask from "./features/todo/AddEditTodoTask";
+import AddTodo from "./features/todo/AddTodo";
 
 const queryclient = new QueryClient({
   defaultOptions: {
@@ -73,8 +73,8 @@ const routet = createBrowserRouter([
             children: [
               { index: true, element: <Navigate replace to="show-todos" /> },
               { path: "show-todos", element: <ShowToDoList /> },
-              { path: "add-todo", element: <AddToDoList /> },
-              { path: ":pkid/add-edit-todo", element: <AddEditTodo /> },
+              { path: "add-todo", element: <AddTodo /> },
+              { path: ":pkid/add-edit-todo", element: <AddEditTodoTask /> },
             ],
           },
         ],
