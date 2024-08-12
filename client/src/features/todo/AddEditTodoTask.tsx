@@ -2,7 +2,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { apiPatchTodos, apiTodo } from "../../services/todosApi";
 import { useParams } from "react-router-dom";
 import { dateToGRformat } from "../../utils/helperFunctions";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Loader from "../../pages/Loader";
 import { Checked, Unchecked } from "../../img/svgsExport";
 import { TodoData } from "../../types/dataTypes";

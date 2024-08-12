@@ -10,7 +10,6 @@
     "noEmit": true
   },
   "include": [
-    "vite.config.ts",
-    "custom.d.ts"
+    "vite.config.ts"
   ]
 }

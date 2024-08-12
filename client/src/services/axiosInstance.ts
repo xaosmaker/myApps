@@ -3,6 +3,7 @@ import { store } from "../store/store";
 import { logOut } from "../store/authSlice";
 import { refresh } from "./authApiCalls";
 const axios = axiosInstance.create({});
+const axiosError = axiosInstance.isAxiosError;
 
 const wrongCredentials = "No active account found with the given credentials";
 const authCredNotProvided = "Authentication credentials were not provided.";
@@ -65,3 +66,4 @@ axios.interceptors.request.use(
 );
 
 export default axios;
+export { axiosError };

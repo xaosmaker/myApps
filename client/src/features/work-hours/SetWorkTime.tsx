@@ -40,9 +40,9 @@ export default function SetWorkTime() {
         <Table.Body>
           {DATA.map((data) => (
             <Table.Row>
-              <span>{data.company}</span>
-              <span>{data.startOfShift}</span>
-              <span>{data.endOfShift}</span>
+              <span>{data.location}</span>
+              <span>{data.startOfWork}</span>
+              <span>{data.endOfWork}</span>
             </Table.Row>
           ))}
         </Table.Body>

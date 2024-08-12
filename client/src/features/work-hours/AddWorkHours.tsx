@@ -21,6 +21,7 @@ export default function AddWorkHours() {
 
   const onHandleSubmit: SubmitHandler<AddWorkDayData> = (data, event) => {
     event?.preventDefault();
+    console.log("work hours data", data);
   };
   useEffect(() => {
     if (["weekend", "timesOff", "sickLeave", "publicHoliday"].includes(day)) {

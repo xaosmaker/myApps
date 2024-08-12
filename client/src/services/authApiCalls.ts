@@ -1,5 +1,5 @@
 import { LoginFormValues } from "../types/formtypes";
-import axios from "./axiosInstance";
+import axios, { axiosError } from "./axiosInstance";
 
 async function login(credentials: LoginFormValues) {
   try {
@@ -7,7 +7,10 @@ async function login(credentials: LoginFormValues) {
     const data = await res.data;
     return data;
   } catch (e) {
-    throw new Error(e.response.data.detail);
+    if (axiosError(e)) {
+      throw new Error(e.response?.data.detail);
+    }
+    throw new Error("something went wrong");
   }
 }
 
@@ -17,7 +20,10 @@ async function refresh() {
     const data = await res.data;
     return data;
   } catch (e) {
-    return e.response;
+    if (axiosError(e)) {
+      return e.response;
+    }
+    throw new Error("something went wrong");
   }
 }
 
@@ -27,7 +33,10 @@ async function showUser() {
     const data = await res.data;
     return data;
   } catch (error) {
-    return error.response;
+    if (axiosError(error)) {
+      return error.response;
+    }
+    throw new Error("something went wrong");
   }
 }
 export { login, showUser, refresh };
