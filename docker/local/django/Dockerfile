@@ -31,9 +31,9 @@ RUN apk update --no-cache && apk upgrade --no-cache \
 
 RUN addgroup --system --gid ${GID} django && \ 
   adduser --system --uid ${UID} --disabled-password  --ingroup django django && \
-  mkdir -p ${APP_HOME}/staticfiles && \
-  chown -R django:django ${APP_HOME}/staticfiles && \
-  chmod -R 775 ${APP_HOME}/staticfiles
+  mkdir -p ${APP_HOME}/static && \
+  chown -R django:django ${APP_HOME}/static && \
+  chmod -R 775 ${APP_HOME}/static
 
 
 RUN apk update --no-cache && apk upgrade --no-cache \
