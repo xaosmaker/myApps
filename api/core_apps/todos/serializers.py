@@ -1,3 +1,5 @@
+from datetime import timedelta
+
 from rest_framework.serializers import ModelSerializer
 
 from core_apps.todos.models import Todo, TodoTasks
@@ -34,6 +36,7 @@ class TodoListSerializer(ModelSerializer):
     def create(self, validated_data):
         user = self.context["request"].user
         validated_data.pop("todo", None)
+        validated_data["complete_until"] += timedelta(hours=23, seconds=59, minutes=59)
 
         instance = Todo.objects.create(profile=user.profile, **validated_data)
         return instance
