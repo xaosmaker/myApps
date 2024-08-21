@@ -4,12 +4,37 @@ import { TodoTaskData } from "../../types/dataTypes";
 import { setTodoTaskCompleted } from "../../store/todoSlice";
 import { FaTrashCan } from "react-icons/fa6";
 
-export default function TodoTaskItem({ todo }: { todo: TodoTaskData }) {
+export default function TodoTaskItem({
+  todo,
+  expired,
+}: {
+  todo: TodoTaskData;
+  expired: boolean;
+}) {
   const dispatch = useDispatch();
+  let showTrash;
+  let clickCheck;
   function handleAddClick() {
     console.log("click");
     console.log("name", todo.name);
     dispatch(setTodoTaskCompleted(todo.name));
+  }
+  if (!todo.is_completed && !expired) {
+    showTrash = (
+      <button>
+        <FaTrashCan className="text-red-500" />
+      </button>
+    );
+    clickCheck = (
+      <button
+        className="flex justify-center items-center"
+        onClick={handleAddClick}
+      >
+        <Unchecked />
+      </button>
+    );
+  } else {
+    clickCheck = <Unchecked />;
   }
   return (
     <div
@@ -17,24 +42,9 @@ export default function TodoTaskItem({ todo }: { todo: TodoTaskData }) {
         todo.is_completed ? "bg-green-700" : "bg-red-300"
       } rounded-md px-3`}
     >
-      <span>
-        {todo.is_completed ? (
-          <Checked />
-        ) : (
-          <button
-            className="flex justify-center items-center"
-            onClick={handleAddClick}
-          >
-            <Unchecked />
-          </button>
-        )}
-      </span>
+      <span>{todo.is_completed ? <Checked /> : clickCheck}</span>
       <span>{todo.name}</span>
-      {todo.is_completed ? null : (
-        <button>
-          <FaTrashCan className="text-red-500" />
-        </button>
-      )}
+      {showTrash}
     </div>
   );
 }

@@ -83,7 +83,7 @@ export default function AddEditTodoTask() {
       <div className=" flex max-h-[75%] flex-wrap gap-x-4 gap-y-2 overflow-y-scroll rounded-sm bg-slate-600 p-2 ">
         {todo.todo_tasks.length !== 0 ? (
           todo.todo_tasks?.map((data) => (
-            <TodoTaskItem key={data.name} todo={data} />
+            <TodoTaskItem key={data.name} todo={data} expired={todo.expired} />
           ))
         ) : (
           <div> pls add todo</div>
