@@ -23,7 +23,9 @@ export default function TodoCard({ todoList }: { todoList: TodoData }) {
                 <span className="uppercase">Expired</span>
               ) : (
                 <span>
-                  <span className="mr-1 uppercase">expires:</span>
+                  <span className="mr-1 uppercase">
+                    {todoList.completed ? "completed:" : "expires:"}
+                  </span>
                   {dateToGRformat(todoList.complete_until)}
                 </span>
               )}
