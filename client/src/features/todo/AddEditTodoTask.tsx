@@ -70,7 +70,7 @@ export default function AddEditTodoTask() {
             <input
               onChange={(e) => setTodoInput(e.target.value)}
               value={todoInput}
-              className="bg-transparent"
+              className="bg-transparent w-full border-none"
               name="addTodo"
               placeholder="Add Todo"
             />
