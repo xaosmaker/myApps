@@ -12,23 +12,23 @@ pipeline {
       slackSend channel: '#myapps', message:"Starting Building branch ${env.BRANCH_NAME}...\nURL: ${env.RUN_DISPLAY_URL} \nBuild: #${env.BUILD_NUMBER}", tokenCredentialId: 'mytests-hq'
       }
     }
+     stage('copy env.local'){
 
+      steps{
+        configFileProvider([configFile(fileId: '52ef0837-0124-497d-a52c-2da8c2bb2934', targetLocation:'.envs/')]){}
+      }
+    }
     stage('stop docker all containers and start portainer '){
       steps{
-        sh "docker stop \$(docker ps -aq)"
-        sh"docker start portainer"
+        // sh "docker stop \$(docker ps -aq)"
+        sh "docker compose -f local.yml down -v"
+        // sh"docker start portainer"
       }
     }
     stage('clean docker containers and volumes'){
       steps{
         sh "docker container prune -f"
         sh "docker volume prune -af"
-      }
-    }
-    stage('copy env.local'){
-
-      steps{
-        configFileProvider([configFile(fileId: '52ef0837-0124-497d-a52c-2da8c2bb2934', targetLocation:'.envs/')]){}
       }
     }
     stage('docker Build') {
