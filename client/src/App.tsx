@@ -20,6 +20,7 @@ import ShowUser from "./features/user/ShowUser";
 import ShowToDoList from "./features/todo/ShowToDoList";
 import AddEditTodoTask from "./features/todo/AddEditTodoTask";
 import AddTodo from "./features/todo/AddTodo";
+import { refresh } from "./services/authApiCalls";
 
 const queryclient = new QueryClient({
   defaultOptions: {
@@ -42,6 +43,7 @@ const routet = createBrowserRouter([
 
   {
     element: <AuthLayout />,
+    loader: refresh,
     children: [
       {
         element: <MainLayout />,

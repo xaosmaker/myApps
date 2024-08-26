@@ -47,3 +47,6 @@ export interface LoginFormValues {
   email: string;
   password: string;
 }
+export interface RefreshData {
+  message: string;
+}
