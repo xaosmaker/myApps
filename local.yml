@@ -52,7 +52,7 @@ services:
       - myApps_nw
   myapps_nginx:
     build:
-      context: ./docker/production/nginx
+      context: ./docker/local/nginx
       dockerfile: Dockerfile
     image: myapps_nginx
     container_name: myapps_nginx
