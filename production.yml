@@ -47,7 +47,6 @@ services:
       - "8080:80"
     volumes:
       - static_volume:/app/static
-      - client_volume:/app/dist
       - myapps_logs_store:/var/log/nginx
     depends_on:
       - myapps_api
@@ -61,4 +60,3 @@ volumes:
   myapps_postgres_db_data: {}
   myapps_logs_store: {}
   static_volume: {}
-  client_volume: {}
