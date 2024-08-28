@@ -24,7 +24,6 @@ export default function AddTodo() {
   } = useForm<TodoData>();
   const onHandleSubmit: SubmitHandler<TodoData> = (data, event) => {
     event?.preventDefault();
-    console.log("data", data);
     if (data.title === "") {
       data.title = dateToGRformat(data.complete_until) || data.complete_until;
     }

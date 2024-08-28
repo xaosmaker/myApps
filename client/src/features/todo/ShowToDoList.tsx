@@ -31,13 +31,13 @@ export default function ShowToDoList() {
       <div className=" my-4 grid uppercase md:grid-cols-4 ">
         <p>Total: {total}</p>
         <p className="font-semibold text-yellow-600">
-          Pending: {(remaining / total) * 100}%
+          Pending: {Math.round((remaining / total) * 100)}%
         </p>
         <p className="font-semibold text-green-600">
-          Success: {(completed / total) * 100}%
+          Success: {Math.round((completed / total) * 100)}%
         </p>
         <p className="font-semibold text-red-600">
-          failed: {(failed / total) * 100}%
+          failed: {Math.round((failed / total) * 100)}%
         </p>
       </div>
 
