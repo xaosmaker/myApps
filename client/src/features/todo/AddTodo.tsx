@@ -5,6 +5,7 @@ import { useMutation } from "@tanstack/react-query";
 import { apiCreateTodos } from "../../services/todosApi";
 import { useNavigate } from "react-router-dom";
 import { TodoData } from "../../types/dataTypes";
+import { dateToGRformat } from "../../utils/helperFunctions";
 
 export default function AddTodo() {
   const navigate = useNavigate();
@@ -23,6 +24,10 @@ export default function AddTodo() {
   } = useForm<TodoData>();
   const onHandleSubmit: SubmitHandler<TodoData> = (data, event) => {
     event?.preventDefault();
+    console.log("data", data);
+    if (data.title === "") {
+      data.title = dateToGRformat(data.complete_until) || data.complete_until;
+    }
     if (data.todo_tasks === undefined) {
       data.todo_tasks = [];
     }
@@ -39,6 +44,7 @@ export default function AddTodo() {
       >
         <Input
           htmlType="text"
+          required={false}
           name="title"
           error={errors?.title?.message}
           register={register("title")}

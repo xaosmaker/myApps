@@ -9,7 +9,14 @@ SECRET_KEY = getenv(
 
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "0.0.0.0", "192.168.1.102", "192.168.1.5"]
+ALLOWED_HOSTS = [
+    "localhost",
+    "127.0.0.1",
+    "0.0.0.0",
+    "192.168.1.102",
+    "192.168.1.5",
+    "192.168.1.127",
+]
 CSRF_TRUSTED_ORIGINS = ["http://0.0.0.0:8080", "http://localhost:8080"]
 
 LOGGING = {

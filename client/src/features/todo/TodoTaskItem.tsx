@@ -15,8 +15,6 @@ export default function TodoTaskItem({
   let showTrash;
   let clickCheck;
   function handleAddClick() {
-    console.log("click");
-    console.log("name", todo.name);
     dispatch(setTodoTaskCompleted(todo.name));
   }
   if (!todo.is_completed && !expired) {
@@ -27,7 +25,7 @@ export default function TodoTaskItem({
     );
     clickCheck = (
       <button
-        className="flex justify-center items-center"
+        className="flex items-center justify-center"
         onClick={handleAddClick}
       >
         <Unchecked />

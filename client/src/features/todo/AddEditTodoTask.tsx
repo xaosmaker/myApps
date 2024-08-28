@@ -45,9 +45,6 @@ export default function AddEditTodoTask() {
     return <Loader />;
   }
   const showAddButtons = todo.completed || todo.expired;
-  console.log("showAddButtons", showAddButtons);
-  console.log("todo.completed", todo.completed);
-  console.log("todo.expired", todo.expired);
 
   return (
     <div className=" h-5/6 w-10/12">
@@ -70,7 +67,7 @@ export default function AddEditTodoTask() {
             <input
               onChange={(e) => setTodoInput(e.target.value)}
               value={todoInput}
-              className="bg-transparent w-full border-none"
+              className="w-full border-none bg-transparent"
               name="addTodo"
               placeholder="Add Todo"
             />
