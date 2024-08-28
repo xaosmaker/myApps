@@ -11,7 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-# TODO: change  this in production
 if os.getenv("PROD_ENV") == "True":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings.production")
 else:

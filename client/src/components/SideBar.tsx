@@ -7,7 +7,6 @@ import BurgerMenu from "../img/menu_24dp_FILL0_wght400_GRAD0_opsz24.svg?react";
 import CloseMenu from "../img/close_24dp_FILL0_wght400_GRAD0_opsz24.svg?react";
 import { NavLink, useLocation } from "react-router-dom";
 import { data } from "../types/dataTypes";
-// TODO: all data should render automatically from the choosen app like work hours or houses or vehicles
 
 export default function Sidebar() {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);

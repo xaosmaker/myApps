@@ -6,7 +6,6 @@ import sys
 
 def main():
     """Run administrative tasks."""
-    # TODO: change  this in production
 
     if os.getenv("PROD_ENV") == "True":
         os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings.production")

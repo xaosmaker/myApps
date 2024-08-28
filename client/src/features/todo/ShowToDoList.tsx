@@ -2,7 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 import { apiTodosList } from "../../services/todosApi";
 import TodoCard from "./TodoCard";
 import { TodoData, TodoListData } from "../../types/dataTypes";
-//TODO: make the statictics total remaing and finished
 
 export default function ShowToDoList() {
   const { data: todoData, isLoading } = useQuery<TodoListData>({
