@@ -166,7 +166,7 @@ REST_FRAMEWORK = {
     #     "django_filters.rest_framework.DjangoFilterBackend",
     # ],
     # TODO: change to 10 before production
-    "PAGE_SIZE": 10,
+    "PAGE_SIZE": 1,
     # "DEFAULT_THROTTLE_CLASSES": (
     #     "rest_framework.throttling.AnonRateThrottle",
     #     "rest_framework.throttling.UserRateThrottle",

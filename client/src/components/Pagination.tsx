@@ -63,19 +63,45 @@ function Pagination({
   }
 
   return (
-    <ul className="mt-6 flex items-center justify-end text-xl">
+    <ul className="mt-6 flex flex-wrap items-center justify-end text-xl">
       {renderArrows && currentPage > 1 ? (
         <>
-          <li className={defaultStyle}> &lt;&lt; </li>
-          <li className={defaultStyle}> &lt; </li>
+          <li
+            onClick={() => onClickPaginationButton("1")}
+            className={defaultStyle}
+          >
+            &lt;&lt;
+          </li>
+          <li
+            onClick={() =>
+              onClickPaginationButton((currentPage - 1).toString())
+            }
+            className={defaultStyle}
+          >
+            {" "}
+            &lt;{" "}
+          </li>
         </>
       ) : null}
       {renderPaginationList()}
 
       {renderArrows && currentPage < totalPages ? (
         <>
-          <li className={defaultStyle}> &gt; </li>
-          <li className={defaultStyle}> &gt;&gt; </li>
+          <li
+            onClick={() =>
+              onClickPaginationButton((currentPage + 1).toString())
+            }
+            className={defaultStyle}
+          >
+            &gt;
+          </li>
+          <li
+            onClick={() => onClickPaginationButton(totalPages.toString())}
+            className={defaultStyle}
+          >
+            {" "}
+            &gt;&gt;{" "}
+          </li>
         </>
       ) : null}
     </ul>
