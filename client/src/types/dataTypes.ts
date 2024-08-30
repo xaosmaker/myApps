@@ -32,9 +32,12 @@ export interface TodoData {
 
 export interface TodoListData {
   count: number;
-  next: number | null;
-  previous: number | null;
+  current_page: number;
+  total_pages: number;
   results: TodoData[];
+  all_completed_todo: number;
+  all_failed_todo: number;
+  all_pending_todo: number;
 }
 
 export interface TodoTaskData {

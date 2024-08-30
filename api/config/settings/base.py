@@ -161,10 +161,11 @@ REST_FRAMEWORK = {
         # "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
-    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "DEFAULT_PAGINATION_CLASS": "core_apps.common.custom_pagination.CustomPagination",
     # "DEFAULT_FILTER_BACKENDS": [
     #     "django_filters.rest_framework.DjangoFilterBackend",
     # ],
+    # TODO: change to 10 before production
     "PAGE_SIZE": 10,
     # "DEFAULT_THROTTLE_CLASSES": (
     #     "rest_framework.throttling.AnonRateThrottle",

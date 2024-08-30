@@ -2,24 +2,20 @@ import { useQuery } from "@tanstack/react-query";
 import { apiTodosList } from "../../services/todosApi";
 import TodoCard from "./TodoCard";
 import { TodoData, TodoListData } from "../../types/dataTypes";
+import usePagePaginationParams from "../../utils/UsePagePaginationParams";
+import Pagination from "../../components/Pagination";
 
 export default function ShowToDoList() {
+  const pageParams = usePagePaginationParams();
+
   const { data: todoData, isLoading } = useQuery<TodoListData>({
-    queryKey: ["todolist"],
-    queryFn: apiTodosList,
+    queryKey: ["todolist", pageParams],
+    queryFn: () => apiTodosList(pageParams),
   });
-  const total = todoData?.results.length || 0;
-  const remaining =
-    todoData?.results.filter(
-      (data) =>
-        data.expired === false &&
-        data.completed === false &&
-        data.completed_in_time === false
-    ).length || 0;
-  const completed =
-    todoData?.results.filter((data) => data.completed === true).length || 0;
-  const failed =
-    todoData?.results.filter((data) => data.expired === true).length || 0;
+  const total = todoData?.count || 0;
+  const remaining = todoData?.all_pending_todo || 0;
+  const completed = todoData?.all_completed_todo || 0;
+  const failed = todoData?.all_failed_todo || 0;
 
   if (isLoading) {
     return <div className="animate-bounce"> Loading ....</div>;
@@ -30,13 +26,13 @@ export default function ShowToDoList() {
       <div className=" my-4 grid uppercase md:grid-cols-4 ">
         <p>Total: {total}</p>
         <p className="font-semibold text-yellow-600">
-          Pending: {Math.round((remaining / total) * 100)}%
+          Pending: {((remaining / total) * 100).toFixed(2)}%
         </p>
         <p className="font-semibold text-green-600">
-          Success: {Math.round((completed / total) * 100)}%
+          Success: {((completed / total) * 100).toFixed(2)}%
         </p>
         <p className="font-semibold text-red-600">
-          failed: {Math.round((failed / total) * 100)}%
+          failed: {((failed / total) * 100).toFixed(2)}%
         </p>
       </div>
 
@@ -45,6 +41,10 @@ export default function ShowToDoList() {
           <TodoCard key={data.pkid} todoList={data} />
         ))}
       </div>
+      <Pagination
+        currentPage={todoData?.current_page || 1}
+        totalPages={todoData?.total_pages || 1}
+      />
     </div>
   );
 }

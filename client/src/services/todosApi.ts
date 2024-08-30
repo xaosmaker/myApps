@@ -1,9 +1,9 @@
 import { TodoData } from "../types/dataTypes";
 import axios, { axiosError } from "./axiosInstance";
 
-async function apiTodosList() {
+async function apiTodosList(queryParams: string = "") {
   try {
-    const res = await axios.get("/api/todos/");
+    const res = await axios.get(`/api/todos/${queryParams}`);
     const data = await res.data;
     return data;
   } catch (error) {
