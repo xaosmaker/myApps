@@ -25,6 +25,4 @@ class TodosViewSet(ModelViewSet):
         data["all_completed_todo"] = all_completed_todo
         data["all_failed_todo"] = all_failed_todo
         data["all_pending_todo"] = all_pending_todo
-        print("total_pages", data["total_pages"])
-        print("current_page", data["current_page"])
         return list_data
