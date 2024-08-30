@@ -36,7 +36,7 @@ export default function ShowToDoList() {
         </p>
       </div>
 
-      <div className="grid h-5/6 gap-4 overflow-y-scroll rounded-md md:grid-cols-3 ">
+      <div className="grid h-3/5 md:h-4/5 gap-4 overflow-y-scroll rounded-md md:grid-cols-3 ">
         {todoData?.results.map((data: TodoData) => (
           <TodoCard key={data.pkid} todoList={data} />
         ))}
