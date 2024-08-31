@@ -1,6 +1,6 @@
 ---
 services:
-  myapps_api:
+  myapps_api: &myapps_api
     build:
       context: .
       dockerfile: ./docker/production/django/Dockerfile
@@ -36,6 +36,35 @@ services:
     restart: always
     networks:
       - myApps_nw
+
+  myapps_redis:
+    image: redis:7.2.5-alpine3.20
+    command: redis-server --appendonly yes
+    container_name: myapps_redis
+    volumes:
+      - myapps_redis_data:/data
+    networks:
+      - myApps_nw
+
+  myapps_celery_worker:
+    <<: *myapps_api
+    image: myapps_celery_worker
+    container_name: myapps_celery_worker
+    command: /start-celeryworker
+
+  myapps_celery_beat:
+    <<: *myapps_api
+    image: myapps_celery_beat
+    container_name: myapps_celery_beat
+    command: /start-celerybeat
+
+  myapps_flower:
+    <<: *myapps_api
+    image: myapps_flower
+    container_name: myapps_flower
+    ports:
+      - "5555:5555"
+    command: /start-flower
   myapps_nginx:
     build:
       context: .
@@ -60,3 +89,4 @@ volumes:
   myapps_postgres_db_data: {}
   myapps_logs_store: {}
   static_volume: {}
+  myapps_redis_data: {}

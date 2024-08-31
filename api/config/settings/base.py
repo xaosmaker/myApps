@@ -31,6 +31,8 @@ THIRD_PARTY_APPS = [
     "rest_framework",
     "djoser",
     "drf_spectacular",
+    "djcelery_email",
+    "django_celery_beat",
 ]
 LOCAL_APPS = [
     "core_apps.users",
@@ -155,6 +157,30 @@ COOKIE_HTTPONLY = True
 COOKIE_SECURE = getenv("COOKIE_SECURE", "True") == "True"
 
 
+# celery config
+if USE_TZ:
+    CELERY_TIMEZONE = TIME_ZONE
+
+CELERY_BROKER_URL = getenv("CELERY_BROKER_URL")
+CELERY_RESULT_BACKEND = getenv("CELERY_RESULT_BACKEND")
+CELERY_ACCEPT_CONTENT = ["application/json"]
+CELERY_RESULT_SERIALIZER = "json"
+CELERY_TASK_SERIALIZER = "json"
+CELERY_RESULT_BACKEND_MAX_RETRIES = 10
+CELERY_TASK_SEND_SENT_EVENT = True
+CELERY_RESULT_EXTENDED = True
+CELERY_RESULT_BACKEND_ALWAYS_RETRY = True
+CELERY_TASK_TIME_LIMIT = 5 * 60
+CELERY_TASK_SOFT_TIME_LIMIT = 60
+CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
+CELERY_WORKER_SEND_TASK_EVENTS = True
+
+CELERY_BEAT_SCHEDULE = {
+    "test-run": {
+        "task": "print_3_times",
+    }
+}
+# rest config
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "core_apps.common.cookie_auth.CookieAuthentication",
