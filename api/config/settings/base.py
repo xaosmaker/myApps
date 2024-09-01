@@ -177,7 +177,7 @@ CELERY_WORKER_SEND_TASK_EVENTS = True
 
 CELERY_BEAT_SCHEDULE = {
     "test-run": {
-        "task": "print_3_times",
+        "task": "test_email_every_24_hours",
     }
 }
 # rest config

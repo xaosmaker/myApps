@@ -1,6 +1,7 @@
 from os import getenv
 
-from config.settings.base import *  # noqa
+from config.settings.base import *
+from config.settings.production import EMAIL_BACKEND  # noqa
 
 SECRET_KEY = getenv(
     "DJANGO_SECRET_KEY",
@@ -40,7 +41,8 @@ LOGGING = {
     },
 }
 
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+# EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_BACKEND = "djcelery_email.backends.CeleryEmailBackend"
 EMAIL_HOST = getenv("EMAIL_HOST")
 EMAIL_USE_TLS = getenv("EMAIL_USE_TLS")
 EMAIL_PORT = getenv("EMAIL_PORT")

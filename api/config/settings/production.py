@@ -10,7 +10,8 @@ ADMINS = [
     ("Drosinakis Drosos", "drosostest@gmail.com"),
 ]
 
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+# EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_BACKEND = "djcelery_email.backends.CeleryEmailBackend"
 EMAIL_HOST = getenv("EMAIL_HOST")
 EMAIL_USE_TLS = getenv("EMAIL_USE_TLS")
 EMAIL_PORT = getenv("EMAIL_PORT")
