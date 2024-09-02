@@ -41,17 +41,6 @@ export default function NavBar() {
         </li>
         <li>
           <NavLink
-            to="/user"
-            onClick={closeMenu}
-            className={({ isActive }) =>
-              (isActive ? active : undefined) + navLingDecoration
-            }
-          >
-            User
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
             to="/work-hours"
             onClick={closeMenu}
             className={({ isActive }) =>
@@ -61,11 +50,40 @@ export default function NavBar() {
             Work hours
           </NavLink>
         </li>
+
         <li>
-          <button className={navLingDecoration}>Houses</button>
+          <NavLink
+            to="/houses"
+            onClick={closeMenu}
+            className={({ isActive }) =>
+              (isActive ? active : undefined) + navLingDecoration
+            }
+          >
+            Houses
+          </NavLink>
         </li>
         <li>
-          <button className={navLingDecoration}>Vehicles</button>
+          <NavLink
+            to="/vehicles"
+            onClick={closeMenu}
+            className={({ isActive }) =>
+              (isActive ? active : undefined) + navLingDecoration
+            }
+          >
+            Vehicles
+          </NavLink>
+        </li>
+
+        <li>
+          <NavLink
+            to="/user"
+            onClick={closeMenu}
+            className={({ isActive }) =>
+              (isActive ? active : undefined) + navLingDecoration
+            }
+          >
+            User
+          </NavLink>
         </li>
       </ul>
     </div>

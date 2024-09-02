@@ -21,6 +21,7 @@ import ShowToDoList from "./features/todo/ShowToDoList";
 import AddEditTodoTask from "./features/todo/AddEditTodoTask";
 import AddTodo from "./features/todo/AddTodo";
 import { refresh } from "./services/authApiCalls";
+import UnderConstruction from "./components/UnderConstruction";
 
 const queryclient = new QueryClient({
   defaultOptions: {
@@ -49,6 +50,15 @@ const routet = createBrowserRouter([
         element: <MainLayout />,
         children: [
           {
+            path: "/todos",
+            children: [
+              { index: true, element: <Navigate replace to="show-todos" /> },
+              { path: "show-todos", element: <ShowToDoList /> },
+              { path: "add-todo", element: <AddTodo /> },
+              { path: ":pkid/add-edit-todo", element: <AddEditTodoTask /> },
+            ],
+          },
+          {
             path: "/work-hours",
             children: [
               {
@@ -67,18 +77,11 @@ const routet = createBrowserRouter([
             path: "/user",
             children: [
               { index: true, element: <Navigate replace to="me" /> },
-              { path: "me", element: <ShowUser /> },
+              { path: "me", element: <UnderConstruction /> },
             ],
           },
-          {
-            path: "/todos",
-            children: [
-              { index: true, element: <Navigate replace to="show-todos" /> },
-              { path: "show-todos", element: <ShowToDoList /> },
-              { path: "add-todo", element: <AddTodo /> },
-              { path: ":pkid/add-edit-todo", element: <AddEditTodoTask /> },
-            ],
-          },
+          { path: "/houses", element: <UnderConstruction /> },
+          { path: "/vehicles", element: <UnderConstruction /> },
         ],
       },
     ],
