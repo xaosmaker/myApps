@@ -5,6 +5,8 @@ from rest_framework.viewsets import GenericViewSet, ModelViewSet
 from core_apps.todos.models import Todo, TodoTasks
 from core_apps.todos.serializers import TodoListSerializer, TodoSerializer
 
+# TODO: need test for api calls
+
 
 class TodosViewSet(ModelViewSet):
     serializer_class = TodoListSerializer

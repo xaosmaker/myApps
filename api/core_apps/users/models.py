@@ -10,7 +10,7 @@ from django.utils.translation import gettext_lazy as _
 
 from core_apps.users.managers import UserManager
 
-# TODO: need test for the last_name and first name and admin user
+# TODO: need test admin user
 
 
 class User(AbstractBaseUser, PermissionsMixin):

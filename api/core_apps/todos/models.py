@@ -7,7 +7,7 @@ from core_apps.common.models import TimeStampedModel
 from core_apps.profiles.models import Profile
 
 # Create your models here.
-# TODO: need test for todos and  todos admin
+# TODO: need test for todos admin
 
 
 class Todo(TimeStampedModel):
@@ -33,24 +33,19 @@ class Todo(TimeStampedModel):
     class Meta:
         ordering = ["completed", "expired", "complete_until"]
 
-    # TODO: make a method who calculates if the doto is completed in time
-    # TODO: make a method who calculates if the doto is completed at all
-
     def finish_model(self):
         if self.completed is False and self.expired is False:
             if datetime.datetime.now(tz=datetime.UTC) > self.complete_until:
                 self.expired = True
 
-            todos_bool = [i.is_completed for i in self.todo.all()]
-            if todos_bool and all(todos_bool) is True:
+            todo_tasks_bools = [i.is_completed for i in self.todo.all()]
+            if todo_tasks_bools and all(todo_tasks_bools) is True:
                 self.completed = True
 
             if self.expired is False and self.completed is True:
                 self.completed_in_time = True
 
         self.save()
-
-        pass
 
 
 class TodoTasks(TimeStampedModel):

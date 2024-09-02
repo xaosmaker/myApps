@@ -9,10 +9,6 @@ from django.db.utils import IntegrityError
 
 pytestmark = pytest.mark.django_db
 
-# TODO: write test for first name and last name of the users
-# TODO: check to appear capitalize and dont have any other format
-# TODO: check to fail if the first name or last name not provided
-
 
 def test_create_user_should_suceed(user):
     """Create user with email should succeed"""
@@ -21,6 +17,8 @@ def test_create_user_should_suceed(user):
     assert created_user.username == user["username"]
     assert created_user.email == user["email"]
     assert created_user.check_password(user["password"]) is True
+    assert created_user.first_name == user["first_name"]
+    assert created_user.last_name == user["last_name"]
     assert created_user.is_staff is False
     assert created_user.is_active is False
     assert created_user.is_superuser is False
