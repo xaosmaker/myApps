@@ -1,7 +1,9 @@
-from rest_framework.viewsets import ModelViewSet
+from rest_framework import response, status
+from rest_framework.mixins import DestroyModelMixin
+from rest_framework.viewsets import GenericViewSet, ModelViewSet
 
-from core_apps.todos.models import Todo
-from core_apps.todos.serializers import TodoListSerializer
+from core_apps.todos.models import Todo, TodoTasks
+from core_apps.todos.serializers import TodoListSerializer, TodoSerializer
 
 
 class TodosViewSet(ModelViewSet):
@@ -26,3 +28,26 @@ class TodosViewSet(ModelViewSet):
         data["all_failed_todo"] = all_failed_todo
         data["all_pending_todo"] = all_pending_todo
         return list_data
+
+
+class TodoTaskDelete(DestroyModelMixin, GenericViewSet):
+    serializer_class = TodoSerializer
+    queryset = TodoTasks.objects.all()
+
+    def get_queryset(self):
+        user = self.request.user
+        data = TodoTasks.objects.filter(todo_list__profile__user=user)
+        return data
+
+    def destroy(self, request, *args, **kwargs):
+        if kwargs["pk"]:
+            todo_task = self.get_queryset().get(pkid=kwargs["pk"])
+            todo = Todo.objects.get(todo=todo_task)
+
+        if todo.expired is True or todo.completed is True:
+            return response.Response(
+                status=status.HTTP_403_FORBIDDEN,
+                data={"detail": "Can't delete a completed of expired todo task."},
+            )
+
+        return super().destroy(request, *args, **kwargs)

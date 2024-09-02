@@ -62,5 +62,23 @@ async function apiPatchTodos(todosList: TodoData) {
     throw new Error("Can't create todoTasks");
   }
 }
+async function apiDeleteTodoTask(pkid: number) {
+  try {
+    const res = await axios.delete(`/api/todo-tasks/${pkid}`);
+    const data = await res.data;
+    return data;
+  } catch (error) {
+    if (axiosError(error)) {
+      throw new Error(error.response?.data.detail);
+    }
+    throw new Error("Can't delete todoTasks");
+  }
+}
 
-export { apiTodosList, apiCreateTodos, apiTodo, apiPatchTodos };
+export {
+  apiTodosList,
+  apiCreateTodos,
+  apiTodo,
+  apiPatchTodos,
+  apiDeleteTodoTask,
+};
