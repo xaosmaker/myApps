@@ -16,7 +16,6 @@ import AddWorkHours from "./features/work-hours/AddWorkHours";
 import SetWorkTime from "./features/work-hours/SetWorkTime";
 import Error404 from "./pages/Error404";
 import AuthLayout from "./features/authentication/AuthLayout";
-import ShowUser from "./features/user/ShowUser";
 import ShowToDoList from "./features/todo/ShowToDoList";
 import AddEditTodoTask from "./features/todo/AddEditTodoTask";
 import AddTodo from "./features/todo/AddTodo";
