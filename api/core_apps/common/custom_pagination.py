@@ -22,3 +22,25 @@ class CustomPagination(PageNumberPagination):
                 "results": data,
             }
         )
+
+    def get_paginated_response_schema(self, schema):
+
+        return {
+            "type": "object",
+            "required": ["count", "results"],
+            "properties": {
+                "count": {
+                    "type": "integer",
+                    "example": 123,
+                },
+                "current_page": {
+                    "type": "integer",
+                    "example": 1,
+                },
+                "total_pages": {
+                    "type": "integer",
+                    "example": 25,
+                },
+                "results": schema,
+            },
+        }
