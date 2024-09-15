@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Input from "../../components/Input";
 import Button from "../../ui/Button";
 import { AddWorkDayData } from "../../types/dataTypes";
-import CustomDate from "./CustomDate";
+import CustomDate from "../../components/CustomDate";
 
 // TODO: validation of form and for every time on form
 // WARN: the date should be a string

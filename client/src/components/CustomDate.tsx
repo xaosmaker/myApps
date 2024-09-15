@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { UseFormSetValue } from "react-hook-form";
-import { AddWorkDayData } from "../../types/dataTypes";
+import { AddWorkDayData } from "../types/dataTypes";
 
 // TODO: when i have time i will fix the date any
 
@@ -36,7 +36,7 @@ export default function CustomDate({
               day: "2-digit",
               month: "2-digit",
               year: "numeric",
-            }),
+            })
           );
         }
         const strArray = newArray.join("-");
@@ -44,7 +44,7 @@ export default function CustomDate({
         selectedDate("date", strArray);
       }
     },
-    [dates, selectedDate],
+    [dates, selectedDate]
   );
   return (
     <div className="flex flex-col border-b-2 border-slate-800 py-2  ">

@@ -19,6 +19,9 @@ class DiaryDate(TimeStampedModel):
     def __str__(self) -> str:
         return str(self.date)
 
+    class Meta:
+        ordering = ["-date"]
+
 
 class DiaryNotes(TimeStampedModel):
     class DiaryCroices(models.TextChoices):
@@ -48,4 +51,4 @@ class DiaryNotes(TimeStampedModel):
         return f"{self.time} {self.show_10_words_text}"
 
     class Meta:
-        ordering = ["diary_date", "time", "note_type"]
+        ordering = ["-note_type", "time"]

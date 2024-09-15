@@ -9,3 +9,4 @@ django-celery-beat==2.7.0
 django-celery-email==3.0.0
 flower==2.0.1
 redis==5.0.8
+pytz==2024.1

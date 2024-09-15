@@ -21,4 +21,9 @@ const TODOS_SIDEBAR_DATA: data[] = [
   { icon: FaPlus, to: "todos/add-todo", name: "Add Todo" },
 ];
 
-export { WORKHOURS_SIDEBAR_DATA, TODOS_SIDEBAR_DATA };
+const DAILY_DIARY_DATA: data[] = [
+  { icon: FaListCheck, to: "daily-diary/show-diary", name: "Show Diary" },
+  { icon: FaPlus, to: "daily-diary/add-diary", name: "Add Diary" },
+];
+
+export { DAILY_DIARY_DATA, WORKHOURS_SIDEBAR_DATA, TODOS_SIDEBAR_DATA };

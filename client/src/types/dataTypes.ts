@@ -53,3 +53,27 @@ export interface LoginFormValues {
 export interface RefreshData {
   message: string;
 }
+export interface DiaryNoteData {
+  pkid: number;
+  note_type: string;
+  time: string;
+  note: string;
+}
+
+export interface DiaryDateData {
+  pkid: number;
+  date: string;
+  diary_date: DiaryNoteData[];
+}
+
+export interface DiaryList {
+  count: number;
+  current_page: number;
+  total_pages: number;
+  results: DiaryDateData[];
+}
+
+export interface DiaryChoicesData {
+  value: string;
+  display_name: string;
+}

@@ -1,4 +1,5 @@
 import {
+  DAILY_DIARY_DATA,
   TODOS_SIDEBAR_DATA,
   WORKHOURS_SIDEBAR_DATA,
 } from "../data/sidebarData";
@@ -19,6 +20,8 @@ export default function Sidebar() {
         setSidebarData(WORKHOURS_SIDEBAR_DATA);
       } else if (path === "todos") {
         setSidebarData(TODOS_SIDEBAR_DATA);
+      } else if (path === "daily-diary") {
+        setSidebarData(DAILY_DIARY_DATA);
       } else {
         setSidebarData(null);
       }
