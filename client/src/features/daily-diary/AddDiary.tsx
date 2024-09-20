@@ -10,6 +10,7 @@ import { apiDiaryNoteCreate } from "../../services/diaryApi";
 
 export default function AddDiary() {
   const choices = useLoaderData() as [DiaryChoicesData];
+  const stringValidation = choices.map((choice) => choice.value);
   const navigate = useNavigate();
   const {
     register,
@@ -34,7 +35,20 @@ export default function AddDiary() {
         onSubmit={handleSubmit(onHandleSubmit)}
         className="mb-10 flex flex-col gap-5"
       >
-        <Select register={register("note_type")}>
+        <Select
+          register={register("note_type", {
+            validate: {
+              validateChoiceinChoices: (v: string) =>
+                stringValidation.filter((choice) => choice === v).length > 0 ||
+                "Select a Valid Option",
+            },
+          })}
+          error={errors.note_type?.message}
+        >
+          <option key={"-----"} value="-----">
+            -----
+          </option>
+
           {choices?.map((data) => (
             <option key={data.value} value={data.value}>
               {data.display_name}

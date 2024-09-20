@@ -24,7 +24,7 @@ export default function NavBar() {
       <ul
         className={`${
           isMenuOpen
-            ? "absolute right-0 top-16 h-full w-full bg-slate-900"
+            ? "absolute right-0 top-16 z-10 h-full w-full bg-slate-900"
             : "hidden"
         } md:static md:flex md:h-auto md:w-auto md:bg-transparent `}
       >
