@@ -29,7 +29,7 @@ export default function ShowDailyDiary() {
     <div className=" h-[80svh] w-11/12">
       <p className="text-center text-4xl font-bold uppercase">Daily diary</p>
       <div className=" my-4 grid uppercase md:grid-cols-4 "></div>
-      <div className="flex justify-betweena items-center">
+      <div className="justify-betweena flex items-center">
         <p className="uppercase">Sort by type:</p>
         <Select
           onchange={(e: React.ChangeEvent<HTMLSelectElement>) =>
@@ -47,7 +47,7 @@ export default function ShowDailyDiary() {
         </Select>
       </div>
 
-      <div className="grid h-3/5 md:h-4/5 gap-4 overflow-y-scroll rounded-md md:grid-cols-3 ">
+      <div className="grid h-3/5 gap-4 overflow-y-scroll rounded-md md:h-4/5 md:grid-cols-3 ">
         {diaryData?.results.map((data: DiaryDateData) => (
           <DiaryCard key={data.pkid} diaryList={data} filterWord={filter} />
         ))}

@@ -26,6 +26,7 @@ import ShowDailyDiary from "./features/daily-diary/ShowDailyDiary";
 import AddDiary from "./features/daily-diary/AddDiary";
 import { apiDiaryChoices } from "./services/diaryApi";
 import DiaryDetails from "./features/daily-diary/DiaryDetails";
+import CountDownTimer from "./features/timer/CountDownTimer";
 
 const queryclient = new QueryClient({
   defaultOptions: {
@@ -79,6 +80,17 @@ const routet = createBrowserRouter([
                 loader: apiDiaryChoices,
               },
               { path: ":pkid/diary-details", element: <DiaryDetails /> },
+            ],
+          },
+          {
+            path: "/timer",
+            children: [
+              {
+                index: true,
+                element: <Navigate replace to="count-down-timer" />,
+              },
+
+              { path: "count-down-timer", element: <CountDownTimer /> },
             ],
           },
           {

@@ -18,7 +18,7 @@ export default function DiaryCard({
             </h3>
           </div>
         </div>
-        <div className="flex flex-col gap-2  bg-slate-700 px-4 pt-2 h-64 overflow-y-scroll ">
+        <div className="flex h-64 flex-col  gap-2 overflow-y-scroll bg-slate-700 px-4 pt-2 ">
           {/*{diaryList?.diary_date?.slice(0, 10).map(() => ( */}
           {diaryList?.diary_date
             ?.filter((data) =>

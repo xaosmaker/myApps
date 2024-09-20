@@ -19,11 +19,28 @@ const SYMBOLS = [
   "}",
   ")",
 ];
+function validateIsNumber(v: string) {
+  const regex: RegExp = /^[0-9]*$/;
+  return regex.test(v);
+}
+function validateHasCommasAndSpacesOnly(v: string) {
+  const regex: RegExp = /^[0-9 ,]*$/;
+  return regex.test(v);
+}
 function containSymbol(str: string) {
   for (const symbol of SYMBOLS) {
     if (str.includes(symbol)) {
       return true;
     }
+  }
+  return false;
+}
+function validateSplitWithRegexAndGT0(data: string, regex: RegExp) {
+  const dataArray = data.split(regex);
+
+  const dataArrayGT = dataArray.filter((data) => Number(data) > 0);
+  if (dataArray.length === dataArrayGT.length) {
+    return true;
   }
   return false;
 }
@@ -65,9 +82,17 @@ function validatePassword(p: string) {
   if (!symbol) {
     return {
       type: false,
-      message: `Password should contain one of those symbols \n ${SYMBOLS.join(", ")} `,
+      message: `Password should contain one of those symbols \n ${SYMBOLS.join(
+        ", "
+      )} `,
     };
   }
 }
 
-export { validateEmail, validatePassword };
+export {
+  validateEmail,
+  validateHasCommasAndSpacesOnly,
+  validatePassword,
+  validateIsNumber,
+  validateSplitWithRegexAndGT0,
+};
