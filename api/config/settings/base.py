@@ -177,8 +177,8 @@ CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
 CELERY_WORKER_SEND_TASK_EVENTS = True
 
 CELERY_BEAT_SCHEDULE = {
-    "test-run": {
-        "task": "test_email_every_24_hours",
+    "todo_expiration": {
+        "task": "expiration_todo_reminder",
     }
 }
 # rest config
