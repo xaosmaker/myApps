@@ -63,7 +63,7 @@ function Pagination({
   }
 
   return (
-    <ul className="mt-6 flex flex-wrap items-center justify-end text-xl">
+    <ul className="flex flex-wrap items-center justify-end p-4 text-xl">
       {renderArrows && currentPage > 1 ? (
         <>
           <li

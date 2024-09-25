@@ -16,17 +16,16 @@ import AddWorkHours from "./features/work-hours/AddWorkHours";
 import SetWorkTime from "./features/work-hours/SetWorkTime";
 import Error404 from "./pages/Error404";
 import AuthLayout from "./features/authentication/AuthLayout";
-// import ShowUser from "./features/user/ShowUser";
-import ShowToDoList from "./features/todo/ShowToDoList";
 import AddEditTodoTask from "./features/todo/AddEditTodoTask";
 import AddTodo from "./features/todo/AddTodo";
 import { refresh } from "./services/authApiCalls";
 import UnderConstruction from "./components/UnderConstruction";
-import ShowDailyDiary from "./features/daily-diary/ShowDailyDiary";
 import AddDiary from "./features/daily-diary/AddDiary";
 import { apiDiaryChoices } from "./services/diaryApi";
 import DiaryDetails from "./features/daily-diary/DiaryDetails";
 import CountDownTimer from "./features/timer/CountDownTimer";
+import TodoCard from "./features/todo/TodoCard";
+import DiaryCard from "./features/daily-diary/DiaryCard";
 
 const queryclient = new QueryClient({
   defaultOptions: {
@@ -58,7 +57,7 @@ const routet = createBrowserRouter([
             path: "/todos",
             children: [
               { index: true, element: <Navigate replace to="show-todos" /> },
-              { path: "show-todos", element: <ShowToDoList /> },
+              { path: "show-todos", element: <TodoCard /> },
               { path: "add-todo", element: <AddTodo /> },
               { path: ":pkid/add-edit-todo", element: <AddEditTodoTask /> },
             ],
@@ -71,7 +70,7 @@ const routet = createBrowserRouter([
                 path: "show-diary",
                 errorElement: <Error404 />,
                 loader: apiDiaryChoices,
-                element: <ShowDailyDiary />,
+                element: <DiaryCard />,
               },
               {
                 path: "add-diary",

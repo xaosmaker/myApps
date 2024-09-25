@@ -1,9 +1,6 @@
-function dateToGRformat(date: string | undefined): string | null {
-  if (date !== undefined) {
-    const newDate: Date = new Date(date);
-    return newDate.toLocaleDateString("en-GB");
-  }
-  return null;
+function dateToGRformat(date: string): string {
+  const newDate: Date = new Date(date);
+  return newDate.toLocaleDateString("en-GB");
 }
 function timeToHumanReadable() {
   const date = new Date();

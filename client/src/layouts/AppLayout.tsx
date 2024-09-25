@@ -3,11 +3,9 @@ import Sidebar from "../components/SideBar";
 
 export default function AppLayout() {
   return (
-    <div className="box-border grid h-[calc(100%-4rem)] grid-cols-[auto_1fr]">
+    <div className=" grid h-full grid-cols-[auto_1fr] items-center justify-items-center">
       <Sidebar />
-      <main className="flex h-[90svh] items-center justify-center">
-        <Outlet />
-      </main>
+      <Outlet />
     </div>
   );
 }

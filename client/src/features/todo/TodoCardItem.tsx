@@ -1,7 +1,7 @@
 import { Checked, Unchecked } from "../../img/svgsExport";
 import { TodoTaskData } from "../../types/dataTypes";
 
-export default function ShowTodoTask({ todo }: { todo: TodoTaskData }) {
+export default function TodoCardItem({ todo }: { todo: TodoTaskData }) {
   return (
     <p
       className={`flex items-center justify-start gap-4 text-lg capitalize  ${
