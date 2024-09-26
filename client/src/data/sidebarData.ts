@@ -22,8 +22,8 @@ const TODOS_SIDEBAR_DATA: data[] = [
 ];
 
 const DAILY_DIARY_DATA: data[] = [
-  { icon: FaListCheck, to: "daily-diary/show-diary", name: "Show Diary" },
-  { icon: FaPlus, to: "daily-diary/add-diary", name: "Add Diary" },
+  { icon: FaListCheck, to: "diary/show-diary", name: "Show Diary" },
+  { icon: FaPlus, to: "diary/add-diary", name: "Add Diary" },
 ];
 
 const NUTRITIONS_DATA: data[] = [
@@ -35,9 +35,19 @@ const NUTRITIONS_DATA: data[] = [
   { icon: FaPlus, to: "nutritions/add-nutritions", name: "Add Nutritions" },
 ];
 
+const GYM_DATA: data[] = [
+  {
+    icon: FaListCheck,
+    to: "gym/show-gym",
+    name: "Show Gym",
+  },
+  { icon: FaPlus, to: "gym/add-gym", name: "Add Gym Day" },
+];
+
 export {
   DAILY_DIARY_DATA,
   WORKHOURS_SIDEBAR_DATA,
   TODOS_SIDEBAR_DATA,
   NUTRITIONS_DATA,
+  GYM_DATA,
 };

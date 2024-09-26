@@ -1,30 +1,24 @@
 import { useQuery } from "@tanstack/react-query";
 import Card from "../../components/card/Card";
 import CardLayout from "../../components/card/CardLayout";
-import { apiNutritionsDays } from "../../services/nutritionsApiCalls";
+import {
+  apiNutritionsDays,
+  userWeightGetApiCall,
+} from "../../services/nutritionsApiCalls";
 import usePagePaginationParams from "../../utils/UsePagePaginationParams";
 import Pagination from "../../components/Pagination";
 import { dateToGRformat } from "../../utils/helperFunctions";
-interface NutritionType {
-  eat_time: string;
-  quantity: number;
-  food_name: string;
-  total_calories: number;
-}
-interface NutritionDayType {
-  created_at: string;
-  total_foods_calories: number;
-  nutrition_day: NutritionType[];
-}
-interface NutritionDataType {
-  count: number;
-  current_page: number;
-  total_pages: number;
-  results: NutritionDayType[];
-}
+import {
+  NutritionDataType,
+  UserWeightTypes,
+} from "../../types/nutritions/NutritionCardTypes";
 
 export default function NutritionCard() {
   const pageParams = usePagePaginationParams();
+  const { data: userWeight = [] } = useQuery<UserWeightTypes[]>({
+    queryFn: userWeightGetApiCall,
+    queryKey: ["userWeight"],
+  });
 
   const { data: nutritionData, isLoading } = useQuery<NutritionDataType>({
     queryKey: ["nutritionData", pageParams],
@@ -36,13 +30,38 @@ export default function NutritionCard() {
   return (
     <CardLayout>
       <CardLayout.Header>
-        <CardLayout.Title>Nutritions</CardLayout.Title>
+        <CardLayout.Title>
+          <div className="flex flex-col">
+            Nutritions
+            <div className="flex items-center justify-center gap-4 text-lg font-normal capitalize">
+              <span>
+                Current Weight:{" "}
+                {userWeight?.length > 0 ? userWeight[0].current_weight : 0}
+              </span>
+              <span>
+                Daily Calories:
+                {userWeight?.length > 0
+                  ? userWeight[0].daily_target_calories
+                  : 0}
+              </span>
+            </div>
+          </div>
+        </CardLayout.Title>
       </CardLayout.Header>
       <CardLayout.Body className="h-3/5 md:h-4/6 md:grid-cols-3">
         {nutritionData?.results?.map((item) => (
           <Card key={item.created_at} link="#">
             <Card.Title className="text-center">
-              {dateToGRformat(item.created_at)}
+              <div className="flex flex-col">
+                <span>{dateToGRformat(item.created_at)}</span>
+                <span>
+                  Remaining Calories:{" "}
+                  {userWeight?.length > 0
+                    ? userWeight[0].daily_target_calories -
+                      item.total_foods_calories
+                    : 0}
+                </span>
+              </div>
             </Card.Title>
             <Card.Body>
               {item.nutrition_day.map((day, index) => (

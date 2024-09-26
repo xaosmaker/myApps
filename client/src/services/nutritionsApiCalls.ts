@@ -1,4 +1,6 @@
 import { SubmitDataType } from "../features/nutrition/AddFood";
+import { FoodDataTypes } from "../types/nutritionTypes";
+import { baseGetApiCall, basePostApiCall } from "../utils/baseApiCalls";
 import axios, { axiosError } from "./axiosInstance";
 
 async function apiNutritionsFoods() {
@@ -57,5 +59,25 @@ async function apiNutritionDateCreate(nutritionData: SubmitDataType) {
     throw new Error(`Can't Create Nutrition Date Note`);
   }
 }
+async function createFoodApiCall(foodData: FoodDataTypes) {
+  return await basePostApiCall(
+    "/api/food-data/",
+    foodData,
+    "Can't Create Food"
+  );
+}
+async function userWeightGetApiCall() {
+  return await baseGetApiCall(
+    "/api/user-weight/",
+    "",
+    "Can't get user Weight!"
+  );
+}
 
-export { apiNutritionsFoods, apiNutritionDateCreate, apiNutritionsDays };
+export {
+  apiNutritionsFoods,
+  apiNutritionDateCreate,
+  apiNutritionsDays,
+  createFoodApiCall,
+  userWeightGetApiCall,
+};

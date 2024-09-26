@@ -1,25 +1,22 @@
-import React from "react";
+import {
+  CardLayoutBodyTypes,
+  CardLayoutHeaderTypes,
+  CardLayoutTitleTypes,
+  CardLayoutTypes,
+} from "../../types/componentTypes/cardTypes";
 
-function CardLayout({ children }: { children: React.ReactNode }) {
+function CardLayout({ children }: CardLayoutTypes) {
   return <div className="h-[calc(100dvh-4rem)] w-11/12">{children}</div>;
 }
-function CardLayoutTitle({
-  children,
-}: {
-  children: string | React.ReactElement;
-}) {
+function CardLayoutTitle({ children }: CardLayoutTitleTypes) {
   return (
-    <p className="py-4 text-center text-4xl font-bold uppercase">{children}</p>
+    <div className="py-4 text-center text-4xl font-bold uppercase">
+      {children}
+    </div>
   );
 }
 
-function CardLayoutBody({
-  children,
-  className,
-}: {
-  children: React.ReactNode;
-  className: React.ComponentProps<"div">["className"];
-}) {
+function CardLayoutBody({ children, className }: CardLayoutBodyTypes) {
   return (
     <div
       className={`my-4 grid  gap-4 overflow-y-scroll rounded-md ${className} `}
@@ -28,13 +25,7 @@ function CardLayoutBody({
     </div>
   );
 }
-function CardLayoutHeader({
-  children,
-  className,
-}: {
-  children: React.ReactNode;
-  className?: React.ComponentProps<"div">["className"];
-}) {
+function CardLayoutHeader({ children, className }: CardLayoutHeaderTypes) {
   return <div className={className}>{children}</div>;
 }
 

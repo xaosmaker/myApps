@@ -39,8 +39,8 @@ LOCAL_APPS = [
     "core_apps.common",
     "core_apps.todos",
     "core_apps.profiles",
-    "core_apps.daily_diary",
-    "core_apps.nutritions",
+    "core_apps.nutrition_tracker",
+    "core_apps.gym_tracker",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS

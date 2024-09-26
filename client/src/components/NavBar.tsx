@@ -41,15 +41,16 @@ export default function NavBar() {
         </li>
         <li>
           <NavLink
-            to="/daily-diary"
+            to="/gym"
             onClick={closeMenu}
             className={({ isActive }) =>
               (isActive ? active : undefined) + navLingDecoration
             }
           >
-            Daily Diary
+            Gym
           </NavLink>
         </li>
+
         <li>
           <NavLink
             to="/nutritions"

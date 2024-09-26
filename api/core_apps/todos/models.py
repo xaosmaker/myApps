@@ -49,7 +49,7 @@ class Todo(TimeStampedModel):
 
 
 class TodoTasks(TimeStampedModel):
-    name = models.CharField(max_length=50, verbose_name=_("Todo Name"))
+    name = models.CharField(max_length=255, verbose_name=_("Todo Name"))
     is_completed = models.BooleanField(default=False)
     todo_list = models.ForeignKey(
         Todo,

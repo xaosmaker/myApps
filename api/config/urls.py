@@ -38,6 +38,6 @@ urlpatterns = [
     ),
     path("api/auth/", include("core_apps.users.urls")),
     path("api/", include("core_apps.todos.urls")),
-    path("api/", include("core_apps.daily_diary.urls")),
-    path("api/", include("core_apps.nutritions.urls")),
+    path("api/", include("core_apps.gym_tracker.urls")),
+    path("api/", include("core_apps.nutrition_tracker.urls")),
 ]

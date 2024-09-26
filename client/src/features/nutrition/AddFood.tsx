@@ -1,12 +1,7 @@
-interface FoodDataType {
-  food: string;
-  quantity: string;
-  callories: number;
-  pkid: number;
-}
 interface FormType {
   eat_time: string;
   quantity: string;
+  test: { value: number; pkid: number; label: string };
 }
 type SelectValuesTypes = {
   label: string;
@@ -29,6 +24,10 @@ import { useForm } from "react-hook-form";
 import { timeToHumanReadable } from "../../utils/helperFunctions";
 import Button from "../../ui/Button";
 import { useNavigate } from "react-router-dom";
+import Modal from "../../components/modal/Modal";
+import { FaPlus } from "react-icons/fa6";
+import AddFoodStats from "./AddFoodStats";
+import { FoodDataTypes } from "../../types/nutritionTypes";
 export default function AddFood() {
   const navigate = useNavigate();
   const { mutate } = useMutation({
@@ -81,24 +80,40 @@ export default function AddFood() {
         htmlType="text"
         register={register("quantity")}
       />
-      <Select
-        theme={(theme) => ({
-          ...theme,
-          colors: {
-            ...theme.colors,
-            primary: "#334155",
-            primary25: "#0f172a",
-            neutral0: "#1e293b",
-            neutral80: "#f8fafc",
-          },
-        })}
-        options={foodOptionsData.map((item: FoodDataType) => ({
-          label: `${item.food} (${item.quantity})`,
-          value: item.callories,
-          pkid: item.pkid,
-        }))}
-        onChange={setFood}
-      />
+      <div className="grid grid-cols-[1fr_auto] items-center justify-center gap-2">
+        <Select
+          theme={(theme) => ({
+            ...theme,
+            colors: {
+              ...theme.colors,
+              primary: "#334155",
+              primary25: "#0f172a",
+              neutral0: "#1e293b",
+              neutral80: "#f8fafc",
+            },
+          })}
+          options={foodOptionsData.map((item: FoodDataTypes) => ({
+            label: `${item.food_name} (${item.food_quantity})`,
+            value: item.food_calories,
+            pkid: item.pkid,
+          }))}
+          onChange={setFood}
+        />
+
+        <Modal>
+          <Modal.Open opens="test">
+            <div className="group/message relative cursor-pointer p-2 text-xl  text-green-500">
+              <FaPlus />
+              <span className="text-nowrap invisible absolute right-1/2 top-9 translate-x-1/2 rounded-md border-2 border-slate-950 bg-slate-800 px-4 py-2 text-slate-50 transition-all duration-500 group-hover/message:visible">
+                Add Food
+              </span>
+            </div>
+          </Modal.Open>
+          <Modal.Window name="test">
+            <AddFoodStats />
+          </Modal.Window>
+        </Modal>
+      </div>
       <div>
         <Button type="submit">Submit</Button>
       </div>

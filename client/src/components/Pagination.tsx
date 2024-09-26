@@ -1,16 +1,11 @@
 import React, { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
+import { PaginationTypes } from "../types/componentTypes/paginationTypes";
 const active = " bg-slate-950 ";
 const defaultStyle = " rounded-md px-4 py-2 hover:bg-slate-950 ";
 const totalPagination = 2;
 
-function Pagination({
-  currentPage,
-  totalPages,
-}: {
-  currentPage: number;
-  totalPages: number;
-}) {
+function Pagination({ currentPage, totalPages }: PaginationTypes) {
   const [pageNumber, setPageNumber] = useSearchParams();
 
   function onClickPaginationButton(pageNumber: string) {
