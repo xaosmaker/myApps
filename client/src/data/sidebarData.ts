@@ -26,4 +26,18 @@ const DAILY_DIARY_DATA: data[] = [
   { icon: FaPlus, to: "daily-diary/add-diary", name: "Add Diary" },
 ];
 
-export { DAILY_DIARY_DATA, WORKHOURS_SIDEBAR_DATA, TODOS_SIDEBAR_DATA };
+const NUTRITIONS_DATA: data[] = [
+  {
+    icon: FaListCheck,
+    to: "nutritions/show-nutritions",
+    name: "Show Nutritions",
+  },
+  { icon: FaPlus, to: "nutritions/add-nutritions", name: "Add Nutritions" },
+];
+
+export {
+  DAILY_DIARY_DATA,
+  WORKHOURS_SIDEBAR_DATA,
+  TODOS_SIDEBAR_DATA,
+  NUTRITIONS_DATA,
+};

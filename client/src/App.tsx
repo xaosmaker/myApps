@@ -26,6 +26,8 @@ import DiaryDetails from "./features/daily-diary/DiaryDetails";
 import CountDownTimer from "./features/timer/CountDownTimer";
 import TodoCard from "./features/todo/TodoCard";
 import DiaryCard from "./features/daily-diary/DiaryCard";
+import NutritionCard from "./features/nutrition/NutritionCard";
+import AddFood from "./features/nutrition/AddFood";
 
 const queryclient = new QueryClient({
   defaultOptions: {
@@ -90,6 +92,19 @@ const routet = createBrowserRouter([
               },
 
               { path: "count-down-timer", element: <CountDownTimer /> },
+            ],
+          },
+
+          {
+            path: "/nutritions",
+            children: [
+              {
+                index: true,
+                element: <Navigate replace to="show-nutritions" />,
+              },
+
+              { path: "show-nutritions", element: <NutritionCard /> },
+              { path: "add-nutritions", element: <AddFood /> },
             ],
           },
           {

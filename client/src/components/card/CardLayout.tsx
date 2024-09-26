@@ -33,7 +33,7 @@ function CardLayoutHeader({
   className,
 }: {
   children: React.ReactNode;
-  className: React.ComponentProps<"div">["className"];
+  className?: React.ComponentProps<"div">["className"];
 }) {
   return <div className={className}>{children}</div>;
 }

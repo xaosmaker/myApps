@@ -66,7 +66,7 @@ export default function Input({
         />
         <label
           htmlFor={name}
-          className="absolute left-0 bg-slate-900 top-3 origin-[0] -translate-y-7 capitalize peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-150 peer-placeholder-shown:text-slate-700 peer-focus:-translate-y-6 peer-focus:scale-100 peer-focus:text-blue-600"
+          className="absolute left-0 top-3 origin-[0] -translate-y-7 bg-slate-900 capitalize peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-150 peer-placeholder-shown:text-slate-700 peer-focus:-translate-y-6 peer-focus:scale-100 peer-focus:text-blue-600"
         >
           {displayName ? displayName : name}
         </label>

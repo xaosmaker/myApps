@@ -51,26 +51,34 @@ export default function DiaryCard() {
       </CardLayout.Header>
 
       <CardLayout.Body className="h-3/5 md:h-4/6 md:grid-cols-3">
-        {diaryData?.results?.map((data: DiaryDateData) => (
-          <Card key={data.pkid} link="#">
-            <Card.Title className=" text-center">
-              {dateToGRformat(data.date)}
-            </Card.Title>
-            <Card.Body>
-              {data?.diary_date
-                ?.filter((data) =>
-                  filterWord === "all" ? true : data.note_type === filterWord
-                )
-                .map((data) => (
-                  <div className="grid grid-cols-3" key={data.pkid}>
-                    <p>{data.note_type}</p>
-                    <p>{data.time.slice(0, -3)}</p>
-                    <p>{data.note}</p>
-                  </div>
-                ))}
-            </Card.Body>
-          </Card>
-        ))}
+        {diaryData?.results
+          ?.filter((results) =>
+            filterWord === "all"
+              ? true
+              : results.diary_date.filter(
+                  (resultsData) => resultsData.note_type === filterWord
+                ).length > 0
+          )
+          .map((data: DiaryDateData) => (
+            <Card key={data.pkid} link="#">
+              <Card.Title className=" text-center">
+                {dateToGRformat(data.date)}
+              </Card.Title>
+              <Card.Body>
+                {data?.diary_date
+                  ?.filter((data) =>
+                    filterWord === "all" ? true : data.note_type === filterWord
+                  )
+                  .map((data) => (
+                    <div className="grid grid-cols-3" key={data.pkid}>
+                      <p>{data.note_type}</p>
+                      <p>{data.time.slice(0, -3)}</p>
+                      <p>{data.note}</p>
+                    </div>
+                  ))}
+              </Card.Body>
+            </Card>
+          ))}
       </CardLayout.Body>
       <Pagination
         currentPage={diaryData?.current_page || 1}

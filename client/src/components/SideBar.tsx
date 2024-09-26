@@ -1,5 +1,6 @@
 import {
   DAILY_DIARY_DATA,
+  NUTRITIONS_DATA,
   TODOS_SIDEBAR_DATA,
   WORKHOURS_SIDEBAR_DATA,
 } from "../data/sidebarData";
@@ -22,6 +23,8 @@ export default function Sidebar() {
         setSidebarData(TODOS_SIDEBAR_DATA);
       } else if (path === "daily-diary") {
         setSidebarData(DAILY_DIARY_DATA);
+      } else if (path === "nutritions") {
+        setSidebarData(NUTRITIONS_DATA);
       } else {
         setSidebarData(null);
       }

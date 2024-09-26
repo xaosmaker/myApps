@@ -39,4 +39,5 @@ urlpatterns = [
     path("api/auth/", include("core_apps.users.urls")),
     path("api/", include("core_apps.todos.urls")),
     path("api/", include("core_apps.daily_diary.urls")),
+    path("api/", include("core_apps.nutritions.urls")),
 ]
