@@ -1,4 +1,4 @@
-export interface apiPaginationTypes<T> {
+export interface GetPaginationDataType<T> {
   count: number;
   current_page: number;
   results: T[];

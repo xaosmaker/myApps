@@ -1,17 +1,17 @@
 import { useForm } from "react-hook-form";
-import Input from "../../components/Input";
-import Button from "../../ui/Button";
+import Input from "../../../components/Input";
+import Button from "../../../ui/Button";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createFoodApiCall } from "../../services/nutritionsApiCalls";
-import { FoodDataTypes } from "../../types/nutritionTypes";
 import { useContext } from "react";
-import { ModalContext } from "../../components/modal/Modal";
-
-export default function AddFoodStats() {
+import { ModalContext } from "../../../components/modal/Modal";
+import { FoodDataType } from "../types/NutritionTypes";
+import { postAddFoodDetails } from "../services/nutritionServices";
+export default function AddFoodDetails() {
   const { close } = useContext(ModalContext);
   const querclient = useQueryClient();
+
   const { mutate } = useMutation({
-    mutationFn: createFoodApiCall,
+    mutationFn: postAddFoodDetails,
     onSuccess: () => {
       querclient.invalidateQueries({
         queryKey: ["foodSelect"],
@@ -19,14 +19,16 @@ export default function AddFoodStats() {
       close();
     },
   });
-  const submitHandle = (data: FoodDataTypes) => {
+
+  const submitHandle = (data: FoodDataType) => {
     mutate(data);
   };
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FoodDataTypes>();
+  } = useForm<FoodDataType>();
   return (
     <form
       onSubmit={handleSubmit(submitHandle)}
@@ -34,20 +36,20 @@ export default function AddFoodStats() {
     >
       <Input
         htmlType="text"
-        name="food"
+        name="food_name"
         displayName="Food Name"
         register={register("food_name")}
         error={errors.food_name?.message}
       />
       <Input
         htmlType="text"
-        name="quantity2"
+        name="food_quantity"
         displayName="quantity per calories"
         register={register("food_quantity")}
         error={errors.food_quantity?.message}
       />
       <Input
-        name="calories"
+        name="food_calories"
         register={register("food_calories")}
         error={errors.food_calories?.message}
         htmlType="number"

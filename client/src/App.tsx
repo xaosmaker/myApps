@@ -22,10 +22,10 @@ import { refresh } from "./services/authApiCalls";
 import UnderConstruction from "./components/UnderConstruction";
 import CountDownTimer from "./features/timer/CountDownTimer";
 import TodoCard from "./features/todo/TodoCard";
-import NutritionCard from "./features/nutrition/NutritionCard";
-import AddFood from "./features/nutrition/AddFood";
 import GymCard from "./features/gym/GymCard";
 import AddGymWorkout from "./features/gym/AddGymWorkout";
+import NutritionList from "./features/nutrition/pages/NutritionList";
+import AddFoodIntake from "./features/nutrition/pages/AddFoodIntake";
 
 const queryclient = new QueryClient({
   defaultOptions: {
@@ -83,8 +83,8 @@ const routet = createBrowserRouter([
                 element: <Navigate replace to="show-nutritions" />,
               },
 
-              { path: "show-nutritions", element: <NutritionCard /> },
-              { path: "add-nutritions", element: <AddFood /> },
+              { path: "show-nutritions", element: <NutritionList /> },
+              { path: "add-nutritions", element: <AddFoodIntake /> },
             ],
           },
           {

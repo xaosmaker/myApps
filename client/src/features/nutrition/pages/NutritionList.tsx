@@ -1,30 +1,18 @@
-import { useQuery } from "@tanstack/react-query";
-import Card from "../../components/card/Card";
-import CardLayout from "../../components/card/CardLayout";
-import {
-  apiNutritionsDays,
-  userWeightGetApiCall,
-} from "../../services/nutritionsApiCalls";
-import usePagePaginationParams from "../../utils/UsePagePaginationParams";
-import Pagination from "../../components/Pagination";
-import { dateToGRformat } from "../../utils/helperFunctions";
-import {
-  NutritionDataType,
-  UserWeightTypes,
-} from "../../types/nutritions/NutritionCardTypes";
+import usePagePaginationParams from "../../../hooks/usePagePaginationParams";
+import CardLayout from "../../../components/card/CardLayout";
+import Card from "../../../components/card/Card";
+import Pagination from "../../../components/Pagination";
+import { dateToGRformat } from "../../../utils/helperFunctions";
+import { useGetNutritionsDaysListData } from "../hooks/useGetNutritionsDaysListData";
+import { useGetUserWeightData } from "../hooks/useGetUserWeightData";
 
-export default function NutritionCard() {
+export default function NutritionList() {
   const pageParams = usePagePaginationParams();
-  const { data: userWeight = [] } = useQuery<UserWeightTypes[]>({
-    queryFn: userWeightGetApiCall,
-    queryKey: ["userWeight"],
-  });
+  const { userWeightData, isUserWeightDataLoading } = useGetUserWeightData();
+  const { nutritionDaysListData, isNutritionDaysLoading } =
+    useGetNutritionsDaysListData(pageParams);
 
-  const { data: nutritionData, isLoading } = useQuery<NutritionDataType>({
-    queryKey: ["nutritionData", pageParams],
-    queryFn: () => apiNutritionsDays(pageParams),
-  });
-  if (isLoading) {
+  if (isNutritionDaysLoading || isUserWeightDataLoading) {
     return <div className="animate-bounce"> Loading ....</div>;
   }
   return (
@@ -36,12 +24,14 @@ export default function NutritionCard() {
             <div className="flex items-center justify-center gap-4 text-lg font-normal capitalize">
               <span>
                 Current Weight:{" "}
-                {userWeight?.length > 0 ? userWeight[0].current_weight : 0}
+                {userWeightData?.length > 0
+                  ? userWeightData[0].current_weight
+                  : 0}
               </span>
               <span>
                 Daily Calories:
-                {userWeight?.length > 0
-                  ? userWeight[0].daily_target_calories
+                {userWeightData?.length > 0
+                  ? userWeightData[0].daily_target_calories
                   : 0}
               </span>
             </div>
@@ -49,15 +39,15 @@ export default function NutritionCard() {
         </CardLayout.Title>
       </CardLayout.Header>
       <CardLayout.Body className="h-3/5 md:h-4/6 md:grid-cols-3">
-        {nutritionData?.results?.map((item) => (
+        {nutritionDaysListData?.results?.map((item) => (
           <Card key={item.created_at} link="#">
             <Card.Title className="text-center">
               <div className="flex flex-col">
                 <span>{dateToGRformat(item.created_at)}</span>
                 <span>
                   Remaining Calories:{" "}
-                  {userWeight?.length > 0
-                    ? userWeight[0].daily_target_calories -
+                  {userWeightData?.length > 0
+                    ? userWeightData[0].daily_target_calories -
                       item.total_foods_calories
                     : 0}
                 </span>
@@ -81,8 +71,8 @@ export default function NutritionCard() {
       </CardLayout.Body>
 
       <Pagination
-        currentPage={nutritionData?.current_page || 1}
-        totalPages={nutritionData?.total_pages || 1}
+        currentPage={nutritionDaysListData?.current_page || 1}
+        totalPages={nutritionDaysListData?.total_pages || 1}
       />
     </CardLayout>
   );

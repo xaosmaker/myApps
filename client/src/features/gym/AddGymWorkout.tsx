@@ -28,7 +28,6 @@ export default function AddGymWorkout() {
     formState: { errors },
   } = useForm<GymWorkoutTypes>();
   function submitForm(data: GymWorkoutTypes) {
-    console.log("data", data);
     mutate(data);
   }
 

@@ -1,13 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import { apiTodosList } from "../../services/todosApi";
 import { TodoData, TodoListData } from "../../types/dataTypes";
-import usePagePaginationParams from "../../utils/UsePagePaginationParams";
 import Pagination from "../../components/Pagination";
 import CardLayout from "../../components/card/CardLayout";
 import Card from "../../components/card/Card";
 import { Checked, Unchecked } from "../../img/svgsExport";
 import { dateToGRformat } from "../../utils/helperFunctions";
 import TodoCardItem from "./TodoCardItem";
+import usePagePaginationParams from "../../hooks/usePagePaginationParams";
 
 export default function TodoCard() {
   const pageParams = usePagePaginationParams();

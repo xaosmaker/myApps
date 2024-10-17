@@ -1,17 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
 import Card from "../../components/card/Card";
 import CardLayout from "../../components/card/CardLayout";
-import usePagePaginationParams from "../../utils/UsePagePaginationParams";
 import Pagination from "../../components/Pagination";
 import { dateToGRformat } from "../../utils/helperFunctions";
 import { gymDayGetList } from "../../services/gym";
-import { apiPaginationTypes } from "../../types/generalTypes";
 import { GymDayTypes } from "./gymTypes";
+import usePagePaginationParams from "../../hooks/usePagePaginationParams";
+import { GetPaginationDataType } from "../../types/baseTypes";
 
 export default function GymCard() {
   const pageParams = usePagePaginationParams();
   const { data: gymData, isLoading: isGymDataLoading } = useQuery<
-    apiPaginationTypes<GymDayTypes>
+    GetPaginationDataType<GymDayTypes>
   >({
     queryKey: ["gym-day"],
     queryFn: () => gymDayGetList(pageParams),
