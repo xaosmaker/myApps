@@ -23,6 +23,7 @@ export default function AddFoodIntake() {
     },
   });
 
+  //TODO: need error messages
   if (isFoodDataLoading) {
     return <div className="bg-slate-800">Loading</div>;
   }

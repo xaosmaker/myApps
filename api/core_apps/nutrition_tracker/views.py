@@ -15,7 +15,7 @@ from core_apps.nutrition_tracker.serializers import (
 )
 
 
-class NutritionViewSet(ListModelMixin, GenericViewSet):
+class NutritionViewSet(CreateModelMixin, ListModelMixin, GenericViewSet):
     serializer_class = NutritionSerializer
     queryset = Nutrition.objects.all()
 

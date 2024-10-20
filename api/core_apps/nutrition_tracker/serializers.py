@@ -29,12 +29,14 @@ class NutritionSerializer(serializers.ModelSerializer):
         nutrition = Nutrition.objects.create(
             nutrition_day=nutrition_day, **validated_data
         )
-        nutrition.total_calories = nutrition.quantity * nutrition.food.food_calories
+        nutrition.total_calories = round(
+            nutrition.quantity * nutrition.food.food_calories, 2
+        )
         nutrition.save()
         if nutrition_day.total_foods_calories is not None:
-            nutrition_day.total_foods_calories += nutrition.total_calories
+            nutrition_day.total_foods_calories += round(nutrition.total_calories, 2)
         else:
-            nutrition_day.total_foods_calories = nutrition.total_calories
+            nutrition_day.total_foods_calories = round(nutrition.total_calories, 2)
         nutrition_day.save()
 
         return nutrition

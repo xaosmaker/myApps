@@ -1,31 +1,26 @@
 import { useForm } from "react-hook-form";
-import Input from "../../components/Input";
-import Button from "../../ui/Button";
-import { GymMachineTypes } from "../../types/gym/gymMachineTypes";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createGymMachinePost } from "../../services/gym";
-import { useContext } from "react";
-import { ModalContext } from "../../components/modal/Modal";
+import { GymMachineType } from "../types/GymTypes";
+import { usePostGymMachine } from "../hooks/usePostGymMachine";
+import Input from "../../../components/Input";
+import Button from "../../../ui/Button";
 
 export default function AddGymMachine() {
-  const queryclient = useQueryClient();
-  const { close } = useContext(ModalContext);
-  const { mutate } = useMutation({
-    mutationFn: (data: GymMachineTypes) => createGymMachinePost(data),
-    onSuccess: () => {
-      queryclient.invalidateQueries({ queryKey: ["machineData"] });
-      close();
-    },
-  });
-
-  function submitFunction(machineData: GymMachineTypes) {
-    mutate(machineData);
+  function submitFunction(machineData: GymMachineType) {
+    postGymMachineMutate(machineData);
   }
+  const { postGymMachineMutate, isPostGymMachineError, postGymMachineError } =
+    usePostGymMachine();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<GymMachineTypes>();
+  } = useForm<GymMachineType>();
+  const error = (
+    <div className="whitespace-pre-wrap rounded-md bg-red-600 px-2 font-semibold capitalize">
+      {postGymMachineError?.message}
+    </div>
+  );
+
   return (
     <form
       onSubmit={handleSubmit(submitFunction)}
@@ -43,6 +38,7 @@ export default function AddGymMachine() {
         <label className="uppercase">Track by Time</label>
         <input {...register("is_tracked_by_time")} type="checkbox" />
       </div>
+      {isPostGymMachineError && error}
 
       <div className="self-start">
         <Button type="submit">Add Machine</Button>

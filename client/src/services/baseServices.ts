@@ -14,7 +14,8 @@ async function basePost(url: string, diaryData: object, errorMessage: string) {
       if (error.response?.data.detail) {
         throw new Error(error.response.data.detail);
       }
-      return error.response;
+
+      throw new Error(Object.values(error.response?.data).join("\n"));
     }
     throw new Error(errorMessage);
   }
@@ -37,7 +38,7 @@ async function baseGet(
       if (error.response?.data.detail) {
         throw new Error(error.response.data.detail);
       }
-      return error.response;
+      throw new Error(Object.values(error.response?.data).join("\n"));
     }
     throw new Error(errorMessage);
   }

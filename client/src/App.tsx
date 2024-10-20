@@ -22,8 +22,8 @@ import { refresh } from "./services/authApiCalls";
 import UnderConstruction from "./components/UnderConstruction";
 import CountDownTimer from "./features/timer/CountDownTimer";
 import TodoCard from "./features/todo/TodoCard";
-import GymCard from "./features/gym/GymCard";
-import AddGymWorkout from "./features/gym/AddGymWorkout";
+import GymCard from "./features/gym/pages/GymCard";
+import AddGymWorkout from "./features/gym/pages/AddGymWorkout";
 import NutritionList from "./features/nutrition/pages/NutritionList";
 import AddFoodIntake from "./features/nutrition/pages/AddFoodIntake";
 

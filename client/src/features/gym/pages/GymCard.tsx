@@ -1,23 +1,15 @@
-import { useQuery } from "@tanstack/react-query";
-import Card from "../../components/card/Card";
-import CardLayout from "../../components/card/CardLayout";
-import Pagination from "../../components/Pagination";
-import { dateToGRformat } from "../../utils/helperFunctions";
-import { gymDayGetList } from "../../services/gym";
-import { GymDayTypes } from "./gymTypes";
-import usePagePaginationParams from "../../hooks/usePagePaginationParams";
-import { GetPaginationDataType } from "../../types/baseTypes";
+import usePagePaginationParams from "../../../hooks/usePagePaginationParams";
+import CardLayout from "../../../components/card/CardLayout";
+import Card from "../../../components/card/Card";
+import { dateToGRformat } from "../../../utils/helperFunctions";
+import Pagination from "../../../components/Pagination";
+import { useGetGymDay } from "../hooks/useGetGymDay";
 
 export default function GymCard() {
   const pageParams = usePagePaginationParams();
-  const { data: gymData, isLoading: isGymDataLoading } = useQuery<
-    GetPaginationDataType<GymDayTypes>
-  >({
-    queryKey: ["gym-day"],
-    queryFn: () => gymDayGetList(pageParams),
-  });
+  const { gymListData, isGymListDataLoading } = useGetGymDay(pageParams);
 
-  if (isGymDataLoading) {
+  if (isGymListDataLoading) {
     return <div className="animate-bounce"> Loading ....</div>;
   }
   return (
@@ -26,7 +18,7 @@ export default function GymCard() {
         <CardLayout.Title>Gym</CardLayout.Title>
       </CardLayout.Header>
       <CardLayout.Body className="h-3/5 md:h-4/6 md:grid-cols-3">
-        {gymData?.results?.map((item) => (
+        {gymListData?.results?.map((item) => (
           <Card key={item.created_at} link="#">
             <Card.Title className="text-center">
               {dateToGRformat(item.created_at)}
@@ -63,8 +55,8 @@ export default function GymCard() {
       </CardLayout.Body>
 
       <Pagination
-        currentPage={gymData?.current_page || 1}
-        totalPages={gymData?.total_pages || 1}
+        currentPage={gymListData?.current_page || 1}
+        totalPages={gymListData?.total_pages || 1}
       />
     </CardLayout>
   );

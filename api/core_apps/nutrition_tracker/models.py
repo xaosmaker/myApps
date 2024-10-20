@@ -26,10 +26,13 @@ class NutritionDay(TimeStampedModel):
         verbose_name=_("Nutrition Profile"),
         related_name="nutritions_profile",
     )
-    total_foods_calories = models.IntegerField(blank=True, null=True)
+    total_foods_calories = models.FloatField(blank=True, null=True)
 
     def __str__(self) -> str:
         return str(self.created_at.date())
+
+    class Meta:
+        ordering = ["-created_at"]
 
 
 class Nutrition(TimeStampedModel):
@@ -40,8 +43,8 @@ class Nutrition(TimeStampedModel):
         related_name="nutrition_day",
     )
     eat_time = models.TimeField()
-    total_calories = models.IntegerField(blank=True, default=0)
-    quantity = models.IntegerField()
+    total_calories = models.FloatField(blank=True, default=0)
+    quantity = models.FloatField()
     food = models.ForeignKey("FoodData", on_delete=models.CASCADE)
 
     def __str__(self) -> str:
