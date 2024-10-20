@@ -12,7 +12,8 @@ class GymMachineSerializer(serializers.ModelSerializer):
 
 
 class GymTrackerSerializer(serializers.ModelSerializer):
-    gym_machine = GymMachineSerializer()
+    gym_machine = GymMachineSerializer(read_only=True)
+    gym_machine_id = serializers.IntegerField(write_only=True)
 
     class Meta:
         model = GymTracker
@@ -24,6 +25,7 @@ class GymTrackerSerializer(serializers.ModelSerializer):
             "gym_weight",
             "gym_workout_time",
             "gym_dificulty",
+            "gym_machine_id",
         ]
 
     def create(self, validated_data):
@@ -34,10 +36,9 @@ class GymTrackerSerializer(serializers.ModelSerializer):
             created_at__date=datetime.today().date(),
             profile=user.profile,
         )
-        gym_machine_data = validated_data.pop("gym_machine")
-        gym_machine = GymMachine.objects.get(
-            machine_name=gym_machine_data["machine_name"]
-        )
+        gym_machine_id = validated_data.pop("gym_machine_id")
+        gym_machine = GymMachine.objects.get(pkid=gym_machine_id)
+        print(gym_machine)
 
         tracker = GymTracker.objects.create(
             gym_day=machine_day, gym_machine=gym_machine, **validated_data

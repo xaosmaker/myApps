@@ -1,4 +1,5 @@
-from rest_framework.viewsets import ModelViewSet
+from rest_framework.mixins import CreateModelMixin, ListModelMixin
+from rest_framework.viewsets import GenericViewSet, ModelViewSet
 
 from core_apps.nutrition_tracker.models import (
     FoodData,
@@ -14,7 +15,7 @@ from core_apps.nutrition_tracker.serializers import (
 )
 
 
-class NutritionViewSet(ModelViewSet):
+class NutritionViewSet(ListModelMixin, GenericViewSet):
     serializer_class = NutritionSerializer
     queryset = Nutrition.objects.all()
 
@@ -23,13 +24,13 @@ class NutritionViewSet(ModelViewSet):
         return Nutrition.objects.filter(nutrition_day__profile=user.profile)
 
 
-class FoodDataViewset(ModelViewSet):
+class FoodDataViewset(CreateModelMixin, ListModelMixin, GenericViewSet):
     pagination_class = None
     serializer_class = FoodDataSerializer
     queryset = FoodData.objects.all()
 
 
-class NutritionDateViewset(ModelViewSet):
+class NutritionDateViewset(ListModelMixin, GenericViewSet):
     serializer_class = NutritionDaySerializer
     queryset = NutritionDay.objects.all()
 
@@ -38,7 +39,7 @@ class NutritionDateViewset(ModelViewSet):
         return NutritionDay.objects.filter(profile=user.profile)
 
 
-class TargetKilogramsViewSet(ModelViewSet):
+class TargetKilogramsViewSet(ListModelMixin, CreateModelMixin, GenericViewSet):
     pagination_class = None
     serializer_class = TargetKilogramsSerializer
     queryset = TargetKilograms.objects.all()

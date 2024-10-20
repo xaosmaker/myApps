@@ -1,4 +1,5 @@
-from rest_framework.viewsets import ModelViewSet
+from rest_framework.mixins import CreateModelMixin, ListModelMixin
+from rest_framework.viewsets import GenericViewSet
 
 from core_apps.gym_tracker.models import GymDay, GymMachine, GymTracker
 from core_apps.gym_tracker.serializers import (
@@ -8,7 +9,7 @@ from core_apps.gym_tracker.serializers import (
 )
 
 
-class GymDayViewset(ModelViewSet):
+class GymDayViewset(ListModelMixin, GenericViewSet):
     serializer_class = GymDaySerializer
     queryset = GymDay.objects.all()
 
@@ -17,7 +18,7 @@ class GymDayViewset(ModelViewSet):
         return GymDay.objects.filter(profile=user.profile)
 
 
-class GymMachineViewset(ModelViewSet):
+class GymMachineViewset(ListModelMixin, CreateModelMixin, GenericViewSet):
     pagination_class = None
     serializer_class = GymMachineSerializer
     queryset = GymMachine.objects.all()
@@ -26,7 +27,7 @@ class GymMachineViewset(ModelViewSet):
         return GymMachine.objects.all()
 
 
-class GymTrackerViewSet(ModelViewSet):
+class GymTrackerViewSet(CreateModelMixin, GenericViewSet):
     serializer_class = GymTrackerSerializer
     queryset = GymTracker.objects.all()
 

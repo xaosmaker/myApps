@@ -24,9 +24,7 @@ class GymDay(TimeStampedModel):
 
 class GymMachine(TimeStampedModel):
 
-    machine_name = models.CharField(
-        max_length=50,
-    )
+    machine_name = models.CharField(max_length=50, unique=True)
     is_tracked_by_time = models.BooleanField(default=False)
 
     def __str__(self) -> str:
