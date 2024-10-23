@@ -49,6 +49,7 @@ export default function AddFoodDetails() {
         error={errors.food_quantity?.message}
       />
       <Input
+        otherProps={{ step: 0.01 }}
         name="food_calories"
         register={register("food_calories")}
         error={errors.food_calories?.message}

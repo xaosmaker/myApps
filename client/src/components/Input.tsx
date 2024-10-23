@@ -5,6 +5,7 @@ export default function Input({
   name,
   error,
   register,
+  otherProps,
   required = true,
   displayName = null,
   text = "text",
@@ -14,6 +15,7 @@ export default function Input({
       type={htmlType}
       id={name}
       {...register}
+      {...otherProps}
       placeholder=""
       className={`peer block w-full transform border-b-2  bg-transparent px-0 py-2.5 caret-slate-100 outline-none  ${
         error
