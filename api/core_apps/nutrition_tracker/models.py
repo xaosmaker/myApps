@@ -54,7 +54,7 @@ class Nutrition(TimeStampedModel):
 class FoodData(TimeStampedModel):
     food_name = models.CharField(max_length=250, unique=True)
     food_quantity = models.CharField(max_length=250)
-    food_calories = models.IntegerField()
+    food_calories = models.FloatField()
 
     def __str__(self) -> str:
         return f"{self.food_name} {self.food_calories}cal per {self.food_quantity}"
