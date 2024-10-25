@@ -59,4 +59,9 @@ class FoodDataSerializer(serializers.ModelSerializer):
 class TargetKilogramsSerializer(serializers.ModelSerializer):
     class Meta:
         model = TargetKilograms
-        fields = ["daily_target_calories", "current_weight"]
+        fields = ["daily_target_calories", "current_weight", "pkid", "created_at"]
+        read_only_fields = ["pkid", "created_at"]
+
+    def create(self, validated_data):
+        user = self.context["request"].user
+        return TargetKilograms.objects.create(**validated_data, profile=user.profile)

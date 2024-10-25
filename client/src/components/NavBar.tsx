@@ -89,24 +89,13 @@ export default function NavBar() {
 
         <li>
           <NavLink
-            to="/houses"
-            onClick={closeMenu}
-            className={({ isActive }) =>
-              (isActive ? active : undefined) + navLingDecoration
-            }
-          >
-            Houses
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
             to="/vehicles"
             onClick={closeMenu}
             className={({ isActive }) =>
               (isActive ? active : undefined) + navLingDecoration
             }
           >
-            Vehicles
+            Incomes
           </NavLink>
         </li>
 

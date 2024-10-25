@@ -26,6 +26,7 @@ import GymCard from "./features/gym/pages/GymCard";
 import AddGymWorkout from "./features/gym/pages/AddGymWorkout";
 import NutritionList from "./features/nutrition/pages/NutritionList";
 import AddFoodIntake from "./features/nutrition/pages/AddFoodIntake";
+import UserWeightData from "./features/nutrition/pages/UserWeightData";
 
 const queryclient = new QueryClient({
   defaultOptions: {
@@ -85,6 +86,7 @@ const routet = createBrowserRouter([
 
               { path: "show-nutritions", element: <NutritionList /> },
               { path: "add-nutritions", element: <AddFoodIntake /> },
+              { path: "user-weight-data", element: <UserWeightData /> },
             ],
           },
           {

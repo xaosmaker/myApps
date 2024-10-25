@@ -1,5 +1,11 @@
-function dateToGRformat(date: string): string {
-  const newDate: Date = new Date(date);
+function dateToGRformat(date?: string): string {
+  let newDate;
+  if (date) {
+    newDate = new Date(date);
+  } else {
+    newDate = new Date();
+  }
+
   return newDate.toLocaleDateString("en-GB");
 }
 function timeTo24Format() {

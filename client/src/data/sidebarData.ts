@@ -3,7 +3,7 @@ import SetWorkHours from "../img/manage_history_24dp_FILL0_wght400_GRAD0_opsz24.
 import SumWorkTime from "../img/pending_actions_24dp_FILL0_wght400_GRAD0_opsz24.svg?react";
 import ShowWorkTime from "../img/schedule_24dp_FILL0_wght400_GRAD0_opsz24.svg?react";
 import { data } from "../types/dataTypes";
-import { FaListCheck, FaPlus } from "react-icons/fa6";
+import { FaListCheck, FaPlus, FaAddressCard } from "react-icons/fa6";
 
 const WORKHOURS_SIDEBAR_DATA: data[] = [
   {
@@ -33,6 +33,11 @@ const NUTRITIONS_DATA: data[] = [
     name: "Show Nutritions",
   },
   { icon: FaPlus, to: "nutritions/add-nutritions", name: "Add Nutritions" },
+  {
+    icon: FaAddressCard,
+    to: "nutritions/user-weight-data",
+    name: "User Weight Data",
+  },
 ];
 
 const GYM_DATA: data[] = [

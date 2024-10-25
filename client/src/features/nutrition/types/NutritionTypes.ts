@@ -1,6 +1,8 @@
 import { GetPaginationDataType } from "../../../types/baseTypes";
 
 export interface UserWeightStatusType {
+  pkid?: number;
+  created_at?: number;
   daily_target_calories: number;
   current_weight: number;
 }

@@ -1,5 +1,9 @@
 import { baseGet, basePost } from "../../../services/baseServices";
-import { AddFoodIntakeType, FoodDataType } from "../types/NutritionTypes";
+import {
+  AddFoodIntakeType,
+  FoodDataType,
+  UserWeightStatusType,
+} from "../types/NutritionTypes";
 
 async function getUserWeightStatus() {
   return await baseGet(
@@ -32,8 +36,16 @@ async function postAddFoodIntake(nutritionData: AddFoodIntakeType) {
 async function postAddFoodDetails(foodData: FoodDataType) {
   return await basePost("/api/food-data/", foodData, "Can't Create Food");
 }
+async function createUserWeight(userData: UserWeightStatusType) {
+  return await basePost(
+    "/api/user-weight/",
+    userData,
+    "Can't create user data\nTry again later"
+  );
+}
 
 export {
+  createUserWeight,
   getFoodData,
   getNutritionsDaysList,
   postAddFoodIntake,
