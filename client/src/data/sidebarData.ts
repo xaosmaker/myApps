@@ -13,7 +13,7 @@ const WORKHOURS_SIDEBAR_DATA: data[] = [
   },
   { icon: AddHours, to: "work-hours/add-work-time", name: "Add Work Hours" },
   { icon: SumWorkTime, to: "work-hours/sum-work-time", name: "Sum Work Time" },
-  { icon: SetWorkHours, to: "work-hours/set-work-time", name: "Set Work Time" },
+  { icon: SetWorkHours, to: "work-hours/work-shifts", name: "Set Work Time" },
 ];
 
 const TODOS_SIDEBAR_DATA: data[] = [

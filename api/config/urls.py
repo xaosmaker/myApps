@@ -40,4 +40,5 @@ urlpatterns = [
     path("api/", include("core_apps.todos.urls")),
     path("api/", include("core_apps.gym_tracker.urls")),
     path("api/", include("core_apps.nutrition_tracker.urls")),
+    path("api/", include("core_apps.work_hours.urls")),
 ]

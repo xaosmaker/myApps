@@ -13,7 +13,6 @@ import LoginRegPage from "./features/authentication/LoginRegPage";
 import MainLayout from "./layouts/MainLayout";
 import ShowWorkDays from "./features/work-hours/ShowWorkDays";
 import AddWorkHours from "./features/work-hours/AddWorkHours";
-import SetWorkTime from "./features/work-hours/SetWorkTime";
 import Error404 from "./pages/Error404";
 import AuthLayout from "./features/authentication/AuthLayout";
 import AddEditTodoTask from "./features/todo/AddEditTodoTask";
@@ -27,6 +26,7 @@ import AddGymWorkout from "./features/gym/pages/AddGymWorkout";
 import NutritionList from "./features/nutrition/pages/NutritionList";
 import AddFoodIntake from "./features/nutrition/pages/AddFoodIntake";
 import UserWeightData from "./features/nutrition/pages/UserWeightData";
+import WorkShifts from "./features/work-hours/pages/WorkShifts";
 
 const queryclient = new QueryClient({
   defaultOptions: {
@@ -113,7 +113,7 @@ const routet = createBrowserRouter([
                 element: <ShowWorkDays />,
               },
               { path: "add-work-time", element: <AddWorkHours /> },
-              { path: "set-work-time", element: <SetWorkTime /> },
+              { path: "work-shifts", element: <WorkShifts /> },
             ],
           },
           {

@@ -5,21 +5,6 @@ export type data = {
   name: string;
 };
 
-export type AddWorkDayData = {
-  date: string;
-  day: string;
-  startOfWork: string;
-  endOfWork: string;
-  location: string;
-  comment: string;
-};
-
-export type SetShift = {
-  company: string;
-  startOfShift: string;
-  endOfShift: string;
-};
-
 export interface TodoData {
   pkid: number;
   title: string;

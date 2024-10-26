@@ -2,8 +2,8 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import Input from "../../components/Input";
 import Button from "../../ui/Button";
-import { AddWorkDayData } from "../../types/dataTypes";
 import CustomDate from "../../components/CustomDate";
+import { AddWorkDayData } from "./types/WorkHoursTypes";
 
 // TODO: validation of form and for every time on form
 // WARN: the date should be a string
