@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { UseFormSetValue } from "react-hook-form";
-import { AddWorkDayData } from "../types/dataTypes";
+import { AddWorkDayData } from "../features/work-hours/types/WorkHoursTypes";
 
 // TODO: when i have time i will fix the date any
 // TODO: refactor this when i use it
@@ -48,7 +48,7 @@ export default function CustomDate({
     [dates, selectedDate]
   );
   return (
-    <div className="flex flex-col border-b-2 border-slate-800 py-2  ">
+    <div className="flex flex-col border-b-2 border-slate-800 py-2">
       <span>Date</span>
       {dateRange ? (
         <DatePicker

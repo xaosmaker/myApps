@@ -11,8 +11,6 @@ import { store } from "./store/store";
 import UnAuthLayout from "./features/authentication/UnAuthLayout";
 import LoginRegPage from "./features/authentication/LoginRegPage";
 import MainLayout from "./layouts/MainLayout";
-import ShowWorkDays from "./features/work-hours/ShowWorkDays";
-import AddWorkHours from "./features/work-hours/AddWorkHours";
 import Error404 from "./pages/Error404";
 import AuthLayout from "./features/authentication/AuthLayout";
 import AddEditTodoTask from "./features/todo/AddEditTodoTask";
@@ -27,6 +25,8 @@ import NutritionList from "./features/nutrition/pages/NutritionList";
 import AddFoodIntake from "./features/nutrition/pages/AddFoodIntake";
 import UserWeightData from "./features/nutrition/pages/UserWeightData";
 import WorkShifts from "./features/work-hours/pages/WorkShifts";
+import ShowWorkDays from "./features/work-hours/pages/ShowWorkDays";
+import AddWorkHours from "./features/work-hours/pages/AddWorkHours";
 
 const queryclient = new QueryClient({
   defaultOptions: {

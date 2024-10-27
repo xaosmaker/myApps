@@ -19,3 +19,33 @@ class WorkShift(TimeStampedModel):
 
     class Meta:
         ordering = ["-created_at"]
+
+
+class WorkDay(TimeStampedModel):
+    class WorkDayType(models.TextChoices):
+        TRAVEL = "Travel"
+        NORMAL_DAY = "Work Day"
+        WEEKEND = "Weekend"
+        TIMES_OFF = "Times off"
+        SICK_LEAVE = "Sick Leave"
+        PUBLIC_HOLIDAY = "Public Holiday"
+
+    profile = models.ForeignKey(
+        Profile, on_delete=models.CASCADE, related_name="work_day_profile"
+    )
+    work_day_shift = models.ForeignKey(
+        WorkShift, on_delete=models.CASCADE, null=True, blank=True
+    )
+    type_of_work_day = models.CharField(max_length=50, choices=WorkDayType.choices)
+    date_start = models.DateField(unique=True)
+    date_end = models.DateField(null=True, blank=True, unique=True)
+    location = models.CharField(max_length=150, null=True, blank=True)
+    start_of_work = models.TimeField(null=True, blank=True)
+    end_of_work = models.TimeField(null=True, blank=True)
+    comment = models.CharField(max_length=255, null=True, blank=True)
+
+    class Meta:
+        ordering = ["-date_start"]
+
+    def __str__(self) -> str:
+        return f"{self.date_start}-{self.date_end}, {self.start_of_work}-{self.end_of_work}"
