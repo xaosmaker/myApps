@@ -20,7 +20,6 @@ export default function SetWorkShifts() {
     },
   });
   function sumbitHandler(data: WorkShiftFormType) {
-    console.log("data", data);
     mutate(data);
   }
   const {

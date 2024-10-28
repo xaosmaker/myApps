@@ -11,7 +11,6 @@ export default function ShowWorkDays() {
   if (isWorkDayDataLoading) {
     return <div className="animate-bounce"> Loading ....</div>;
   }
-  console.log("workDayData", workDayData);
   return (
     <Table
       tableHeight="h-96"
