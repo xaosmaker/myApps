@@ -2,6 +2,7 @@ export type AddWorkDayData = {
   date: string;
   day: string;
   startOfWork: string;
+  work_day_shift: number;
   endOfWork: string;
   location: string;
   comment: string;
@@ -10,6 +11,7 @@ export type WorkDayFormType = {
   type_of_work_day: string;
   date_start: string;
   date_end: string | null;
+  work_day_shift: number;
   location: string | null;
   start_of_work: string | null;
   end_of_work: string | null;

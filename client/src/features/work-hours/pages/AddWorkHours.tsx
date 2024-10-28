@@ -7,6 +7,7 @@ import { AddWorkDayData, WorkDayFormType } from "../types/WorkHoursTypes";
 import { useGetWorkDayData } from "../hooks/useGetWorkDayData";
 import { useMutation } from "@tanstack/react-query";
 import { addWorkDays } from "../services/workHoursServices";
+import { useGetWorkShifts } from "../hooks/useGetworkShifts";
 
 // TODO: validation of form and for every time on form
 // TODO: make workday start from last inport add the shift to the data
@@ -15,6 +16,7 @@ import { addWorkDays } from "../services/workHoursServices";
 
 export default function AddWorkHours() {
   const { isWorkDayDataLoading } = useGetWorkDayData();
+  const { workShiftsData, isWorkShiftsDataLoading } = useGetWorkShifts();
   const [souldRender, setShouldRender] = useState<boolean>(true);
   const { mutate } = useMutation({
     mutationFn: addWorkDays,
@@ -49,6 +51,7 @@ export default function AddWorkHours() {
       comment: data.comment || null,
       location: data.location || null,
       start_of_work: data.startOfWork || null,
+      work_day_shift: data.work_day_shift,
       end_of_work: data.endOfWork || null,
       date_start: start_date,
       date_end: end_date,
@@ -66,7 +69,7 @@ export default function AddWorkHours() {
     }
   }, [day]);
 
-  if (isWorkDayDataLoading) {
+  if (isWorkDayDataLoading || isWorkShiftsDataLoading) {
     return <div className="animate-bounce"> Loading ....</div>;
   }
 
@@ -106,6 +109,23 @@ export default function AddWorkHours() {
 
         {souldRender && (
           <>
+            <select
+              {...register("work_day_shift")}
+              className="appearance-none border-0 bg-slate-900"
+            >
+              {workShiftsData.map((workShift) => {
+                return (
+                  <option
+                    key={workShift.pkid}
+                    className="uppercase"
+                    value={workShift.pkid}
+                  >{`${workShift.company}(${workShift.start_of_shift.slice(
+                    0,
+                    -3
+                  )}-${workShift.end_of_shift.slice(0, -3)})`}</option>
+                );
+              })}
+            </select>
             <Input
               htmlType="time"
               name="start of work"
