@@ -16,7 +16,6 @@ import AuthLayout from "./features/authentication/AuthLayout";
 import AddEditTodoTask from "./features/todo/AddEditTodoTask";
 import AddTodo from "./features/todo/AddTodo";
 import { refresh } from "./services/authApiCalls";
-import UnderConstruction from "./components/UnderConstruction";
 import CountDownTimer from "./features/timer/CountDownTimer";
 import TodoCard from "./features/todo/TodoCard";
 import GymCard from "./features/gym/pages/GymCard";
@@ -116,15 +115,13 @@ const routet = createBrowserRouter([
               { path: "work-shifts", element: <WorkShifts /> },
             ],
           },
-          {
-            path: "/user",
-            children: [
-              { index: true, element: <Navigate replace to="me" /> },
-              { path: "me", element: <UnderConstruction /> },
-            ],
-          },
-          { path: "/houses", element: <UnderConstruction /> },
-          { path: "/vehicles", element: <UnderConstruction /> },
+          // {
+          //   path: "/user",
+          //   children: [
+          //     { index: true, element: <Navigate replace to="me" /> },
+          //     { path: "me", element: <UnderConstruction /> },
+          //   ],
+          // },
         ],
       },
     ],
