@@ -42,9 +42,7 @@ DEBUG = False
 ALLOWED_HOSTS = [".drosinakis.com"]
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://drosinakis.com",
-    "https://www.drosinakis.com",
-    "https://test.drosinakis.com",
+    "https://apps.drosinakis.com",
 ]
 
 LOGGING = {
