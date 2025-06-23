@@ -4,6 +4,15 @@
 **Built with Django, PostgreSQL, and React**
 
 ---
+## 📌 Guest Login
+[**Login**](https://apps.drosinakis.com)
+
+```
+login: guest@test.com
+password: TestUser1!
+```
+Guest credentials to check the app
+---
 
 ## 📌 About This Project
 
