@@ -15,7 +15,7 @@ import Error404 from "./pages/Error404";
 import AuthLayout from "./features/authentication/AuthLayout";
 import AddEditTodoTask from "./features/todo/AddEditTodoTask";
 import AddTodo from "./features/todo/AddTodo";
-import { refresh } from "./services/authApiCalls";
+import { isLoggedIn } from "./services/authApiCalls";
 import CountDownTimer from "./features/timer/CountDownTimer";
 import TodoCard from "./features/todo/TodoCard";
 import GymCard from "./features/gym/pages/GymCard";
@@ -37,6 +37,7 @@ const queryclient = new QueryClient({
 const routet = createBrowserRouter([
   {
     element: <UnAuthLayout />,
+    loader: isLoggedIn,
     children: [
       {
         path: "/",
@@ -48,7 +49,7 @@ const routet = createBrowserRouter([
 
   {
     element: <AuthLayout />,
-    loader: refresh,
+    loader: isLoggedIn,
     children: [
       {
         element: <MainLayout />,

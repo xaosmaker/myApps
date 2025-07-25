@@ -1,3 +1,4 @@
+import { parse } from "cookie";
 import { LoginFormValues } from "../types/formtypes";
 import axios, { axiosError } from "./axiosInstance";
 
@@ -14,16 +15,27 @@ async function login(credentials: LoginFormValues) {
   }
 }
 
+export async function isLoggedIn() {
+  const cookie = parse(document.cookie)
+  if (!cookie.logged_in) {
+    await refresh()
+
+  }
+  return Boolean(cookie.logged_in) === true
+}
+
 async function refresh() {
   try {
     const res = await axios.post("/api/auth/refresh/");
-    const data = await res.data;
-    return data;
-  } catch (e) {
-    if (axiosError(e)) {
-      return e.response;
-    }
-    throw new Error("something went wrong");
+
+    res.status
+
+    return true
+
+
+  } catch {
+
+    return false
   }
 }
 

@@ -21,6 +21,8 @@ makemigrations:
 
 migrate:
 	docker-compose -f local.yml run --rm myapps_api python manage.py migrate
+nginx_reload:
+	docker exec -it myapps_nginx nginx -s reload
 
 pytest:
 	docker-compose -f local.yml run --rm myapps_api pytest
