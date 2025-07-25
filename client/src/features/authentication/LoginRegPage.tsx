@@ -4,19 +4,18 @@ import Button from "../../ui/Button";
 import Input from "../../components/Input";
 import { useMutation } from "@tanstack/react-query";
 import { login } from "../../services/authApiCalls";
-import { logIn } from "../../store/authSlice";
-import { useDispatch } from "react-redux";
 import { LoginFormValues } from "../../types/dataTypes";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginRegPage() {
+  const navigate = useNavigate()
 
 
-  const dispatch = useDispatch();
   const { mutate, error, isError } = useMutation({
     mutationFn: (payload: LoginFormValues) => login(payload),
     onSuccess: (data) => {
       if (data.message === "Login Successful.") {
-        dispatch(logIn());
+        navigate("/work-hours");
       }
     },
   });

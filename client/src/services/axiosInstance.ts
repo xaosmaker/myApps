@@ -1,66 +1,42 @@
-import axiosInstance from "axios";
-import { store } from "../store/store";
-import { logOut } from "../store/authSlice";
+import axiosInstance, { AxiosError } from "axios";
 import { refresh } from "./authApiCalls";
 const axios = axiosInstance.create({});
 const axiosError = axiosInstance.isAxiosError;
 
-const wrongCredentials = "No active account found with the given credentials";
-const authCredNotProvided = "Authentication credentials were not provided.";
-const tokenRefreshSuccessfull = "Access tokens refresh successfully.";
-const noToken = "This field is required.";
-const invalidToken = "Given token not valid for any token type";
 
 axios.interceptors.response.use(
-  function (res) {
+  function(res) {
     return res;
   },
-  async function (error) {
-    const originalRequestRetry = error.config;
-    if (
-      error.response.status === 401 &&
-      error.response.data.detail === wrongCredentials
-    ) {
-      return Promise.reject(error);
-    }
-    if (
-      error.response.status === 401 &&
-      error.response.data.detail === invalidToken
-    ) {
-      const res = await refresh();
-      if (res.message === tokenRefreshSuccessfull) {
-        originalRequestRetry.retry = true;
-        return axios(originalRequestRetry);
-      }
-      store.dispatch(logOut());
-    }
-    if (
-      error.response.status === 401 &&
-      error.response.data.detail === authCredNotProvided
-    ) {
-      const res = await refresh();
-      if (res.message === tokenRefreshSuccessfull) {
-        originalRequestRetry.retry = true;
-        return axios(originalRequestRetry);
-      }
-      store.dispatch(logOut());
+  async function(error: AxiosError) {
+
+    if (error.config?.url === "/api/auth/refresh/") {
+
+
+      return Promise.reject(error)
     }
 
-    if (
-      error.response.status === 400 &&
-      error.response.data.refresh[0] === noToken
-    ) {
-      store.dispatch(logOut());
+    const originalRequestRetry = error.config!;
+    const res = await refresh();
+    if (res) {
+      const req = await axios(originalRequestRetry);
+      if (req.statusText === "OK") {
+
+        return req
+      }
+
+
+      return Promise.reject(error);
     }
     return Promise.reject(error);
   }
 );
 
 axios.interceptors.request.use(
-  function (config) {
+  function(config) {
     return config;
   },
-  function (error) {
+  function(error) {
     return Promise.reject(error);
   }
 );

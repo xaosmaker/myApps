@@ -37,6 +37,7 @@ const queryclient = new QueryClient({
 const routet = createBrowserRouter([
   {
     element: <UnAuthLayout />,
+    loader: refresh,
     children: [
       {
         path: "/",

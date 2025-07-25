@@ -17,13 +17,15 @@ async function login(credentials: LoginFormValues) {
 async function refresh() {
   try {
     const res = await axios.post("/api/auth/refresh/");
-    const data = await res.data;
-    return data;
-  } catch (e) {
-    if (axiosError(e)) {
-      return e.response;
-    }
-    throw new Error("something went wrong");
+
+    res.status
+
+    return true
+
+
+  } catch {
+
+    return false
   }
 }
 
