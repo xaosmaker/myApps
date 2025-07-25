@@ -84,7 +84,7 @@ services:
     image: myapps_nginx
     container_name: myapps_nginx
     ports:
-      - "8080:80"
+      - "8081:80"
     volumes:
       - ./static:/app/static
       - static_data:/app/static
@@ -92,9 +92,12 @@ services:
     depends_on:
       - myapps_api
     networks:
+      - local-nginx-net
       - myApps_nw
 
 networks:
+  local-nginx-net:
+    external: true
   myApps_nw:
 
 volumes:
