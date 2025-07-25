@@ -19,6 +19,7 @@ ALLOWED_HOSTS = [
     "192.168.1.5",
     "192.168.1.127",
     "photo.drosinakis.com",
+    "myApps",
 ]
 CSRF_TRUSTED_ORIGINS = ["http://0.0.0.0:8080", "http://localhost:8080"]
 

@@ -1,5 +1,5 @@
 import { SubmitHandler, useForm } from "react-hook-form";
-import { validateEmail, validatePassword } from "../../utils/valitators";
+import { validateEmail } from "../../utils/valitators";
 import Button from "../../ui/Button";
 import Input from "../../components/Input";
 import { useMutation } from "@tanstack/react-query";
@@ -9,6 +9,8 @@ import { useDispatch } from "react-redux";
 import { LoginFormValues } from "../../types/dataTypes";
 
 export default function LoginRegPage() {
+
+
   const dispatch = useDispatch();
   const { mutate, error, isError } = useMutation({
     mutationFn: (payload: LoginFormValues) => login(payload),
@@ -29,6 +31,7 @@ export default function LoginRegPage() {
   };
 
   const hasErrors = Object.entries(errors).length !== 0;
+
   return (
     <div className="h-screen w-full  bg-slate-900  text-slate-100">
       <form
@@ -54,14 +57,14 @@ export default function LoginRegPage() {
           name="password"
           error={errors.password?.message}
           register={register("password", {
-            minLength: {
-              value: 8,
-              message: "password should be 8 or more chars",
-            },
-            validate: {
-              password: (v) =>
-                validatePassword(v)?.type || validatePassword(v)?.message,
-            },
+            // minLength: {
+            //   value: 8,
+            //   message: "password should be 8 or more chars",
+            // },
+            // validate: {
+            //   password: (v) =>
+            //     validatePassword(v)?.type || validatePassword(v)?.message,
+            // },
           })}
           required={true}
         />
