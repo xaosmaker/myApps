@@ -1,5 +1,5 @@
 import { baseGet, basePost } from "../../../services/baseServices";
-import { WorkDayFormType, WorkShiftFormType } from "../types/WorkHoursTypes";
+import type { WorkDayFormType, WorkShiftFormType } from "../types/WorkHoursTypes";
 
 const getWorkShifts = async () => {
   return await baseGet("/api/work-shifts/", "", "Can't get shifts");

@@ -5,7 +5,7 @@ import Modal from "../../../components/modal/Modal";
 import { FaPlus } from "react-icons/fa6";
 import AddFoodDetails from "../components/AddFoodDetails";
 import { useGetFoodData } from "../hooks/useGetFoodData";
-import { AddFoodIntakeType, FoodDataType } from "../types/NutritionTypes";
+import type { AddFoodIntakeType, FoodDataType } from "../types/NutritionTypes";
 import { usePostFoodIntake } from "../hooks/usePostFoodIntake";
 import SelectSearch from "../../../components/selectSearch/SelectSearch";
 import { timeTo24Format } from "../../../utils/helperFunctions";

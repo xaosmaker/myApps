@@ -1,4 +1,4 @@
-import { InputTypes } from "../types/componentTypes/InputTypes";
+import { type InputTypes } from "../types/componentTypes/InputTypes";
 
 export default function Input({
   htmlType,
@@ -17,11 +17,10 @@ export default function Input({
       {...register}
       {...otherProps}
       placeholder=""
-      className={`peer block w-full transform border-b-2  bg-transparent px-0 py-2.5 caret-slate-100 outline-none  ${
-        error
+      className={`peer block w-full transform border-b-2  bg-transparent px-0 py-2.5 caret-slate-100 outline-none  ${error
           ? "border-red-600 focus:border-red-600"
           : "border-slate-800 autofill:duration-[50000s] focus:border-blue-600"
-      }`}
+        }`}
       required={required}
     />
   );
@@ -30,11 +29,10 @@ export default function Input({
       id={name}
       {...register}
       placeholder=""
-      className={`peer block w-full transform border-b-2  bg-transparent px-0 py-2.5 caret-slate-100 outline-none  ${
-        error
+      className={`peer block w-full transform border-b-2  bg-transparent px-0 py-2.5 caret-slate-100 outline-none  ${error
           ? "border-red-600 focus:border-red-600"
           : "border-slate-800 autofill:duration-[50000s] focus:border-blue-600"
-      }`}
+        }`}
       required={required}
     />
   );

@@ -1,5 +1,5 @@
 import { baseGet, basePost } from "../../../services/baseServices";
-import {
+import type {
   AddFoodIntakeType,
   FoodDataType,
   UserWeightStatusType,

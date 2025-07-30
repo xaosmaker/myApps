@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { FaPlus } from "react-icons/fa6";
 import { useGetGymMachine } from "../hooks/useGetGymMachineList";
-import { GymMachineType, GymWorkoutPostType } from "../types/GymTypes";
+import type { GymMachineType, GymWorkoutPostType } from "../types/GymTypes";
 import SelectSearch from "../../../components/selectSearch/SelectSearch";
 import Modal from "../../../components/modal/Modal";
 import Input from "../../../components/Input";

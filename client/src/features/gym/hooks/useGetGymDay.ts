@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { GetPaginationDataType } from "../../../types/baseTypes";
-import { GymDayType } from "../types/GymTypes";
+import { type GetPaginationDataType } from "../../../types/baseTypes";
+import { type GymDayType } from "../types/GymTypes";
 import { getGymDayList } from "../services/gymServices";
 
 export function useGetGymDay(pageParams: string) {

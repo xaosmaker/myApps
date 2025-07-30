@@ -4,7 +4,7 @@ import Button from "../../../ui/Button";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useContext } from "react";
 import { ModalContext } from "../../../components/modal/Modal";
-import { FoodDataType } from "../types/NutritionTypes";
+import { type FoodDataType } from "../types/NutritionTypes";
 import { postAddFoodDetails } from "../services/nutritionServices";
 export default function AddFoodDetails() {
   const { close } = useContext(ModalContext);

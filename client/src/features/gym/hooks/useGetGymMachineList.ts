@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { GymMachineType } from "../types/GymTypes";
+import { type GymMachineType } from "../types/GymTypes";
 import { getGymMachineList } from "../services/gymServices";
 
 export function useGetGymMachine() {

@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ModalContext } from "../../../components/modal/Modal";
-import { GymMachineType } from "../types/GymTypes";
+import { type GymMachineType } from "../types/GymTypes";
 import { useContext } from "react";
 import { postGymMachine } from "../services/gymServices";
 

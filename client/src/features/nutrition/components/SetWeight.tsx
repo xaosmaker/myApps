@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import Input from "../../../components/Input";
 import Button from "../../../ui/Button";
-import { UserWeightStatusType } from "../types/NutritionTypes";
+import { type UserWeightStatusType } from "../types/NutritionTypes";
 import { useMutation } from "@tanstack/react-query";
 import { createUserWeight } from "../services/nutritionServices";
 import { useNavigate } from "react-router-dom";

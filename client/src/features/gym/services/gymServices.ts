@@ -1,5 +1,5 @@
 import { baseGet, basePost } from "../../../services/baseServices";
-import { GymMachineType, GymWorkoutType } from "../types/GymTypes";
+import type { GymMachineType, GymWorkoutType } from "../types/GymTypes";
 
 async function getGymDayList(queryparmas = "") {
   return await baseGet("/api/gym-list/", queryparmas, "Can't get the gym list");

@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { GymMachineType } from "../types/GymTypes";
+import { type GymMachineType } from "../types/GymTypes";
 import { usePostGymMachine } from "../hooks/usePostGymMachine";
 import Input from "../../../components/Input";
 import Button from "../../../ui/Button";

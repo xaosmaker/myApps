@@ -1,4 +1,4 @@
-import {
+import type {
   CardLayoutBodyTypes,
   CardLayoutHeaderTypes,
   CardLayoutTitleTypes,

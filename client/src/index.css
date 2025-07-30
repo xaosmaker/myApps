@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 .loader {
   width: 48px;
@@ -11,4 +9,12 @@
   display: inline-block;
   box-sizing: border-box;
   animation: rotation 1s linear infinite;
+}
+
+.bg-hero {
+  background-image:
+    linear-gradient(to right bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.6)),
+    url('./img/landingImage.jpg');
+  background-size: cover;
+  background-position: center;
 }

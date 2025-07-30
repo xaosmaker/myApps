@@ -9,10 +9,10 @@ export interface ModalTypes {
 }
 
 export interface ModalOpenTypes {
-  children: React.ReactElement;
+  children: React.ReactElement<{ onClick?: () => void }>;
   opens: string;
 }
 export interface ModalWindowTypes {
-  children: React.ReactElement;
+  children: React.ReactElement<{ onCloseModal?: () => void }>;
   name: string;
 }
