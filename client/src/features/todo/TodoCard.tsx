@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { apiTodosList } from "../../services/todosApi";
-import { TodoData, TodoListData } from "../../types/dataTypes";
+import type { TodoData, TodoListData } from "../../types/dataTypes";
 import Pagination from "../../components/Pagination";
 import CardLayout from "../../components/card/CardLayout";
 import Card from "../../components/card/Card";
@@ -46,9 +46,8 @@ export default function TodoCard() {
         {todoData?.results.map((data: TodoData) => (
           <Card key={data.pkid} link={`/todos/${data.pkid}/add-edit-todo`}>
             <Card.Title
-              className={`flex items-center justify-center ${
-                data.completed_in_time ? "bg-green-900" : "bg-slate-800"
-              } ${data.expired ? "bg-red-800" : null} px-2 py-2 `}
+              className={`flex items-center justify-center ${data.completed_in_time ? "bg-green-900" : "bg-slate-800"
+                } ${data.expired ? "bg-red-800" : null} px-2 py-2 `}
             >
               <p>{data.completed ? <Checked /> : <Unchecked />}</p>
               <div className=" flex w-full flex-col items-center justify-center   gap-2 ">

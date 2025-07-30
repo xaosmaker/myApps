@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { TodoData, TodoTaskData } from "../types/dataTypes";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import type { TodoData, TodoTaskData } from "../types/dataTypes";
 
 const initialTodoState: TodoData = {
   pkid: -1,

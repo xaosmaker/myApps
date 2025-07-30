@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { UseFormSetValue } from "react-hook-form";
-import { AddWorkDayData } from "../features/work-hours/types/WorkHoursTypes";
+import { type UseFormSetValue } from "react-hook-form";
+import { type AddWorkDayData } from "../features/work-hours/types/WorkHoursTypes";
 
 // TODO: when i have time i will fix the date any
 // TODO: refactor this when i use it
@@ -28,7 +28,7 @@ export default function CustomDate({
   };
 
   useEffect(
-    function () {
+    function() {
       if (selectedDate) {
         const newArray = [];
         for (const date of dates) {

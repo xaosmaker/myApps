@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import { PaginationTypes } from "../types/componentTypes/paginationTypes";
+import { type PaginationTypes } from "../types/componentTypes/paginationTypes";
 const active = " bg-slate-950 ";
 const defaultStyle = " rounded-md px-4 py-2 hover:bg-slate-950 ";
 const totalPagination = 2;

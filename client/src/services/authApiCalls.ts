@@ -1,5 +1,5 @@
 import { parse } from "cookie";
-import { LoginFormValues } from "../types/formtypes";
+import { type LoginFormValues } from "../types/formtypes";
 import axios, { axiosError } from "./axiosInstance";
 
 async function login(credentials: LoginFormValues) {
@@ -28,7 +28,8 @@ async function refresh() {
   try {
     const res = await axios.post("/api/auth/refresh/");
 
-    res.status
+    console.log(res);
+
 
     return true
 

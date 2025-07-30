@@ -1,9 +1,9 @@
-import { SubmitHandler, useForm } from "react-hook-form";
+import { type SubmitHandler, useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import Input from "../../../components/Input";
 import Button from "../../../ui/Button";
 import CustomDate from "../../../components/CustomDate";
-import { AddWorkDayData, WorkDayFormType } from "../types/WorkHoursTypes";
+import type { AddWorkDayData, WorkDayFormType } from "../types/WorkHoursTypes";
 import { useGetWorkDayData } from "../hooks/useGetWorkDayData";
 import { useMutation } from "@tanstack/react-query";
 import { addWorkDays } from "../services/workHoursServices";

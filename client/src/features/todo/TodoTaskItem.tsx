@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { Checked, Unchecked } from "../../img/svgsExport";
-import { TodoTaskData } from "../../types/dataTypes";
+import type { TodoTaskData } from "../../types/dataTypes";
 import { removeTodoTask, setTodoTaskCompleted } from "../../store/todoSlice";
 import { FaTrashCan } from "react-icons/fa6";
 import { useMutation } from "@tanstack/react-query";
@@ -56,9 +56,8 @@ export default function TodoTaskItem({
   }
   return (
     <div
-      className={`flex items-center justify-center gap-2 ${
-        todo.is_completed ? "bg-green-700" : "bg-red-300"
-      } rounded-md px-3`}
+      className={`flex items-center justify-center gap-2 ${todo.is_completed ? "bg-green-700" : "bg-red-300"
+        } rounded-md px-3`}
     >
       <span>{todo.is_completed ? <Checked /> : clickCheck}</span>
       <span>{todo.name}</span>

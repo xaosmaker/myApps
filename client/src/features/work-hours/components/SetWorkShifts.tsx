@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import Input from "../../../components/Input";
 import Button from "../../../ui/Button";
-import { WorkShiftFormType } from "../types/WorkHoursTypes";
+import type { WorkShiftFormType } from "../types/WorkHoursTypes";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createWorkShift } from "../services/workHoursServices";
 import { useContext } from "react";

@@ -2,7 +2,7 @@ import { cloneElement, createContext, useContext, useState } from "react";
 import { createPortal } from "react-dom";
 import { FaX } from "react-icons/fa6";
 import { useOutsideClick } from "../../hooks/useOutsideClick";
-import {
+import type {
   ModalContextType,
   ModalOpenTypes,
   ModalTypes,
@@ -15,7 +15,7 @@ const initialValue = {
   open: () => "",
 };
 
-export const ModalContext = createContext<ModalContextType>(initialValue);
+const ModalContext = createContext<ModalContextType>(initialValue);
 
 function Modal({ children }: ModalTypes) {
   const [openName, setOpenName] = useState("");
@@ -64,3 +64,4 @@ Modal.Open = ModalOpen;
 Modal.Window = ModalWindow;
 
 export default Modal;
+export { ModalContext }

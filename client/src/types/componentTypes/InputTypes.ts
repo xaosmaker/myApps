@@ -1,5 +1,5 @@
-import React, { HTMLInputTypeAttribute } from "react";
-import { UseFormRegisterReturn } from "react-hook-form";
+import React, { type HTMLInputTypeAttribute } from "react";
+import { type UseFormRegisterReturn } from "react-hook-form";
 
 export interface InputTypes {
   htmlType: HTMLInputTypeAttribute;

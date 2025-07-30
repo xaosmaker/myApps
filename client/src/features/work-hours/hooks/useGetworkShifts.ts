@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { getWorkShifts } from "../services/workHoursServices";
-import { WorkShiftType } from "../types/WorkHoursTypes";
+import type { WorkShiftType } from "../types/WorkHoursTypes";
 
 export function useGetWorkShifts() {
   const { data: workShiftsData = [], isLoading: isWorkShiftsDataLoading } =

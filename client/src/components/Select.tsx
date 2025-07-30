@@ -1,5 +1,5 @@
-import { ChangeEventHandler } from "react";
-import { UseFormRegisterReturn } from "react-hook-form";
+import { type ChangeEventHandler } from "react";
+import { type UseFormRegisterReturn } from "react-hook-form";
 
 export default function Select({
   children,

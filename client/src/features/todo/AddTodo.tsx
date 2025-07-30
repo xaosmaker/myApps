@@ -1,10 +1,10 @@
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, type SubmitHandler } from "react-hook-form";
 import Input from "../../components/Input";
 import Button from "../../ui/Button";
 import { useMutation } from "@tanstack/react-query";
 import { apiCreateTodos } from "../../services/todosApi";
 import { useNavigate } from "react-router-dom";
-import { TodoData } from "../../types/dataTypes";
+import { type TodoData } from "../../types/dataTypes";
 import { dateToGRformat } from "../../utils/helperFunctions";
 
 export default function AddTodo() {

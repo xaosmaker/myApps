@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { getWorkDays } from "../services/workHoursServices";
-import { WorkDayType } from "../types/WorkHoursTypes";
+import type { WorkDayType } from "../types/WorkHoursTypes";
 
 export function useGetWorkDayData() {
   const { data: workDayData = [], isLoading: isWorkDayDataLoading } = useQuery<

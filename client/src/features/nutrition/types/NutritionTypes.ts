@@ -1,4 +1,4 @@
-import { GetPaginationDataType } from "../../../types/baseTypes";
+import type { GetPaginationDataType } from "../../../types/baseTypes";
 
 export interface UserWeightStatusType {
   pkid?: number;

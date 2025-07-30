@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { getUserWeightStatus } from "../services/nutritionServices";
-import { UserWeightStatusType } from "../types/NutritionTypes";
+import { type UserWeightStatusType } from "../types/NutritionTypes";
 
 export function useGetUserWeightData() {
   const {

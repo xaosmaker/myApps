@@ -7,11 +7,11 @@ import {
   validateSplitWithRegexAndGT0,
 } from "../../utils/valitators";
 import {
-  CountDownSliceInitial,
+  type CountDownSliceInitial,
   setCountDown,
 } from "../../store/countDownslice";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../store/store";
+import { type RootState } from "../../store/store";
 interface FormData {
   laps: string;
   countDownTimers: string;

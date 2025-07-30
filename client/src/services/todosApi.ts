@@ -1,4 +1,4 @@
-import { TodoData } from "../types/dataTypes";
+import { type TodoData } from "../types/dataTypes";
 import axios, { axiosError } from "./axiosInstance";
 
 async function apiTodosList(queryParams: string = "") {

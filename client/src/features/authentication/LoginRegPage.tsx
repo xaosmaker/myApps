@@ -1,10 +1,10 @@
-import { SubmitHandler, useForm } from "react-hook-form";
+import { type SubmitHandler, useForm } from "react-hook-form";
 import { validateEmail } from "../../utils/valitators";
 import Button from "../../ui/Button";
 import Input from "../../components/Input";
 import { useMutation } from "@tanstack/react-query";
 import { login } from "../../services/authApiCalls";
-import { LoginFormValues } from "../../types/dataTypes";
+import { type LoginFormValues } from "../../types/dataTypes";
 import { useNavigate } from "react-router-dom";
 
 export default function LoginRegPage() {
@@ -32,7 +32,7 @@ export default function LoginRegPage() {
   const hasErrors = Object.entries(errors).length !== 0;
 
   return (
-    <div className="h-screen w-full  bg-slate-900  text-slate-100">
+    <div className="h-screen w-full bg-slate-900 text-slate-100">
       <form
         onSubmit={handleSubmit(onHandleSubmit)}
         className="mx-auto flex h-full w-3/4 flex-col items-center justify-center gap-10 sm:w-2/4 md:w-1/4"

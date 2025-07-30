@@ -1,4 +1,4 @@
-import { Control, Controller, FieldValues, Path } from "react-hook-form";
+import { type Control, Controller, type FieldValues, type Path } from "react-hook-form";
 import Select from "react-select";
 
 // Define the BaseOption type to match the structure required by react-select
