@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite'
+import path from "path"
 import react from '@vitejs/plugin-react'
 import svgr from "vite-plugin-svgr";
 import tailwindcss from '@tailwindcss/vite';
@@ -10,5 +11,10 @@ export default defineConfig({
     allowedHosts: ["myapps"],
     host: "0.0.0.0"
 
-  }
+  },
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+    },
+  },
 })
