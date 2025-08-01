@@ -31,10 +31,6 @@ export interface TodoTaskData {
   is_completed: boolean;
 }
 
-export interface LoginFormValues {
-  email: string;
-  password: string;
-}
 export interface RefreshData {
   message: string;
 }

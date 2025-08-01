@@ -1,8 +1,8 @@
 import { parse } from "cookie";
-import { type LoginFormValues } from "../types/formtypes";
 import axios, { axiosError } from "./axiosInstance";
+import type { RegSchema } from "@/features/authentication/schema/registerSchema";
 
-async function login(credentials: LoginFormValues) {
+async function login(credentials: RegSchema) {
   try {
     const res = await axios.post("/api/auth/login/", credentials);
     const data = await res.data;
@@ -16,12 +16,11 @@ async function login(credentials: LoginFormValues) {
 }
 
 export async function isLoggedIn() {
-  const cookie = parse(document.cookie)
+  const cookie = parse(document.cookie);
   if (!cookie.logged_in) {
-    await refresh()
-
+    await refresh();
   }
-  return Boolean(cookie.logged_in) === true
+  return Boolean(cookie.logged_in) === true;
 }
 
 async function refresh() {
@@ -30,13 +29,9 @@ async function refresh() {
 
     console.log(res);
 
-
-    return true
-
-
+    return true;
   } catch {
-
-    return false
+    return false;
   }
 }
 

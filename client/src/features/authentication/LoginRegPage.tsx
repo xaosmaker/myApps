@@ -1,18 +1,29 @@
 import { type SubmitHandler, useForm } from "react-hook-form";
-import { validateEmail } from "../../utils/valitators";
-import Button from "../../ui/Button";
 import Input from "../../components/Input";
 import { useMutation } from "@tanstack/react-query";
 import { login } from "../../services/authApiCalls";
-import { type LoginFormValues } from "../../types/dataTypes";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { regSchema, type RegSchema } from "./schema/registerSchema";
+//TODO: Sign up page and reset Password
 
 export default function LoginRegPage() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const isLoginPage = pathname === "/login";
 
-
-  const { mutate, error, isError } = useMutation({
-    mutationFn: (payload: LoginFormValues) => login(payload),
+  const { mutate } = useMutation({
+    mutationFn: (payload: RegSchema) => login(payload),
     onSuccess: (data) => {
       if (data.message === "Login Successful.") {
         navigate("/work-hours");
@@ -23,57 +34,84 @@ export default function LoginRegPage() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginFormValues>({ mode: "onChange" });
-  const onHandleSubmit: SubmitHandler<LoginFormValues> = (data, event) => {
-    event?.preventDefault();
+  } = useForm<RegSchema>({
+    mode: "onChange",
+    resolver: isLoginPage ? undefined : zodResolver(regSchema),
+    criteriaMode: "all",
+  });
+
+  const onHandleSubmit: SubmitHandler<RegSchema> = (data) => {
+    console.log(data);
+
     mutate(data);
   };
 
-  const hasErrors = Object.entries(errors).length !== 0;
-
   return (
-    <div className="h-screen w-full bg-slate-900 text-slate-100">
-      <form
-        onSubmit={handleSubmit(onHandleSubmit)}
-        className="mx-auto flex h-full w-3/4 flex-col items-center justify-center gap-10 sm:w-2/4 md:w-1/4"
-      >
-        <h2 className="text-2xl font-bold ">VHMS</h2>
-        <h3 className="text-lg"> Login</h3>
-        <Input
-          error={errors.email?.message}
-          htmlType="text"
-          name="email"
-          register={register("email", {
-            validate: {
-              email: (v) => validateEmail(v) || "Enter a Valid Email Address",
-            },
-          })}
-          required={true}
-        />
+    <div className="flex h-screen w-full flex-col items-center justify-center bg-slate-900 text-slate-100">
+      <Card className="w-full max-w-sm">
+        <CardHeader>
+          <CardTitle className="text-2xl md:text-3xl">VHMS</CardTitle>
+          <CardDescription className="md:text-xl">
+            {isLoginPage ? "Login to your account" : "Create a new account"}
+          </CardDescription>
+          <CardAction>
+            <Button variant="link" asChild>
+              {isLoginPage ? (
+                <NavLink to={"/register"}>Sign Up</NavLink>
+              ) : (
+                <NavLink to={"/login"}>Sign In</NavLink>
+              )}
+            </Button>
+          </CardAction>
+        </CardHeader>
+        <CardContent>
+          <form
+            className="mt-4 flex flex-col gap-10 md:text-2xl"
+            onSubmit={handleSubmit(onHandleSubmit)}
+          >
+            <Input
+              error={errors.email}
+              htmlType="text"
+              name="email"
+              register={register("email")}
+              required={true}
+            />
 
-        <Input
-          htmlType="password"
-          name="password"
-          error={errors.password?.message}
-          register={register("password", {
-            // minLength: {
-            //   value: 8,
-            //   message: "password should be 8 or more chars",
-            // },
-            // validate: {
-            //   password: (v) =>
-            //     validatePassword(v)?.type || validatePassword(v)?.message,
-            // },
-          })}
-          required={true}
-        />
-        {isError ? <div className="text-red-500">{error.message}</div> : null}
-        <div className="flex w-full items-center justify-between">
-          {!hasErrors ? <Button type="submit">Login</Button> : <div></div>}
-          {/* TODO: add register functionality */}
-          <button type="reset"></button>
-        </div>
-      </form>
+            <Input
+              htmlType="password"
+              name="password"
+              error={errors.password}
+              register={register("password")}
+              required={true}
+            />
+            {!isLoginPage && (
+              <Input
+                htmlType="password"
+                name="confirmPassword"
+                error={errors.confirmPassword}
+                register={register("confirmPassword")}
+                required={true}
+              />
+            )}
+            <Button
+              type="submit"
+              className="w-full hover:bg-inherit/10 md:text-xl"
+            >
+              {isLoginPage ? "Login" : "Register"}
+            </Button>
+          </form>
+        </CardContent>
+        <CardFooter>
+          {isLoginPage && (
+            <CardDescription className="flex w-full items-center justify-between capitalize">
+              forgot you password ?
+              <Button variant="link" asChild>
+                <NavLink to={"#"}>reset Password</NavLink>
+              </Button>
+            </CardDescription>
+          )}
+        </CardFooter>
+      </Card>
     </div>
   );
 }

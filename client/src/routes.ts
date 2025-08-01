@@ -1,0 +1,124 @@
+import Landing from "./pages/Landing";
+
+import LoginRegPage from "./features/authentication/LoginRegPage";
+import MainLayout from "./layouts/MainLayout";
+import Error404 from "./pages/Error404";
+import AuthLayout from "./features/authentication/AuthLayout";
+import AddEditTodoTask from "./features/todo/AddEditTodoTask";
+import AddTodo from "./features/todo/AddTodo";
+import { isLoggedIn } from "./services/authApiCalls";
+import CountDownTimer from "./features/timer/CountDownTimer";
+import TodoCard from "./features/todo/TodoCard";
+import GymCard from "./features/gym/pages/GymCard";
+import AddGymWorkout from "./features/gym/pages/AddGymWorkout";
+import NutritionList from "./features/nutrition/pages/NutritionList";
+import AddFoodIntake from "./features/nutrition/pages/AddFoodIntake";
+import UserWeightData from "./features/nutrition/pages/UserWeightData";
+import WorkShifts from "./features/work-hours/pages/WorkShifts";
+import ShowWorkDays from "./features/work-hours/pages/ShowWorkDays";
+import AddWorkHours from "./features/work-hours/pages/AddWorkHours";
+import UnAuthLayout from "./features/authentication/UnAuthLayout";
+import { createBrowserRouter, Navigate } from "react-router-dom";
+
+export const router = createBrowserRouter([
+  {
+    Component: UnAuthLayout,
+    loader: isLoggedIn,
+    children: [
+      {
+        path: "/",
+        Component: Landing,
+      },
+      { path: "/login", Component: LoginRegPage },
+      { path: "/register", Component: LoginRegPage },
+    ],
+  },
+
+  {
+    Component: AuthLayout,
+    loader: isLoggedIn,
+    children: [
+      {
+        Component: MainLayout,
+        children: [
+          {
+            path: "/todos",
+            children: [
+              {
+                index: true,
+                Component: () => Navigate({ to: "show-todos", replace: true }),
+              },
+              { path: "show-todos", Component: TodoCard },
+              { path: "add-todo", Component: AddTodo },
+              { path: ":pkid/add-edit-todo", Component: AddEditTodoTask },
+            ],
+          },
+
+          {
+            path: "/timer",
+            children: [
+              {
+                index: true,
+                Component: () =>
+                  Navigate({ replace: true, to: "count-down-timer" }),
+              },
+
+              { path: "count-down-timer", Component: CountDownTimer },
+            ],
+          },
+
+          {
+            path: "/nutritions",
+            children: [
+              {
+                index: true,
+                Component: () =>
+                  Navigate({ replace: true, to: "show-nutritions" }),
+              },
+
+              { path: "show-nutritions", Component: NutritionList },
+              { path: "add-nutritions", Component: AddFoodIntake },
+              { path: "user-weight-data", Component: UserWeightData },
+            ],
+          },
+          {
+            path: "/gym",
+            children: [
+              {
+                index: true,
+                Component: () => Navigate({ to: "show-gym", replace: true }),
+              },
+
+              { path: "show-gym", Component: GymCard },
+              { path: "add-gym", Component: AddGymWorkout },
+            ],
+          },
+          {
+            path: "/work-hours",
+            children: [
+              {
+                index: true,
+                Component: () =>
+                  Navigate({ replace: true, to: "show-work-time" }),
+              },
+              {
+                path: "show-work-time",
+                Component: ShowWorkDays,
+              },
+              { path: "add-work-time", Component: AddWorkHours },
+              { path: "work-shifts", Component: WorkShifts },
+            ],
+          },
+          // {
+          //   path: "/user",
+          //   children: [
+          //     { index: true, Component: Navigate replace to="me"  },
+          //     { path: "me", Component: UnderConstruction  },
+          //   ],
+          // },
+        ],
+      },
+    ],
+  },
+  { path: "*", Component: Error404 },
+]);
