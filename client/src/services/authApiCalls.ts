@@ -28,20 +28,15 @@ export async function activateUserApi(userActivetionCode: ActivateUser) {
     return data;
   } catch (e) {
     if (e instanceof AxiosError) {
-      let error = "";
-      if (e.response?.data) {
-        for (const [key, val] of Object.entries(e.response.data)) {
-          error += key + ": ";
-          if (Array.isArray(val)) {
-            error += val.toString() + "\n";
-          } else {
-            error += `${val}\n`;
-          }
-        }
+      if (e.response?.data.detail === "Stale token for given user.") {
+        throw new Error("User is Already Activated");
       }
-      throw new Error(error);
+
+      if (e.response?.data?.token[0] === "Invalid token for given user.") {
+        throw new Error("Pls contact admin to open your account");
+      }
     }
-    throw new Error("something went wrong");
+    throw new Error("Please try again later");
   }
 }
 
@@ -79,9 +74,7 @@ async function isLoggedIn() {
 
 async function refresh() {
   try {
-    const res = await axios.post("/api/auth/refresh/");
-
-    console.log(res);
+    await axios.post("/api/auth/refresh/");
 
     return true;
   } catch {
