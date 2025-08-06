@@ -2,6 +2,10 @@ import { z } from "zod/v4";
 
 export const regSchema = z
   .object({
+    username: z.string(),
+    first_name: z.string(),
+    last_name: z.string(),
+
     email: z.email(),
     password: z
       .string()
@@ -14,12 +18,12 @@ export const regSchema = z
         (data) => /[1-9]/.test(data),
         "Password should contain one number",
       ),
-    confirmPassword: z.string(),
+    re_password: z.string(),
   })
   .superRefine((data, ctx) => {
-    if (data.confirmPassword !== data.password) {
+    if (data.re_password !== data.password) {
       ctx.addIssue({
-        path: ["confirmPassword"],
+        path: ["re_password"],
         code: "custom",
         message: "Passwords Mismatch",
       });
