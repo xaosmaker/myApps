@@ -7,7 +7,7 @@ SECRET_KEY = getenv(
     "DJANGO_SECRET_KEY",
 )
 ADMINS = [
-    ("Drosinakis Drosos", "drosostest@gmail.com"),
+    ("Drosinakis Drosos", "apptestmailprovider@gmail.com"),
 ]
 
 # EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"

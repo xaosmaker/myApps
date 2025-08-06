@@ -216,7 +216,7 @@ SIMPLE_JWT = {
     "USER_ID_FIELD": "id",
     "USER_ID_CLAIM": "user_id",
 }
-
+EMAIL_FRONTEND_PROTOCOL = "https"
 DJOSER = {
     "USER_ID_FIELD": "id",
     "LOGIN_FIELD": "email",
@@ -227,6 +227,7 @@ DJOSER = {
     "PASSWORD_RESET_CONFIRM_RETYPE": True,
     "ACTIVATION_URL": "activate/{uid}/{token}",
     "PASSWORD_RESET_CONFIRM_URL": "password-reset/{uid}/{token}",
+    "EMAIL_FRONTEND_PROTOCOL": "https",
     "PERMISSIONS": {
         "user_list": ["rest_framework.permissions.IsAdminUser"],
     },

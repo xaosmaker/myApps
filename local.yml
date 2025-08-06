@@ -1,4 +1,3 @@
----
 services:
   myapps_api: &myapps_api
     build:
@@ -62,6 +61,8 @@ services:
     image: myapps_celery_worker
     container_name: myapps_celery_worker
     command: /start-celeryworker
+    dns:
+        - 8.8.8.8
 
   myapps_celery_beat:
     <<: *myapps_api
