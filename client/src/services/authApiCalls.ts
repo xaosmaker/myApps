@@ -2,6 +2,7 @@ import { parse } from "cookie";
 import axios from "./axiosInstance";
 import type { RegSchema } from "@/features/authentication/schema/registerSchema";
 import { AxiosError } from "axios";
+import type { ActivateUser } from "@/features/authentication/types/authTypes";
 
 async function login(credentials: RegSchema) {
   try {
@@ -12,6 +13,33 @@ async function login(credentials: RegSchema) {
   } catch (e) {
     if (e instanceof AxiosError) {
       throw new Error(e.response?.data.detail);
+    }
+    throw new Error("something went wrong");
+  }
+}
+export async function activateUserApi(userActivetionCode: ActivateUser) {
+  try {
+    const res = await axios.post(
+      "/api/auth/users/activation/",
+      userActivetionCode,
+    );
+    const data = await res.data;
+
+    return data;
+  } catch (e) {
+    if (e instanceof AxiosError) {
+      let error = "";
+      if (e.response?.data) {
+        for (const [key, val] of Object.entries(e.response.data)) {
+          error += key + ": ";
+          if (Array.isArray(val)) {
+            error += val.toString() + "\n";
+          } else {
+            error += `${val}\n`;
+          }
+        }
+      }
+      throw new Error(error);
     }
     throw new Error("something went wrong");
   }
