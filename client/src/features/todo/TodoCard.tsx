@@ -1,6 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import { apiTodosList } from "../../services/todosApi";
-import type { TodoData, TodoListData } from "../../types/dataTypes";
 import Pagination from "../../components/Pagination";
 import CardLayout from "../../components/card/CardLayout";
 import Card from "../../components/card/Card";
@@ -8,13 +6,15 @@ import { Checked, Unchecked } from "../../img/svgsExport";
 import { dateToGRformat } from "../../utils/helperFunctions";
 import TodoCardItem from "./TodoCardItem";
 import usePagePaginationParams from "../../hooks/usePagePaginationParams";
+import { getTodosListApi } from "./services/todoApiServices";
+import type { TodoData, TodoListData } from "./types/todoTypes";
 
 export default function TodoCard() {
   const pageParams = usePagePaginationParams();
 
   const { data: todoData, isLoading } = useQuery<TodoListData>({
     queryKey: ["todolist", pageParams],
-    queryFn: () => apiTodosList(pageParams),
+    queryFn: () => getTodosListApi(pageParams),
   });
   const total = todoData?.count || 0;
   const remaining = todoData?.all_pending_todo || 0;
@@ -28,7 +28,7 @@ export default function TodoCard() {
     <CardLayout>
       <CardLayout.Header className="">
         <CardLayout.Title>Todos</CardLayout.Title>
-        <div className=" my-4 grid justify-items-center uppercase md:grid-cols-4 ">
+        <div className="my-4 grid justify-items-center uppercase md:grid-cols-4">
           <p>Total: {total}</p>
           <p className="font-semibold text-yellow-600">
             Pending: {((remaining / total) * 100).toFixed(2)}%
@@ -46,11 +46,12 @@ export default function TodoCard() {
         {todoData?.results.map((data: TodoData) => (
           <Card key={data.pkid} link={`/todos/${data.pkid}/add-edit-todo`}>
             <Card.Title
-              className={`flex items-center justify-center ${data.completed_in_time ? "bg-green-900" : "bg-slate-800"
-                } ${data.expired ? "bg-red-800" : null} px-2 py-2 `}
+              className={`flex items-center justify-center ${
+                data.completed_in_time ? "bg-green-900" : "bg-slate-800"
+              } ${data.expired ? "bg-red-800" : null} px-2 py-2`}
             >
               <p>{data.completed ? <Checked /> : <Unchecked />}</p>
-              <div className=" flex w-full flex-col items-center justify-center   gap-2 ">
+              <div className="flex w-full flex-col items-center justify-center gap-2">
                 <h3 className="mx-auto text-xl font-semibold capitalize">
                   {data.title}
                 </h3>

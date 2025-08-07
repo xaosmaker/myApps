@@ -1,24 +1,6 @@
-import { type TodoData } from "../types/dataTypes";
+import { type TodoData } from "@/features/todo/types/todoTypes";
 import axios, { axiosError } from "./axiosInstance";
 
-async function apiTodosList(queryParams: string = "") {
-  try {
-    const res = await axios.get(`/api/todos/${queryParams}`);
-    const data = await res.data;
-    return data;
-  } catch (error) {
-    if (axiosError(error)) {
-      if (error.response?.status === 404) {
-        throw new Error("404 page not found");
-      }
-      if (error.response?.data.detail) {
-        throw new Error(error.response.data.detail);
-      }
-      return error.response;
-    }
-    throw new Error(`Can't get todo list`);
-  }
-}
 async function apiTodo(pkid: string | undefined) {
   try {
     const res = await axios.get(`/api/todos/${pkid}`);
@@ -75,10 +57,4 @@ async function apiDeleteTodoTask(pkid: number) {
   }
 }
 
-export {
-  apiTodosList,
-  apiCreateTodos,
-  apiTodo,
-  apiPatchTodos,
-  apiDeleteTodoTask,
-};
+export { apiCreateTodos, apiTodo, apiPatchTodos, apiDeleteTodoTask };

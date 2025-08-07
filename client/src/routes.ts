@@ -22,6 +22,7 @@ import Activate from "./features/authentication/Activate";
 import ResetPasswordEmail from "./features/authentication/ResetPasswordEmail";
 import ResetPasswordEmailConfirm from "./features/authentication/ResetPasswordEmailConfirm";
 import { isLoggedInApi } from "./features/authentication/services/authApiServices";
+import TodoList from "./features/todo/pages/TodoList";
 
 export const router = createBrowserRouter([
   {
@@ -58,6 +59,7 @@ export const router = createBrowserRouter([
                 Component: () => Navigate({ to: "show-todos", replace: true }),
               },
               { path: "show-todos", Component: TodoCard },
+              { path: "show-todos2", Component: TodoList },
               { path: "add-todo", Component: AddTodo },
               { path: ":pkid/add-edit-todo", Component: AddEditTodoTask },
             ],
