@@ -1,7 +1,6 @@
 import { type SubmitHandler, useForm } from "react-hook-form";
 import Input from "../../components/Input";
 import { useMutation } from "@tanstack/react-query";
-import { login, registerUserApi } from "../../services/authApiCalls";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
@@ -15,9 +14,11 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { regSchema, type RegSchema } from "./schema/registerSchema";
+import { regSchema } from "./schema/authSchemas";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { useEffect } from "react";
+import type { RegSchema } from "./types/authTypes";
+import { loginApi, registerUserApi } from "./services/authApiServices";
 //TODO: Sign up page and reset Password
 
 export default function LoginRegPage() {
@@ -45,7 +46,7 @@ export default function LoginRegPage() {
 
   const { mutate } = useMutation({
     mutationFn: isLoginPage
-      ? (payload: RegSchema) => login(payload)
+      ? (payload: RegSchema) => loginApi(payload)
       : (payload: RegSchema) => registerUserApi(payload),
     onError: (e) => {
       if (e.message === "No active account found with the given credentials") {

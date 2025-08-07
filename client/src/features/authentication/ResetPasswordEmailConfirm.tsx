@@ -10,12 +10,12 @@ import {
 } from "@/components/ui/card";
 import { useForm } from "react-hook-form";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
-import {
-  resetPasswordSchema,
-  type ResetPasswordSchema,
-} from "./schema/registerSchema";
+import { resetPasswordSchema } from "./schema/authSchemas";
 import { zodResolver } from "@hookform/resolvers/zod";
-import type { ResetPasswordConfirmType } from "./types/authTypes";
+import type {
+  ResetPasswordConfirmType,
+  ResetPasswordSchema,
+} from "./types/authTypes";
 import { useMutation } from "@tanstack/react-query";
 import { resetPasswordConfirmApi } from "./services/authApiServices";
 import { toast } from "sonner";

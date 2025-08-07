@@ -6,7 +6,6 @@ import Error404 from "./pages/Error404";
 import AuthLayout from "./features/authentication/AuthLayout";
 import AddEditTodoTask from "./features/todo/AddEditTodoTask";
 import AddTodo from "./features/todo/AddTodo";
-import { isLoggedIn } from "./services/authApiCalls";
 import CountDownTimer from "./features/timer/CountDownTimer";
 import TodoCard from "./features/todo/TodoCard";
 import GymCard from "./features/gym/pages/GymCard";
@@ -22,11 +21,12 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 import Activate from "./features/authentication/Activate";
 import ResetPasswordEmail from "./features/authentication/ResetPasswordEmail";
 import ResetPasswordEmailConfirm from "./features/authentication/ResetPasswordEmailConfirm";
+import { isLoggedInApi } from "./features/authentication/services/authApiServices";
 
 export const router = createBrowserRouter([
   {
     Component: UnAuthLayout,
-    loader: isLoggedIn,
+    loader: isLoggedInApi,
     children: [
       {
         path: "/",
@@ -45,7 +45,7 @@ export const router = createBrowserRouter([
 
   {
     Component: AuthLayout,
-    loader: isLoggedIn,
+    loader: isLoggedInApi,
     children: [
       {
         Component: MainLayout,

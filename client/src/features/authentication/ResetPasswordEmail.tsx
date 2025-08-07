@@ -10,10 +10,10 @@ import { Button } from "@/components/ui/button";
 import { NavLink } from "react-router-dom";
 import Input from "../../components/Input";
 import { useForm } from "react-hook-form";
-import type { RegSchema } from "./schema/registerSchema";
 import { useMutation } from "@tanstack/react-query";
 import { resetPasswordApi } from "./services/authApiServices";
 import { toast } from "sonner";
+import type { RegSchema } from "./types/authTypes";
 
 export default function ResetPasswordEmail() {
   const { register, handleSubmit } = useForm<Pick<RegSchema, "email">>();

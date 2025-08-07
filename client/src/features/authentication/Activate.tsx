@@ -1,10 +1,10 @@
 import { useMutation } from "@tanstack/react-query";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import type { ActivateUser } from "./types/authTypes";
-import { activateUserApi } from "@/services/authApiCalls";
 import { useEffect } from "react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { toast } from "sonner";
+import { activateUserApi } from "./services/authApiServices";
 
 export default function Activate() {
   const navigate = useNavigate();

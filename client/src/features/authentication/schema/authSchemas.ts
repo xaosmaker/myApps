@@ -54,6 +54,3 @@ export const resetPasswordSchema = z
       });
     }
   });
-
-export type RegSchema = z.infer<typeof regSchema>;
-export type ResetPasswordSchema = z.infer<typeof resetPasswordSchema>;
