@@ -175,7 +175,7 @@ export default function LoginRegPage() {
             <CardDescription className="flex w-full items-center justify-between capitalize">
               forgot you password ?
               <Button variant="link" asChild>
-                <NavLink to={"#"}>reset Password</NavLink>
+                <NavLink to={"/password-reset"}>reset Password</NavLink>
               </Button>
             </CardDescription>
           )}

@@ -20,6 +20,8 @@ import AddWorkHours from "./features/work-hours/pages/AddWorkHours";
 import UnAuthLayout from "./features/authentication/UnAuthLayout";
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import Activate from "./features/authentication/Activate";
+import ResetPasswordEmail from "./features/authentication/ResetPasswordEmail";
+import ResetPasswordEmailConfirm from "./features/authentication/ResetPasswordEmailConfirm";
 
 export const router = createBrowserRouter([
   {
@@ -33,6 +35,11 @@ export const router = createBrowserRouter([
       { path: "/login", Component: LoginRegPage },
       { path: "/register", Component: LoginRegPage },
       { path: "/activate/:uid/:token/", Component: Activate },
+      { path: "/password-reset/", Component: ResetPasswordEmail },
+      {
+        path: "/password-reset/:uid/:token/",
+        Component: ResetPasswordEmailConfirm,
+      },
     ],
   },
 
