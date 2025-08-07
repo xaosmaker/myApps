@@ -61,6 +61,9 @@ export default function CustomPagination({
       setPageNumber(pageNumber);
     }
   };
+  if (totalPages === 1) {
+    return;
+  }
 
   return (
     <Pagination className="cursor-pointer">

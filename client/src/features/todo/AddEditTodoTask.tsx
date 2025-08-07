@@ -5,12 +5,12 @@ import { dateToGRformat } from "../../utils/helperFunctions";
 import { useEffect, useState } from "react";
 import Loader from "../../pages/Loader";
 import { Checked, Unchecked } from "../../img/svgsExport";
-import { type TodoData } from "../../types/dataTypes";
 import { useDispatch, useSelector } from "react-redux";
 import { type RootState } from "../../store/store";
 import { addTodoTask, setTodoState } from "../../store/todoSlice";
 import TodoTaskItem from "./TodoTaskItem";
 import Button from "../../ui/Button";
+import type { TodoData } from "./types/todoTypes";
 
 export default function AddEditTodoTask() {
   const { mutate, isPending: mutateIsLoading } = useMutation({
@@ -47,13 +47,13 @@ export default function AddEditTodoTask() {
   const showAddButtons = todo.completed || todo.expired;
 
   return (
-    <div className=" h-5/6 w-10/12">
-      <div className="mb-10 ">
+    <div className="h-5/6 w-10/12">
+      <div className="mb-10">
         <div className="flex items-center justify-center gap-4">
           <p>{todo?.completed ? <Checked /> : <Unchecked />}</p>
-          <h3 className="text-2xl ">{todo?.title}</h3>
+          <h3 className="text-2xl">{todo?.title}</h3>
         </div>
-        <p className=" mt-10 flex items-center justify-center gap-4">
+        <p className="mt-10 flex items-center justify-center gap-4">
           <span className="capitalize">Expires at:</span>
           {dateToGRformat(todo?.complete_until)}
         </p>
@@ -77,7 +77,7 @@ export default function AddEditTodoTask() {
           </div>
         </div>
       )}
-      <div className=" flex max-h-[75%] flex-wrap gap-x-4 gap-y-2 overflow-y-scroll rounded-sm bg-slate-600 p-2 ">
+      <div className="flex max-h-[75%] flex-wrap gap-x-4 gap-y-2 overflow-y-scroll rounded-sm bg-slate-600 p-2">
         {todo.todo_tasks.length !== 0 ? (
           todo.todo_tasks?.map((data) => (
             <TodoTaskItem key={data.name} todo={data} expired={todo.expired} />

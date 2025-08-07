@@ -7,7 +7,6 @@ import AuthLayout from "./features/authentication/AuthLayout";
 import AddEditTodoTask from "./features/todo/AddEditTodoTask";
 import AddTodo from "./features/todo/AddTodo";
 import CountDownTimer from "./features/timer/CountDownTimer";
-import TodoCard from "./features/todo/TodoCard";
 import GymCard from "./features/gym/pages/GymCard";
 import AddGymWorkout from "./features/gym/pages/AddGymWorkout";
 import NutritionList from "./features/nutrition/pages/NutritionList";
@@ -58,8 +57,7 @@ export const router = createBrowserRouter([
                 index: true,
                 Component: () => Navigate({ to: "show-todos", replace: true }),
               },
-              { path: "show-todos", Component: TodoCard },
-              { path: "show-todos2", Component: TodoList },
+              { path: "show-todos", Component: TodoList },
               { path: "add-todo", Component: AddTodo },
               { path: ":pkid/add-edit-todo", Component: AddEditTodoTask },
             ],

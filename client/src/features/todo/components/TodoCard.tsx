@@ -9,7 +9,7 @@ import {
 import { CircleCheck, CircleX } from "lucide-react";
 import type { TodoData } from "../types/todoTypes";
 import { dateToGRformat } from "@/utils/helperFunctions";
-import TodoCardItem from "../TodoCardItem";
+import TodoCardItem from "./TodoCardItems";
 
 export default function TodoCard({
   goto,

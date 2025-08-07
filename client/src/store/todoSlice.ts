@@ -1,5 +1,5 @@
+import type { TodoData, TodoTaskData } from "@/features/todo/types/todoTypes";
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { TodoData, TodoTaskData } from "../types/dataTypes";
 
 const initialTodoState: TodoData = {
   pkid: -1,
@@ -17,7 +17,7 @@ const todoSlice = createSlice({
   reducers: {
     addTodoTask: (state, action: PayloadAction<string>) => {
       const name = state.todo_tasks.find(
-        (data) => data.name === action.payload
+        (data) => data.name === action.payload,
       );
       if (name === undefined) {
         const todoTask: TodoTaskData = {
@@ -32,7 +32,7 @@ const todoSlice = createSlice({
     },
     removeTodoTask: (state, action: PayloadAction<string>) => {
       state.todo_tasks = state.todo_tasks.filter(
-        (data) => data.name !== action.payload
+        (data) => data.name !== action.payload,
       );
       state.todo_tasks = sortTodo(state.todo_tasks);
     },
@@ -63,7 +63,7 @@ const todoSlice = createSlice({
 
 function sortTodo(data: TodoTaskData[]) {
   return [...data].sort(
-    (a, b) => Number(a.is_completed) - Number(b.is_completed)
+    (a, b) => Number(a.is_completed) - Number(b.is_completed),
   );
 }
 

@@ -4,8 +4,8 @@ import Button from "../../ui/Button";
 import { useMutation } from "@tanstack/react-query";
 import { apiCreateTodos } from "../../services/todosApi";
 import { useNavigate } from "react-router-dom";
-import { type TodoData } from "../../types/dataTypes";
 import { dateToGRformat } from "../../utils/helperFunctions";
+import type { TodoData } from "./types/todoTypes";
 
 export default function AddTodo() {
   const navigate = useNavigate();
