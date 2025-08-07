@@ -33,7 +33,7 @@ export default function AddTodo() {
     mutate(data);
   };
   return (
-    <div className="w-1/2 ">
+    <div className="w-1/2">
       <h2 className="mb-10 text-center text-2xl capitalize">
         Create Todo List
       </h2>
@@ -45,16 +45,16 @@ export default function AddTodo() {
           htmlType="text"
           required={false}
           name="title"
-          error={errors?.title?.message}
+          error={errors.title}
           register={register("title")}
           displayName="Todo List Title"
         />
-        <span className=" flex items-center justify-center gap-2">
-          <span className=" uppercase">expires:</span>
+        <span className="flex items-center justify-center gap-2">
+          <span className="uppercase">expires:</span>
           <Input
             htmlType="date"
             name="complete_until"
-            error={errors.complete_until?.message}
+            error={errors.complete_until}
             register={register("complete_until")}
             displayName=" "
           />

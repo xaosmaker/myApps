@@ -103,7 +103,7 @@ export default function AddWorkHours() {
             htmlType="text"
             name="location"
             register={register("location")}
-            error={errors.location?.message}
+            error={errors.location}
           />
         )}
 
@@ -121,7 +121,7 @@ export default function AddWorkHours() {
                     value={workShift.pkid}
                   >{`${workShift.company}(${workShift.start_of_shift.slice(
                     0,
-                    -3
+                    -3,
                   )}-${workShift.end_of_shift.slice(0, -3)})`}</option>
                 );
               })}
@@ -129,21 +129,21 @@ export default function AddWorkHours() {
             <Input
               htmlType="time"
               name="start of work"
-              error={errors.startOfWork?.message}
+              error={errors.startOfWork}
               register={register("startOfWork")}
             />
             <Input
               htmlType="time"
               name="end of work"
               register={register("endOfWork")}
-              error={errors.endOfWork?.message}
+              error={errors.endOfWork}
             />
 
             <Input
               htmlType="text"
               name="comment"
               register={register("comment")}
-              error={errors.comment?.message}
+              error={errors.comment}
               required={false}
             />
           </>

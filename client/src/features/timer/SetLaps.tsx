@@ -42,7 +42,7 @@ export default function SetLaps() {
   }
   return (
     <>
-      <p className="mb-10 text-lg capitalize tracking-normal">
+      <p className="mb-10 text-lg tracking-normal capitalize">
         you can set multiple countdown timers just using &nbsp; "," &nbsp; in
         Countdown Timers field values.
       </p>
@@ -59,7 +59,7 @@ export default function SetLaps() {
                 Number(v) > 0 || "Sould be Greater Than Zero",
             },
           })}
-          error={errors.laps?.message}
+          error={errors.laps}
         />
         <Input
           htmlType="text"
@@ -75,7 +75,7 @@ export default function SetLaps() {
             },
           })}
           name="countDownTimers"
-          error={errors.countDownTimers?.message}
+          error={errors.countDownTimers}
         />
         <Button buttonType="primary" type="submit">
           Set Timer

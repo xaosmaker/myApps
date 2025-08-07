@@ -39,13 +39,13 @@ export default function AddFoodIntake() {
       >
         <Input
           htmlType="time"
-          error={errors.eat_time?.message}
+          error={errors.eat_time}
           name="eat time"
           register={register("eat_time")}
         />
         <Input
           name="quantity"
-          error={errors.quantity?.message}
+          error={errors.quantity}
           htmlType="text"
           register={register("quantity")}
         />
@@ -59,9 +59,9 @@ export default function AddFoodIntake() {
             }))}
           />
           <Modal.Open opens="test">
-            <div className="group/message relative cursor-pointer p-2 text-xl  text-green-500">
+            <div className="group/message relative cursor-pointer p-2 text-xl text-green-500">
               <FaPlus />
-              <span className="text-nowrap invisible absolute right-1/2 top-9 translate-x-1/2 rounded-md border-2 border-slate-950 bg-slate-800 px-4 py-2 text-slate-50 transition-all duration-500 group-hover/message:visible">
+              <span className="invisible absolute top-9 right-1/2 translate-x-1/2 rounded-md border-2 border-slate-950 bg-slate-800 px-4 py-2 text-nowrap text-slate-50 transition-all duration-500 group-hover/message:visible">
                 Add Food
               </span>
             </div>

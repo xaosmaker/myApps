@@ -46,27 +46,27 @@ export default function AddGymWorkout() {
               }))}
             />
             <Modal.Open opens="gym">
-              <div className="group/message relative cursor-pointer p-2 text-xl  text-green-500">
+              <div className="group/message relative cursor-pointer p-2 text-xl text-green-500">
                 <FaPlus />
-                <span className="text-nowrap invisible absolute right-1/2 top-9 z-10 translate-x-1/2 rounded-md border-2 border-slate-950 bg-slate-800 px-4 py-2 text-slate-50 transition-all duration-500 group-hover/message:visible">
+                <span className="invisible absolute top-9 right-1/2 z-10 translate-x-1/2 rounded-md border-2 border-slate-950 bg-slate-800 px-4 py-2 text-nowrap text-slate-50 transition-all duration-500 group-hover/message:visible">
                   Add Gym Machine
                 </span>
               </div>
             </Modal.Open>
           </div>
-          <div className=" mt-4">
+          <div className="mt-4">
             {is_timed_machine === true && (
               <>
                 <Input
                   htmlType="number"
                   name="gym_dificulty"
-                  error={errors.gym_dificulty?.message}
+                  error={errors.gym_dificulty}
                   register={register("gym_dificulty")}
                 />
                 <Input
                   htmlType="number"
                   name="gym_workout_time"
-                  error={errors.gym_workout_time?.message}
+                  error={errors.gym_workout_time}
                   register={register("gym_workout_time")}
                 />
               </>
@@ -77,19 +77,19 @@ export default function AddGymWorkout() {
                 <Input
                   htmlType="number"
                   name="gym_sets"
-                  error={errors.gym_sets?.message}
+                  error={errors.gym_sets}
                   register={register("gym_sets")}
                 />
                 <Input
                   htmlType="number"
                   name="gym_reps"
-                  error={errors.gym_reps?.message}
+                  error={errors.gym_reps}
                   register={register("gym_reps")}
                 />
                 <Input
                   htmlType="number"
                   name="gym_weight"
-                  error={errors.gym_weight?.message}
+                  error={errors.gym_weight}
                   register={register("gym_weight")}
                 />
               </>

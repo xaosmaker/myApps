@@ -32,27 +32,27 @@ export default function AddFoodDetails() {
   return (
     <form
       onSubmit={handleSubmit(submitHandle)}
-      className="flex  flex-col gap-6 px-4 py-4"
+      className="flex flex-col gap-6 px-4 py-4"
     >
       <Input
         htmlType="text"
         name="food_name"
         displayName="Food Name"
         register={register("food_name")}
-        error={errors.food_name?.message}
+        error={errors.food_name}
       />
       <Input
         htmlType="text"
         name="food_quantity"
         displayName="quantity per calories"
         register={register("food_quantity")}
-        error={errors.food_quantity?.message}
+        error={errors.food_quantity}
       />
       <Input
         otherProps={{ step: 0.01 }}
         name="food_calories"
         register={register("food_calories")}
-        error={errors.food_calories?.message}
+        error={errors.food_calories}
         htmlType="number"
       />
       <div className="mt-5">

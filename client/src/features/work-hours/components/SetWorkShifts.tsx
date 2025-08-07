@@ -37,19 +37,19 @@ export default function SetWorkShifts() {
         htmlType="text"
         register={register("company")}
         name="company"
-        error={errors.company?.message}
+        error={errors.company}
       />
       <Input
         htmlType="time"
         register={register("start_of_shift")}
         name="start of shift"
-        error={errors.start_of_shift?.message}
+        error={errors.start_of_shift}
       />
       <Input
         htmlType="time"
         register={register("end_of_shift")}
         name="end of shift"
-        error={errors.end_of_shift?.message}
+        error={errors.end_of_shift}
       />
       <Button type="submit">Add Shift</Button>
     </form>

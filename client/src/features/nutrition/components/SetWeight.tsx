@@ -33,7 +33,7 @@ export default function SetWeight() {
           register={register("current_weight")}
           name="current_weight"
           displayName="Current User Weight"
-          error={errors.current_weight?.message}
+          error={errors.current_weight}
           otherProps={{ step: 0.01 }}
         />
         <Input
@@ -41,7 +41,7 @@ export default function SetWeight() {
           register={register("daily_target_calories")}
           name="daily_target_calories"
           displayName="Daily Target Calories"
-          error={errors.daily_target_calories?.message}
+          error={errors.daily_target_calories}
         />
         <div>
           <Button type="submit">add weight</Button>

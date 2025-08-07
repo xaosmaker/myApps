@@ -16,7 +16,7 @@ export default function AddGymMachine() {
     formState: { errors },
   } = useForm<GymMachineType>();
   const error = (
-    <div className="whitespace-pre-wrap rounded-md bg-red-600 px-2 font-semibold capitalize">
+    <div className="rounded-md bg-red-600 px-2 font-semibold whitespace-pre-wrap capitalize">
       {postGymMachineError?.message}
     </div>
   );
@@ -32,7 +32,7 @@ export default function AddGymMachine() {
         name="machine_name"
         register={register("machine_name")}
         displayName="Machine Name"
-        error={errors?.machine_name?.message}
+        error={errors?.machine_name}
       />
       <div className="flex items-center justify-between gap-4 self-start">
         <label className="uppercase">Track by Time</label>
