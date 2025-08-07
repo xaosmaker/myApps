@@ -18,17 +18,17 @@ export default function TodoCard({
   data: TodoData;
   goto?: () => void;
 }) {
-  const { title, completed, complete_until, todo_tasks } = data;
+  const { title, completed, complete_until, todo_tasks, expired } = data;
 
   return (
     <Card
       onClick={goto}
-      className="min-h-48 w-full bg-slate-800 p-2 transition-all duration-300 ease-in-out hover:scale-105 hover:cursor-pointer"
+      className={`min-h-48 w-full bg-slate-800 p-2 transition-all duration-300 ease-in-out hover:scale-105 hover:cursor-pointer ${completed && "border-green-500"} ${expired && "border-red-500"}`}
     >
       <CardHeader className="pt-2">
         <CardTitle>{title}</CardTitle>
-        <CardDescription>
-          Expires: {dateToGRformat(complete_until)}
+        <CardDescription className="flex items-center justify-between pt-2">
+          EXRIRES: {dateToGRformat(complete_until)}
         </CardDescription>
         <CardAction>
           {completed ? <CircleCheck color="green" /> : <CircleX color="red" />}
