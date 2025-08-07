@@ -22,6 +22,7 @@ import ResetPasswordEmail from "./features/authentication/ResetPasswordEmail";
 import ResetPasswordEmailConfirm from "./features/authentication/ResetPasswordEmailConfirm";
 import { isLoggedInApi } from "./features/authentication/services/authApiServices";
 import TodoList from "./features/todo/pages/TodoList";
+import AddEditTodo from "./features/todo/pages/AddEditTodo";
 
 export const router = createBrowserRouter([
   {
@@ -60,6 +61,7 @@ export const router = createBrowserRouter([
               { path: "show-todos", Component: TodoList },
               { path: "add-todo", Component: AddTodo },
               { path: ":pkid/add-edit-todo", Component: AddEditTodoTask },
+              { path: ":pkid/add-edit-todo2", Component: AddEditTodo },
             ],
           },
 

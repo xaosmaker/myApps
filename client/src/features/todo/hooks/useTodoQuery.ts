@@ -1,12 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
-import type { TodoListData } from "../types/todoTypes";
-import { getTodosListApi } from "../services/todoApiServices";
+import type { TodoData } from "../types/todoTypes";
+import { getSingleTodoApi } from "../services/todoApiServices";
 
-export function useTodoListQuery(pageParams: string) {
-  const { data: todoListData, isLoading: isTodoListLoading } =
-    useQuery<TodoListData>({
-      queryKey: ["todolist", pageParams],
-      queryFn: () => getTodosListApi(pageParams),
-    });
-  return { todoListData, isTodoListLoading };
+export function useTodoQuery(pkid: string) {
+  const { data: singleTodoData, isLoading: isTodoLoading } = useQuery<TodoData>(
+    {
+      queryKey: ["todos", pkid],
+      queryFn: () => getSingleTodoApi(pkid),
+      enabled: pkid !== undefined,
+    },
+  );
+  return { singleTodoData, isTodoLoading };
 }

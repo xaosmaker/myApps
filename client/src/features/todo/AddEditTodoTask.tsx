@@ -1,5 +1,4 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { apiPatchTodos, apiTodo } from "../../services/todosApi";
 import { useParams } from "react-router-dom";
 import { dateToGRformat } from "../../utils/helperFunctions";
 import { useEffect, useState } from "react";
@@ -11,16 +10,20 @@ import { addTodoTask, setTodoState } from "../../store/todoSlice";
 import TodoTaskItem from "./TodoTaskItem";
 import Button from "../../ui/Button";
 import type { TodoData } from "./types/todoTypes";
+import {
+  createTodoItemApi,
+  getSingleTodoApi,
+} from "./services/todoApiServices";
 
 export default function AddEditTodoTask() {
   const { mutate, isPending: mutateIsLoading } = useMutation({
-    mutationFn: (data: TodoData) => apiPatchTodos(data),
+    mutationFn: (data: TodoData) => createTodoItemApi(data),
   });
   const { pkid } = useParams();
   const dispatch = useDispatch();
   const { data: todoData, isLoading } = useQuery<TodoData>({
     queryKey: ["todos", pkid],
-    queryFn: () => apiTodo(pkid),
+    queryFn: () => getSingleTodoApi(pkid),
     enabled: pkid !== undefined,
   });
   const [todoInput, setTodoInput] = useState<string>("");

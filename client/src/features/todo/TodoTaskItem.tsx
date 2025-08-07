@@ -3,9 +3,9 @@ import { Checked, Unchecked } from "../../img/svgsExport";
 import { removeTodoTask, setTodoTaskCompleted } from "../../store/todoSlice";
 import { FaTrashCan } from "react-icons/fa6";
 import { useMutation } from "@tanstack/react-query";
-import { apiDeleteTodoTask } from "../../services/todosApi";
 import Loader from "../../pages/Loader";
 import type { TodoTaskData } from "./types/todoTypes";
+import { deleteTodoItemApi } from "./services/todoApiServices";
 
 export default function TodoTaskItem({
   todo,
@@ -15,7 +15,7 @@ export default function TodoTaskItem({
   expired: boolean;
 }) {
   const { mutate, isPending } = useMutation({
-    mutationFn: (pkid: number) => apiDeleteTodoTask(pkid),
+    mutationFn: (pkid: number) => deleteTodoItemApi(pkid),
     onSuccess: () => removeTodoTaskLocal(todo),
   });
   const dispatch = useDispatch();

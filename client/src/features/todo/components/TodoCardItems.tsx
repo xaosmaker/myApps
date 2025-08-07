@@ -1,7 +1,16 @@
-import { CircleCheck, CircleX } from "lucide-react";
+import { CircleCheck, CircleX, Trash } from "lucide-react";
 import type { TodoTaskData } from "../types/todoTypes";
+import { Button } from "@/components/ui/button";
 
-export default function TodoCardItem({ todo }: { todo: TodoTaskData }) {
+export default function TodoCardItem({
+  todo,
+  deleteButton = false,
+  deleteFunc,
+}: {
+  todo: TodoTaskData;
+  deleteButton?: boolean;
+  deleteFunc?: () => void;
+}) {
   return (
     <p
       className={`flex items-center justify-start gap-4 text-lg capitalize ${
@@ -14,6 +23,11 @@ export default function TodoCardItem({ todo }: { todo: TodoTaskData }) {
         <CircleX color="red" />
       )}
       {todo.name}
+      {deleteButton && (
+        <Button onClick={deleteFunc} variant="ghost">
+          <Trash />
+        </Button>
+      )}
     </p>
   );
 }

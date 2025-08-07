@@ -35,7 +35,7 @@ export default function TodoCard({
         </CardAction>
       </CardHeader>
       <CardContent className="h-full rounded-md bg-slate-700 py-2">
-        {todo_tasks.map((item) => (
+        {todo_tasks.slice(0, 10).map((item) => (
           <TodoCardItem key={item.pkid} todo={item} />
         ))}
       </CardContent>

@@ -1,4 +1,4 @@
-import { useTodoListQuery } from "../hooks/useTodoQuery";
+import { useTodoListQuery } from "../hooks/useTodoListQuery";
 import usePagePaginationParams from "../../../hooks/usePagePaginationParams";
 import CustomPagination from "@/components/CustomPagination";
 import TodoCard from "../components/TodoCard";
