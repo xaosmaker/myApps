@@ -3,12 +3,17 @@ import { refreshApi } from "../features/authentication/services/authApiServices"
 const axios = axiosInstance.create({});
 const axiosError = axiosInstance.isAxiosError;
 
+//TODO:need to rethink how i manage this
 axios.interceptors.response.use(
   function (res) {
     return res;
   },
   async function (error: AxiosError) {
     if (error.config?.url === "/api/auth/refresh/") {
+      return Promise.reject(error);
+    }
+
+    if (error.response?.status === 403) {
       return Promise.reject(error);
     }
 
