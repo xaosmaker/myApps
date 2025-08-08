@@ -14,12 +14,11 @@ export default function TodoList() {
     navigate(location);
   };
 
-  const total = todoListData?.count || 10;
-  const remaining = todoListData?.all_pending_todo || 5;
-  const completed = todoListData?.all_completed_todo || 2;
-  const failed = todoListData?.all_failed_todo || 3;
-  //{`/todos/${data.pkid}/add-edit-todo`}
-  //
+  const total = todoListData?.count || 0;
+  const remaining = todoListData?.all_pending_todo || 0;
+  const completed = todoListData?.all_completed_todo || 0;
+  const failed = todoListData?.all_failed_todo || 0;
+
   if (isTodoListLoading) {
     return <div className="animate-bounce"> Loading ....</div>;
   }
