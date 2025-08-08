@@ -6,23 +6,32 @@ export default function TodoCardItem({
   todo,
   deleteButton = false,
   deleteFunc,
+  succesFunk,
 }: {
   todo: TodoTaskData;
   deleteButton?: boolean;
   deleteFunc?: () => void;
+  succesFunk?: () => void;
 }) {
   return (
     <p
-      className={`flex items-center justify-start gap-4 text-lg capitalize ${
+      className={`flex items-center justify-start text-lg capitalize ${
         todo.is_completed ? "line-through" : ""
       } `}
     >
-      {todo.is_completed ? (
-        <CircleCheck color="green" />
-      ) : (
-        <CircleX color="red" />
-      )}
-      {todo.name}
+      <Button
+        disabled={todo.is_completed}
+        variant="ghost"
+        onClick={todo.is_completed ? undefined : succesFunk}
+        className="flex gap-4 hover:cursor-pointer"
+      >
+        {todo.is_completed ? (
+          <CircleCheck color="green" />
+        ) : (
+          <CircleX color="red" />
+        )}
+        {todo.name}
+      </Button>
       {deleteButton && (
         <Button onClick={deleteFunc} variant="ghost">
           <Trash />

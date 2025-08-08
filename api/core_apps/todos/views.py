@@ -1,5 +1,5 @@
 from rest_framework import response, status
-from rest_framework.mixins import DestroyModelMixin
+from rest_framework.mixins import DestroyModelMixin, UpdateModelMixin
 from rest_framework.viewsets import GenericViewSet, ModelViewSet
 
 from core_apps.todos.models import Todo, TodoTasks
@@ -35,7 +35,7 @@ class TodosViewSet(ModelViewSet):
         return list_data
 
 
-class TodoTaskDelete(DestroyModelMixin, GenericViewSet):
+class TodoTaskDelete(DestroyModelMixin, UpdateModelMixin, GenericViewSet):
     serializer_class = TodoSerializer
     queryset = TodoTasks.objects.all()
 
@@ -43,6 +43,9 @@ class TodoTaskDelete(DestroyModelMixin, GenericViewSet):
         user = self.request.user
         data = TodoTasks.objects.filter(todo_list__profile__user=user)
         return data
+
+    def update(self, request, *args, **kwargs):
+        return super().update(request, *args, **kwargs)
 
     def destroy(self, request, *args, **kwargs):
         if kwargs["pk"]:

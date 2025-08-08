@@ -22,6 +22,7 @@ import {
   PopoverTrigger,
 } from "@radix-ui/react-popover";
 import { Plus } from "lucide-react";
+import { useUpdateTodo } from "../hooks/useUpdateTodo";
 
 export default function AddEditTodo() {
   const { pkid } = useParams<{ pkid: string }>();
@@ -36,6 +37,7 @@ export default function AddEditTodo() {
 
   const { singleTodoData, isTodoLoading } = useTodoQuery(pkid!);
   const { deleteMutate } = useDeleteTodo();
+  const { updateTodoMutate } = useUpdateTodo();
 
   function onHandleSubmit(data: TodoTaskData) {
     const fullData = singleTodoData!;
@@ -110,6 +112,7 @@ export default function AddEditTodo() {
             todo={item}
             deleteButton={!isExpiredORCompleted}
             deleteFunc={deleteMutate(Number(item.pkid))}
+            succesFunk={updateTodoMutate(item)}
           />
         ))}
       </CardContent>

@@ -4,8 +4,6 @@ import LoginRegPage from "./features/authentication/LoginRegPage";
 import MainLayout from "./layouts/MainLayout";
 import Error404 from "./pages/Error404";
 import AuthLayout from "./features/authentication/AuthLayout";
-import AddEditTodoTask from "./features/todo/AddEditTodoTask";
-import AddTodo from "./features/todo/AddTodo";
 import CountDownTimer from "./features/timer/CountDownTimer";
 import GymCard from "./features/gym/pages/GymCard";
 import AddGymWorkout from "./features/gym/pages/AddGymWorkout";
@@ -23,6 +21,7 @@ import ResetPasswordEmailConfirm from "./features/authentication/ResetPasswordEm
 import { isLoggedInApi } from "./features/authentication/services/authApiServices";
 import TodoList from "./features/todo/pages/TodoList";
 import AddEditTodo from "./features/todo/pages/AddEditTodo";
+import AddTodo from "./features/todo/pages/AddTodo";
 
 export const router = createBrowserRouter([
   {
@@ -60,8 +59,7 @@ export const router = createBrowserRouter([
               },
               { path: "show-todos", Component: TodoList },
               { path: "add-todo", Component: AddTodo },
-              { path: ":pkid/add-edit-todo", Component: AddEditTodoTask },
-              { path: ":pkid/add-edit-todo2", Component: AddEditTodo },
+              { path: ":pkid/add-edit-todo", Component: AddEditTodo },
             ],
           },
 

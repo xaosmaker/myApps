@@ -1,6 +1,6 @@
 import { AxiosError } from "axios";
 import axios from "../../../services/axiosInstance";
-import type { TodoData } from "../types/todoTypes";
+import type { TodoData, TodoTaskData } from "../types/todoTypes";
 
 export async function getTodosListApi(queryParams: string = "") {
   try {
@@ -50,6 +50,23 @@ export async function deleteTodoItemApi(pkid: number) {
       throw new Error(error.response?.data.detail);
     }
     throw new Error("Can't delete todoTasks");
+  }
+}
+// this api call is only used to update the todo item to finish
+export async function finishTodoItemApi(todosList: TodoTaskData) {
+  todosList.is_completed = true;
+  try {
+    const res = await axios.patch(
+      `/api/todo-tasks/${todosList.pkid}/`,
+      todosList,
+    );
+    const data = res.data;
+    return data;
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      throw new Error(error.response?.data.detail);
+    }
+    throw new Error("Can't create todoTasks");
   }
 }
 

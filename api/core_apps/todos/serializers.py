@@ -11,6 +11,15 @@ class TodoSerializer(ModelSerializer):
         fields = ["pkid", "name", "is_completed"]
         read_only_fields = ["pkid"]
 
+    def update(self, instance, validated_data):
+        todo_instance: Todo = instance.todo_list
+        if todo_instance.completed or todo_instance.expired:
+            return instance
+
+        data: TodoTasks = super().update(instance, validated_data)
+        data.todo_list.finish_model()
+        return data
+
 
 class TodoListSerializer(ModelSerializer):
     todo_tasks = TodoSerializer(many=True, source="todo")
