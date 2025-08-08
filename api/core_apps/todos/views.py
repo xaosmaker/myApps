@@ -6,6 +6,9 @@ from core_apps.todos.models import Todo, TodoTasks
 from core_apps.todos.serializers import TodoListSerializer, TodoSerializer
 
 # TODO: need test for api calls
+# TODO: make not create a todo item is the todo is finished
+# TODO: create api for all tasks of a todo and create a single task with the todo id
+# TODO: delete todo and all of its tasks
 
 
 class TodosViewSet(ModelViewSet):
