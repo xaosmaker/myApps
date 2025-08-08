@@ -7,8 +7,8 @@ import AddFoodDetails from "../components/AddFoodDetails";
 import { useGetFoodData } from "../hooks/useGetFoodData";
 import type { AddFoodIntakeType, FoodDataType } from "../types/NutritionTypes";
 import { usePostFoodIntake } from "../hooks/usePostFoodIntake";
-import SelectSearch from "../../../components/selectSearch/SelectSearch";
 import { timeTo24Format } from "../../../utils/helperFunctions";
+import SelectSearch2 from "@/components/selectSearch/SelectSearch2";
 export default function AddFoodIntake() {
   const { postFoodIntake } = usePostFoodIntake();
   const { foodData, isFoodDataLoading } = useGetFoodData();
@@ -22,6 +22,15 @@ export default function AddFoodIntake() {
       eat_time: timeTo24Format(),
     },
   });
+  const selectFoodData = foodData?.map((item: FoodDataType) => {
+
+    return {
+      label: `${item.food_name} (${item.food_quantity})`,
+      value: item.pkid.toString(),
+    }
+  })
+
+
 
   //TODO: need error messages
   if (isFoodDataLoading) {
@@ -50,14 +59,7 @@ export default function AddFoodIntake() {
           register={register("quantity")}
         />
         <div className="grid grid-cols-[1fr_auto] items-center justify-center gap-2">
-          <SelectSearch
-            control={control}
-            name="food"
-            options={foodData.map((item: FoodDataType) => ({
-              label: `${item.food_name} (${item.food_quantity})`,
-              value: item.pkid,
-            }))}
-          />
+          <SelectSearch2 control={control} name="food" data={selectFoodData} />
           <Modal.Open opens="test">
             <div className="group/message relative cursor-pointer p-2 text-xl text-green-500">
               <FaPlus />
