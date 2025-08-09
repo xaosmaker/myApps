@@ -2,12 +2,12 @@ import { type SubmitHandler, useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import Input from "../../../components/Input";
 import Button from "../../../ui/Button";
-import { CustomDate2 } from "@/components/CustomDate2";
 import type { AddWorkDayData, WorkDayFormType } from "../types/WorkHoursTypes";
 import { useGetWorkDayData } from "../hooks/useGetWorkDayData";
 import { useMutation } from "@tanstack/react-query";
 import { addWorkDays } from "../services/workHoursServices";
 import { useGetWorkShifts } from "../hooks/useGetworkShifts";
+import { DateRange } from "@/components/DateRange";
 
 // TODO: validation of form and for every time on form
 // TODO: make workday start from last inport add the shift to the data
@@ -85,7 +85,7 @@ export default function AddWorkHours() {
           <option value="Travel">Travel</option>
         </select>
 
-        <CustomDate2<AddWorkDayData> name="date" control={control} />
+        <DateRange<AddWorkDayData> name="date" control={control} />
         {day === "Travel" && (
           <Input
             htmlType="text"

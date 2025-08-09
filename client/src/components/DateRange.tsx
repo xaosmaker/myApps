@@ -13,9 +13,8 @@ import {
 import { Controller } from "react-hook-form"
 import type { Control, FieldValues, Path } from "react-hook-form"
 
-new Date().toLocaleDateString()
 
-export function CustomDate2<T extends FieldValues>({
+export function DateRange<T extends FieldValues>({
   control,
   name,
   className,
