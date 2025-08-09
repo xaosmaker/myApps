@@ -1,9 +1,9 @@
-import { FaPlus } from "react-icons/fa6";
 import Modal from "../../../components/modal/Modal";
 import Table from "../../../ui/Table";
 import { dateToGRformat } from "../../../utils/helperFunctions";
 import { useGetUserWeightData } from "../hooks/useGetUserWeightData";
 import SetWeight from "../components/SetWeight";
+import { Plus } from "lucide-react";
 
 export default function UserWeightData() {
   const { userWeightData } = useGetUserWeightData();
@@ -15,7 +15,7 @@ export default function UserWeightData() {
       <Modal>
         <Modal.Open opens="userWeightData">
           <div className="group/message relative cursor-pointer p-2 text-xl  text-green-500">
-            <FaPlus />
+            <Plus />
             <span className="text-nowrap invisible absolute right-1/2 top-9 translate-x-1/2 rounded-md border-2 border-slate-950 bg-slate-800 px-4 py-2 text-slate-50 transition-all duration-500 group-hover/message:visible">
               Add user Data
             </span>

@@ -1,6 +1,5 @@
 import { cloneElement, createContext, useContext, useState } from "react";
 import { createPortal } from "react-dom";
-import { FaX } from "react-icons/fa6";
 import { useOutsideClick } from "../../hooks/useOutsideClick";
 import type {
   ModalContextType,
@@ -8,6 +7,7 @@ import type {
   ModalTypes,
   ModalWindowTypes,
 } from "../../types/componentTypes/modalTypes";
+import { X } from "lucide-react";
 
 const initialValue = {
   openName: "",
@@ -51,7 +51,7 @@ function ModalWindow({ children, name }: ModalWindowTypes) {
           className="absolute right-2 top-2 bg-none p-2 text-lg transition-all duration-200 hover:text-slate-100"
           onClick={close}
         >
-          <FaX />
+          <X />
         </button>
         <div>{cloneElement(children, { onCloseModal: close })}</div>
       </div>

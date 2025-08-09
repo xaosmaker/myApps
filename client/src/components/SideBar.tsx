@@ -1,15 +1,13 @@
 import {
-  DAILY_DIARY_DATA,
   GYM_DATA,
   NUTRITIONS_DATA,
   TODOS_SIDEBAR_DATA,
   WORKHOURS_SIDEBAR_DATA,
 } from "../data/sidebarData";
 import { cloneElement, useEffect, useState } from "react";
-import BurgerMenu from "../img/menu_24dp_FILL0_wght400_GRAD0_opsz24.svg?react";
-import CloseMenu from "../img/close_24dp_FILL0_wght400_GRAD0_opsz24.svg?react";
 import { NavLink, useLocation } from "react-router-dom";
 import { type data } from "../types/dataTypes";
+import { Menu, X } from "lucide-react";
 
 export default function Sidebar() {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
@@ -22,8 +20,6 @@ export default function Sidebar() {
         setSidebarData(WORKHOURS_SIDEBAR_DATA);
       } else if (path === "todos") {
         setSidebarData(TODOS_SIDEBAR_DATA);
-      } else if (path === "diary") {
-        setSidebarData(DAILY_DIARY_DATA);
       } else if (path === "nutritions") {
         setSidebarData(NUTRITIONS_DATA);
       } else if (path === "gym") {
@@ -43,7 +39,7 @@ export default function Sidebar() {
         onClick={() => setIsMenuOpen(!isMenuOpen)}
         className="mb-5 px-2 py-2"
       >
-        {isMenuOpen ? <CloseMenu /> : <BurgerMenu />}
+        {isMenuOpen ? <X /> : <Menu />}
       </button>
       <div className="flex flex-col gap-4">
         {sidebarData?.map((data) => (

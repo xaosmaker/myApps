@@ -1,5 +1,4 @@
 import { useForm } from "react-hook-form";
-import { FaPlus } from "react-icons/fa6";
 import { useGetGymMachine } from "../hooks/useGetGymMachineList";
 import type { GymWorkoutPostType } from "../types/GymTypes";
 import Modal from "../../../components/modal/Modal";
@@ -8,6 +7,7 @@ import AddGymMachine from "../components/AddGymMachine";
 import { usePostGymWorkout } from "../hooks/usePostGymWorkout";
 import Button from "../../../ui/Button";
 import SelectSearch2 from "@/components/selectSearch/SelectSearch2";
+import { Plus } from "lucide-react";
 
 //TODO: need refactor and rething indo step card
 
@@ -48,7 +48,7 @@ export default function AddGymWorkout() {
             <SelectSearch2<GymWorkoutPostType> name="gym_machine_id" control={control} data={gymMachinedata} />
             <Modal.Open opens="gym">
               <div className="group/message relative cursor-pointer p-2 text-xl text-green-500">
-                <FaPlus />
+                <Plus />
                 <span className="invisible absolute top-9 right-1/2 z-10 translate-x-1/2 rounded-md border-2 border-slate-950 bg-slate-800 px-4 py-2 text-nowrap text-slate-50 transition-all duration-500 group-hover/message:visible">
                   Add Gym Machine
                 </span>
