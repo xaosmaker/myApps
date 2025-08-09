@@ -19,9 +19,11 @@ import Activate from "./features/authentication/Activate";
 import ResetPasswordEmail from "./features/authentication/ResetPasswordEmail";
 import ResetPasswordEmailConfirm from "./features/authentication/ResetPasswordEmailConfirm";
 import { isLoggedInApi } from "./features/authentication/services/authApiServices";
-import TodoList from "./features/todo/pages/TodoList";
-import AddEditTodo from "./features/todo/pages/AddEditTodo";
-import AddTodo from "./features/todo/pages/AddTodo";
+import { lazy } from "react";
+
+const TodoList = lazy(() => import("./features/todo/pages/TodoList"))
+const AddEditTodo = lazy(() => import("./features/todo/pages/AddEditTodo"))
+const AddTodo = lazy(() => import("./features/todo/pages/AddTodo"))
 
 export const router = createBrowserRouter([
   {
