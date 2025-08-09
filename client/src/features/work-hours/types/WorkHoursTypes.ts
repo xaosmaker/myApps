@@ -1,5 +1,7 @@
+import type { DateRange } from "react-day-picker";
+
 export type AddWorkDayData = {
-  date: string;
+  date: DateRange;
   day: string;
   startOfWork: string;
   work_day_shift: number;

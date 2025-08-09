@@ -23,17 +23,13 @@ interface DataType {
   label: string
 }
 
-
 export default function SelectSearch2<T extends FieldValues>({ data, name, control }: { data: DataType[], name: Path<T>, control: Control<T> }) {
 
   const [open, setOpen] = React.useState(false)
 
-
-
   return (
     <Controller name={name} control={control}
       render={({ field: { onChange, value } }) => (
-
 
         <Popover open={open} onOpenChange={setOpen}>
           <PopoverTrigger asChild>

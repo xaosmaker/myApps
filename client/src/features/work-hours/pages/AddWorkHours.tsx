@@ -2,7 +2,7 @@ import { type SubmitHandler, useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import Input from "../../../components/Input";
 import Button from "../../../ui/Button";
-import CustomDate from "../../../components/CustomDate";
+import { CustomDate2 } from "@/components/CustomDate2";
 import type { AddWorkDayData, WorkDayFormType } from "../types/WorkHoursTypes";
 import { useGetWorkDayData } from "../hooks/useGetWorkDayData";
 import { useMutation } from "@tanstack/react-query";
@@ -25,26 +25,18 @@ export default function AddWorkHours() {
     register,
     formState: { errors },
     handleSubmit,
-    setValue,
+    control,
     watch,
   } = useForm<AddWorkDayData>({
     mode: "onChange",
     defaultValues: {},
   });
-  const day = watch("day");
 
-  const onHandleSubmit: SubmitHandler<AddWorkDayData> = (data, event) => {
-    event?.preventDefault();
-    const date = data.date.split("-");
+  const day = watch('day')
 
-    const date0 = date[0].split("/");
-    const start_date = `${date0[2]}-${date0[0]}-${date0[1]}`;
-    let end_date = null;
-
-    if (date.length === 2) {
-      const date1 = date[1].split("/");
-      end_date = `${date1[2]}-${date1[0]}-${date1[1]}`;
-    }
+  const onHandleSubmit: SubmitHandler<AddWorkDayData> = (data) => {
+    const from = data.date.from?.toISOString().split("T")[0]
+    const to = data.date.to?.toISOString().split("T")[0] || null
 
     const postData: WorkDayFormType = {
       type_of_work_day: data.day,
@@ -53,9 +45,10 @@ export default function AddWorkHours() {
       start_of_work: data.startOfWork || null,
       work_day_shift: data.work_day_shift,
       end_of_work: data.endOfWork || null,
-      date_start: start_date,
-      date_end: end_date,
+      date_start: from!,
+      date_end: to,
     };
+
     mutate(postData);
   };
 
@@ -92,12 +85,7 @@ export default function AddWorkHours() {
           <option value="Travel">Travel</option>
         </select>
 
-        <CustomDate
-          startDate={new Date()}
-          dateRange={day === "Travel"}
-          selectedDate={setValue}
-        />
-        <input type="hidden" {...register("date")} />
+        <CustomDate2<AddWorkDayData> name="date" control={control} />
         {day === "Travel" && (
           <Input
             htmlType="text"

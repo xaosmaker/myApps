@@ -19,7 +19,6 @@ export default function AddGymWorkout() {
     return { value: item.pkid.toString(), label: item.machine_name }
   }
 
-
   )
   const {
     register,
@@ -32,16 +31,12 @@ export default function AddGymWorkout() {
     gymWorkoutMutate(data);
   }
 
-
-
   if (isGymMachineLoading) {
     return <div className="animate-bounce"> Loading ....</div>;
   }
   const machine_id = Number(watch("gym_machine_id"))
   const is_timed_machine = gymMachineList.find((item) => item.pkid === machine_id)?.is_tracked_by_time;
   console.log(machine_id, is_timed_machine);
-
-
 
   return (
     <div>
