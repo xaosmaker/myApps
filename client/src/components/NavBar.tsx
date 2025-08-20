@@ -23,10 +23,11 @@ export default function NavBar() {
         {isMenuOpen ? <X /> : <Menu />}
       </div>
       <ul
-        className={`${isMenuOpen
+        className={`${
+          isMenuOpen
             ? "absolute top-16 right-0 z-10 h-full w-full bg-slate-900"
             : "hidden"
-          } md:static md:flex md:h-auto md:w-auto md:bg-transparent`}
+        } md:static md:flex md:h-auto md:w-auto md:bg-transparent`}
       >
         <li>
           <NavLink
@@ -63,17 +64,17 @@ export default function NavBar() {
           </NavLink>
         </li>
 
-        <li>
-          <NavLink
-            to="/timer"
-            onClick={closeMenu}
-            className={({ isActive }) =>
-              (isActive ? active : undefined) + navLingDecoration
-            }
-          >
-            Timer
-          </NavLink>
-        </li>
+        {/* <li> */}
+        {/*   <NavLink */}
+        {/*     to="/timer" */}
+        {/*     onClick={closeMenu} */}
+        {/*     className={({ isActive }) => */}
+        {/*       (isActive ? active : undefined) + navLingDecoration */}
+        {/*     } */}
+        {/*   > */}
+        {/*     Timer */}
+        {/*   </NavLink> */}
+        {/* </li> */}
 
         <li>
           <NavLink

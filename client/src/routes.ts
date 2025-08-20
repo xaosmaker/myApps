@@ -4,7 +4,6 @@ import LoginRegPage from "./features/authentication/LoginRegPage";
 import MainLayout from "./layouts/MainLayout";
 import Error404 from "./pages/Error404";
 import AuthLayout from "./features/authentication/AuthLayout";
-import CountDownTimer from "./features/timer/CountDownTimer";
 import GymCard from "./features/gym/pages/GymCard";
 import AddGymWorkout from "./features/gym/pages/AddGymWorkout";
 import NutritionList from "./features/nutrition/pages/NutritionList";
@@ -21,9 +20,9 @@ import ResetPasswordEmailConfirm from "./features/authentication/ResetPasswordEm
 import { isLoggedInApi } from "./features/authentication/services/authApiServices";
 import { lazy } from "react";
 
-const TodoList = lazy(() => import("./features/todo/pages/TodoList"))
-const AddEditTodo = lazy(() => import("./features/todo/pages/AddEditTodo"))
-const AddTodo = lazy(() => import("./features/todo/pages/AddTodo"))
+const TodoList = lazy(() => import("./features/todo/pages/TodoList"));
+const AddEditTodo = lazy(() => import("./features/todo/pages/AddEditTodo"));
+const AddTodo = lazy(() => import("./features/todo/pages/AddTodo"));
 
 export const router = createBrowserRouter([
   {
@@ -65,18 +64,18 @@ export const router = createBrowserRouter([
             ],
           },
 
-          {
-            path: "/timer",
-            children: [
-              {
-                index: true,
-                Component: () =>
-                  Navigate({ replace: true, to: "count-down-timer" }),
-              },
-
-              { path: "count-down-timer", Component: CountDownTimer },
-            ],
-          },
+          // {
+          //   path: "/timer",
+          //   children: [
+          //     {
+          //       index: true,
+          //       Component: () =>
+          //         Navigate({ replace: true, to: "count-down-timer" }),
+          //     },
+          //
+          //     { path: "count-down-timer", Component: NewTimer },
+          //   ],
+          // },
 
           {
             path: "/nutritions",

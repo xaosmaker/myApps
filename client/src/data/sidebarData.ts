@@ -17,7 +17,6 @@ const TODOS_SIDEBAR_DATA: data[] = [
   { icon: ListPlus, to: "todos/add-todo", name: "Add Todo" },
 ];
 
-
 const NUTRITIONS_DATA: data[] = [
   {
     icon: ListTodo,
