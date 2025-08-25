@@ -6,7 +6,7 @@ import Input from "../../../components/Input";
 import AddGymMachine from "../components/AddGymMachine";
 import { usePostGymWorkout } from "../hooks/usePostGymWorkout";
 import Button from "../../../ui/Button";
-import SelectSearch2 from "@/components/selectSearch/SelectSearch2";
+import SelectSearch from "@/components/selectSearch/SelectSearch";
 import { Plus } from "lucide-react";
 
 //TODO: need refactor and rething indo step card
@@ -16,10 +16,8 @@ export default function AddGymWorkout() {
   const { gymWorkoutMutate } = usePostGymWorkout();
 
   const gymMachinedata = gymMachineList.map((item) => {
-    return { value: item.pkid.toString(), label: item.machine_name }
-  }
-
-  )
+    return { value: item.pkid.toString(), label: item.machine_name };
+  });
   const {
     register,
     handleSubmit,
@@ -34,8 +32,10 @@ export default function AddGymWorkout() {
   if (isGymMachineLoading) {
     return <div className="animate-bounce"> Loading ....</div>;
   }
-  const machine_id = Number(watch("gym_machine_id"))
-  const is_timed_machine = gymMachineList.find((item) => item.pkid === machine_id)?.is_tracked_by_time;
+  const machine_id = Number(watch("gym_machine_id"));
+  const is_timed_machine = gymMachineList.find(
+    (item) => item.pkid === machine_id,
+  )?.is_tracked_by_time;
   console.log(machine_id, is_timed_machine);
 
   return (
@@ -44,8 +44,11 @@ export default function AddGymWorkout() {
       <Modal>
         <form onSubmit={handleSubmit(submitForm)}>
           <div className="grid grid-cols-[1fr_auto] gap-2">
-
-            <SelectSearch2<GymWorkoutPostType> name="gym_machine_id" control={control} data={gymMachinedata} />
+            <SelectSearch<GymWorkoutPostType>
+              name="gym_machine_id"
+              control={control}
+              data={gymMachinedata}
+            />
             <Modal.Open opens="gym">
               <div className="group/message relative cursor-pointer p-2 text-xl text-green-500">
                 <Plus />
