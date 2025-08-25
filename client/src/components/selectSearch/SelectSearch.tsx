@@ -77,7 +77,7 @@ export default function SelectSearch<T extends FieldValues>({
                       onSelect={onChange}
                     >
                       {item.label}
-                      {value === item.value ? "true" : "false"}
+                      {value === item.value ? true : false}
 
                       <Check
                         className={`ml-auto ${value === item.value ? "opacity-100" : "opacity-0"}`}
