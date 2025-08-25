@@ -31,10 +31,12 @@ export default function SelectSearch<T extends FieldValues>({
   data,
   name,
   control,
+  label = "select framework...",
 }: {
   data: DataType[];
   name: Path<T>;
   control: Control<T>;
+  label?: string;
 }) {
   const [open, setOpen] = React.useState(false);
 
@@ -49,11 +51,9 @@ export default function SelectSearch<T extends FieldValues>({
               variant="outline"
               role="combobox"
               aria-expanded={open}
-              className="w-[200px] justify-between"
+              className="w-full justify-between"
             >
-              {value
-                ? data.find((item) => item.value === value)?.label
-                : "Select framework..."}
+              {value ? data.find((item) => item.value === value)?.label : label}
               <ChevronsUpDown className="opacity-50" />
             </Button>
           </PopoverTrigger>
