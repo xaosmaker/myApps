@@ -2,21 +2,17 @@ import { useForm } from "react-hook-form";
 import Input from "../../../components/Input";
 import Button from "../../../ui/Button";
 import type { WorkShiftFormType } from "../types/WorkHoursTypes";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { createWorkShift } from "../services/workHoursServices";
-import { useContext } from "react";
-import { ModalContext } from "../../../components/modal/Modal";
+import { queryClient } from "../../../queryClient";
 
 export default function SetWorkShifts() {
-  const querClient = useQueryClient();
-  const { close } = useContext(ModalContext);
   const { mutate } = useMutation({
     mutationFn: createWorkShift,
     onSuccess: () => {
-      querClient.invalidateQueries({
+      queryClient.invalidateQueries({
         queryKey: ["WorkShifts"],
       });
-      close();
     },
   });
   function sumbitHandler(data: WorkShiftFormType) {
@@ -30,7 +26,7 @@ export default function SetWorkShifts() {
   return (
     <form
       onSubmit={handleSubmit(sumbitHandler)}
-      className="mt-10 flex flex-col gap-6"
+      className="flex flex-col gap-10"
     >
       <span className="text-center text-2xl uppercase">Add Shift</span>
       <Input

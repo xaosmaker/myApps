@@ -9,7 +9,6 @@ import AddGymWorkout from "./features/gym/pages/AddGymWorkout";
 import NutritionList from "./features/nutrition/pages/NutritionList";
 import AddFoodIntake from "./features/nutrition/pages/AddFoodIntake";
 import UserWeightData from "./features/nutrition/pages/UserWeightData";
-import WorkShifts from "./features/work-hours/pages/WorkShifts";
 import ShowWorkDays from "./features/work-hours/pages/ShowWorkDays";
 import AddWorkHours from "./features/work-hours/pages/AddWorkHours";
 import UnAuthLayout from "./features/authentication/UnAuthLayout";
@@ -19,6 +18,7 @@ import ResetPasswordEmail from "./features/authentication/ResetPasswordEmail";
 import ResetPasswordEmailConfirm from "./features/authentication/ResetPasswordEmailConfirm";
 import { isLoggedInApi } from "./features/authentication/services/authApiServices";
 import { lazy } from "react";
+import Shifts from "./features/work-hours/pages/Shifts";
 
 const TodoList = lazy(() => import("./features/todo/pages/TodoList"));
 const AddEditTodo = lazy(() => import("./features/todo/pages/AddEditTodo"));
@@ -116,7 +116,7 @@ export const router = createBrowserRouter([
                 Component: ShowWorkDays,
               },
               { path: "add-work-time", Component: AddWorkHours },
-              { path: "work-shifts", Component: WorkShifts },
+              { path: "work-shifts", Component: Shifts },
             ],
           },
           // {

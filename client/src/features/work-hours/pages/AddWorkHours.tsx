@@ -3,24 +3,40 @@ import { useEffect, useState } from "react";
 import Input from "../../../components/Input";
 import Button from "../../../ui/Button";
 import type { AddWorkDayData, WorkDayFormType } from "../types/WorkHoursTypes";
-import { useGetWorkDayData } from "../hooks/useGetWorkDayData";
 import { useMutation } from "@tanstack/react-query";
 import { addWorkDays } from "../services/workHoursServices";
 import { useGetWorkShifts } from "../hooks/useGetworkShifts";
 import { DateRange } from "@/components/DateRange";
+import SelectSearch from "@/components/selectSearch/SelectSearch";
+import { DatePicker } from "@/components/DatePicker";
 
 // TODO: validation of form and for every time on form
 // TODO: make workday start from last inport add the shift to the data
 // TODO: make search from date to date
 // WARN: the date should be a string
+// i change the ui and then i refactor this
+//
+const selectDayData = [
+  { value: "Work Day", label: "Work Day" },
+  { value: "Weekend", label: "Weekend" },
+  { value: "Times off", label: "Times Off" },
+  { value: "Sick Leave", label: "Sick Leave" },
+  { value: "Public Holiday", label: "Public Holiday" },
+  { value: "Travel", label: "Travel" },
+];
 
 export default function AddWorkHours() {
-  const { isWorkDayDataLoading } = useGetWorkDayData();
   const { workShiftsData, isWorkShiftsDataLoading } = useGetWorkShifts();
+  const workDayShiftDataSelect = workShiftsData.map((data) => ({
+    label: `${data.company} ( ${data.start_of_shift} - ${data.end_of_shift} )`,
+    value: data.pkid.toString(),
+  }));
+
   const [souldRender, setShouldRender] = useState<boolean>(true);
   const { mutate } = useMutation({
     mutationFn: addWorkDays,
   });
+
   const {
     register,
     formState: { errors },
@@ -32,11 +48,19 @@ export default function AddWorkHours() {
     defaultValues: {},
   });
 
-  const day = watch('day')
+  const day = watch("day");
 
   const onHandleSubmit: SubmitHandler<AddWorkDayData> = (data) => {
-    const from = data.date.from?.toISOString().split("T")[0]
-    const to = data.date.to?.toISOString().split("T")[0] || null
+    const day = data.date.from?.getDate();
+    const month = data.date.from?.getMonth() || 0 + 1;
+    const year = data.date.from?.getFullYear();
+
+    // const from = data.date.from?.toISOString().split("T")[0];
+    const from = `${year}-${month.toLocaleString("en-US", { minimumIntegerDigits: 2 })}-${day?.toLocaleString("en-US", { minimumIntegerDigits: 2 })}`;
+
+    const to = data.date.to?.toISOString().split("T")[0] || null;
+
+    console.log(data);
 
     const postData: WorkDayFormType = {
       type_of_work_day: data.day,
@@ -48,6 +72,8 @@ export default function AddWorkHours() {
       date_start: from!,
       date_end: to,
     };
+
+    console.log(postData);
 
     mutate(postData);
   };
@@ -62,7 +88,7 @@ export default function AddWorkHours() {
     }
   }, [day]);
 
-  if (isWorkDayDataLoading || isWorkShiftsDataLoading) {
+  if (isWorkShiftsDataLoading) {
     return <div className="animate-bounce"> Loading ....</div>;
   }
 
@@ -73,47 +99,35 @@ export default function AddWorkHours() {
         className="flex w-3/4 flex-col gap-10 sm:w-2/3 md:w-1/4"
         onSubmit={handleSubmit(onHandleSubmit)}
       >
-        <select
-          {...register("day")}
-          className="appearance-none border-0 bg-slate-900"
-        >
-          <option value="Work Day">Work Day</option>
-          <option value="Weekend">Weekend</option>
-          <option value="Times off">Times Off</option>
-          <option value="Sick Leave">Sick Leave</option>
-          <option value="Public Holiday">Public Holiday</option>
-          <option value="Travel">Travel</option>
-        </select>
+        <SelectSearch<AddWorkDayData>
+          label="Select Day..."
+          name="day"
+          data={selectDayData}
+          control={control}
+        />
 
-        <DateRange<AddWorkDayData> name="date" control={control} />
-        {day === "Travel" && (
-          <Input
-            htmlType="text"
-            name="location"
-            register={register("location")}
-            error={errors.location}
-          />
+        {day === "Travel" ? (
+          <>
+            <DateRange<AddWorkDayData> name="date" control={control} />
+            <Input
+              htmlType="text"
+              name="location"
+              register={register("location")}
+              error={errors.location}
+            />
+          </>
+        ) : (
+          <DatePicker<AddWorkDayData> control={control} name="date.from" />
         )}
 
         {souldRender && (
           <>
-            <select
-              {...register("work_day_shift")}
-              className="appearance-none border-0 bg-slate-900"
-            >
-              {workShiftsData.map((workShift) => {
-                return (
-                  <option
-                    key={workShift.pkid}
-                    className="uppercase"
-                    value={workShift.pkid}
-                  >{`${workShift.company}(${workShift.start_of_shift.slice(
-                    0,
-                    -3,
-                  )}-${workShift.end_of_shift.slice(0, -3)})`}</option>
-                );
-              })}
-            </select>
+            <SelectSearch<AddWorkDayData>
+              control={control}
+              name="work_day_shift"
+              data={workDayShiftDataSelect}
+              label="Select Shift..."
+            />
             <Input
               htmlType="time"
               name="start of work"
