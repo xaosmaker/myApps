@@ -9,8 +9,10 @@ import { workDayTableCols } from "../components/WorkDayTableCols";
 export default function ShowWorkDays() {
   const { workDayData } = useGetWorkDayData();
   return (
-    <div className="container mx-auto py-10">
-      <DataTable columns={workDayTableCols} data={workDayData} />
+    <div className="w-full overflow-auto">
+      <div className="mx-auto mt-10 w-fit">
+        <DataTable columns={workDayTableCols} data={workDayData} />
+      </div>
     </div>
   );
 }

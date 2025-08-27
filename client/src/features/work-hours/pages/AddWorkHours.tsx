@@ -11,6 +11,8 @@ import { DatePicker } from "@/components/DatePicker";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import { dateToUtcYYYYMMDD } from "../helpers/utils";
+import { selectDayData } from "../data/selectDayData";
 
 // TODO: validation of form and for every time on form
 // TODO: make workday start from last inport add the shift to the data
@@ -18,14 +20,6 @@ import { useNavigate } from "react-router-dom";
 // WARN: the date should be a string
 // i change the ui and then i refactor this
 //
-const selectDayData = [
-  { value: "Work Day", label: "Work Day" },
-  { value: "Weekend", label: "Weekend" },
-  { value: "Times off", label: "Times Off" },
-  { value: "Sick Leave", label: "Sick Leave" },
-  { value: "Public Holiday", label: "Public Holiday" },
-  { value: "Travel", label: "Travel" },
-];
 
 export default function AddWorkHours() {
   const { workShiftsData, isWorkShiftsDataLoading } = useGetWorkShifts();
@@ -55,14 +49,8 @@ export default function AddWorkHours() {
   const day = watch("day");
 
   const onHandleSubmit: SubmitHandler<AddWorkDayData> = (data) => {
-    const day = data.date.from?.getDate();
-    const month = data.date.from?.getMonth() || 0 + 1;
-    const year = data.date.from?.getFullYear();
-
-    // const from = data.date.from?.toISOString().split("T")[0];
-    const from = `${year}-${month.toLocaleString("en-US", { minimumIntegerDigits: 2 })}-${day?.toLocaleString("en-US", { minimumIntegerDigits: 2 })}`;
-
-    const to = data.date.to?.toISOString().split("T")[0] || null;
+    const from = dateToUtcYYYYMMDD(data.date.from);
+    const to = dateToUtcYYYYMMDD(data.date.to);
 
     const postData: WorkDayFormType = {
       type_of_work_day: data.day,
