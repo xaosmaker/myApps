@@ -1,7 +1,6 @@
 import { type SubmitHandler, useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import Input from "../../../components/Input";
-import Button from "../../../ui/Button";
 import type { AddWorkDayData, WorkDayFormType } from "../types/WorkHoursTypes";
 import { useMutation } from "@tanstack/react-query";
 import { addWorkDays } from "../services/workHoursServices";
@@ -9,6 +8,9 @@ import { useGetWorkShifts } from "../hooks/useGetworkShifts";
 import { DateRange } from "@/components/DateRange";
 import SelectSearch from "@/components/selectSearch/SelectSearch";
 import { DatePicker } from "@/components/DatePicker";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 // TODO: validation of form and for every time on form
 // TODO: make workday start from last inport add the shift to the data
@@ -32,9 +34,11 @@ export default function AddWorkHours() {
     value: data.pkid.toString(),
   }));
 
+  const navigate = useNavigate();
   const [souldRender, setShouldRender] = useState<boolean>(true);
   const { mutate } = useMutation({
     mutationFn: addWorkDays,
+    onSuccess: () => navigate("/work-hours"),
   });
 
   const {
@@ -45,7 +49,7 @@ export default function AddWorkHours() {
     watch,
   } = useForm<AddWorkDayData>({
     mode: "onChange",
-    defaultValues: {},
+    defaultValues: { date: { from: new Date() }, day: "Work Day" },
   });
 
   const day = watch("day");
@@ -60,8 +64,6 @@ export default function AddWorkHours() {
 
     const to = data.date.to?.toISOString().split("T")[0] || null;
 
-    console.log(data);
-
     const postData: WorkDayFormType = {
       type_of_work_day: data.day,
       comment: data.comment || null,
@@ -72,8 +74,6 @@ export default function AddWorkHours() {
       date_start: from!,
       date_end: to,
     };
-
-    console.log(postData);
 
     mutate(postData);
   };
@@ -93,66 +93,72 @@ export default function AddWorkHours() {
   }
 
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center gap-20">
-      <h3 className="text-xl">Add work Day</h3>
-      <form
-        className="flex w-3/4 flex-col gap-10 sm:w-2/3 md:w-1/4"
-        onSubmit={handleSubmit(onHandleSubmit)}
-      >
-        <SelectSearch<AddWorkDayData>
-          label="Select Day..."
-          name="day"
-          data={selectDayData}
-          control={control}
-        />
-
-        {day === "Travel" ? (
-          <>
-            <DateRange<AddWorkDayData> name="date" control={control} />
-            <Input
-              htmlType="text"
-              name="location"
-              register={register("location")}
-              error={errors.location}
-            />
-          </>
-        ) : (
-          <DatePicker<AddWorkDayData> control={control} name="date.from" />
-        )}
-
-        {souldRender && (
-          <>
+    <div className="mx-auto mt-10">
+      <Card>
+        <CardHeader>
+          <CardTitle>Add work Day</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <form
+            className="flex flex-col gap-10"
+            onSubmit={handleSubmit(onHandleSubmit)}
+          >
             <SelectSearch<AddWorkDayData>
+              label="Select Day..."
+              name="day"
+              data={selectDayData}
               control={control}
-              name="work_day_shift"
-              data={workDayShiftDataSelect}
-              label="Select Shift..."
-            />
-            <Input
-              htmlType="time"
-              name="start of work"
-              error={errors.startOfWork}
-              register={register("startOfWork")}
-            />
-            <Input
-              htmlType="time"
-              name="end of work"
-              register={register("endOfWork")}
-              error={errors.endOfWork}
             />
 
-            <Input
-              htmlType="text"
-              name="comment"
-              register={register("comment")}
-              error={errors.comment}
-              required={false}
-            />
-          </>
-        )}
+            {day === "Travel" ? (
+              <>
+                <DateRange<AddWorkDayData> name="date" control={control} />
+                <Input
+                  htmlType="text"
+                  name="location"
+                  register={register("location")}
+                  error={errors.location}
+                />
+              </>
+            ) : (
+              <DatePicker<AddWorkDayData> control={control} name="date.from" />
+            )}
 
-        <Button type="submit">Add Work Day</Button>
-      </form>
+            {souldRender && (
+              <>
+                <SelectSearch<AddWorkDayData>
+                  control={control}
+                  name="work_day_shift"
+                  data={workDayShiftDataSelect}
+                  label="Select Shift..."
+                />
+                <Input
+                  htmlType="time"
+                  name="start of work"
+                  error={errors.startOfWork}
+                  register={register("startOfWork")}
+                />
+                <Input
+                  htmlType="time"
+                  name="end of work"
+                  register={register("endOfWork")}
+                  error={errors.endOfWork}
+                />
+
+                <Input
+                  htmlType="text"
+                  name="comment"
+                  register={register("comment")}
+                  error={errors.comment}
+                  required={false}
+                />
+              </>
+            )}
+
+            <Button type="submit">Add Work Day</Button>
+          </form>
+        </CardContent>
+      </Card>
     </div>
   );
 }
