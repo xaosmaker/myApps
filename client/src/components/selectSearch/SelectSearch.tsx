@@ -31,12 +31,14 @@ export default function SelectSearch<T extends FieldValues>({
   data,
   name,
   control,
+  required = false,
   label = "select framework...",
 }: {
   data: DataType[];
   name: Path<T>;
   control: Control<T>;
   label?: string;
+  required?: boolean;
 }) {
   const [open, setOpen] = React.useState(false);
 
@@ -44,6 +46,7 @@ export default function SelectSearch<T extends FieldValues>({
     <Controller
       name={name}
       control={control}
+      rules={{ required: required }}
       render={({ field: { onChange, value } }) => (
         <Popover open={open} onOpenChange={setOpen}>
           <PopoverTrigger asChild>

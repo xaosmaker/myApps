@@ -116,6 +116,7 @@ export default function AddWorkHours() {
               <>
                 <SelectSearch<AddWorkDayData>
                   control={control}
+                  required={true}
                   name="work_day_shift"
                   data={workDayShiftDataSelect}
                   label="Select Shift..."
