@@ -1,8 +1,10 @@
 import type { ColumnDef } from "@tanstack/react-table";
 import type { WorkDayType } from "../types/WorkHoursTypes";
 import { dateToGRformat } from "@/utils/helperFunctions";
+import AddWorkHours from "./AddWorkHours";
 
 export const workDayTableCols: ColumnDef<WorkDayType>[] = [
+  { id: "action", header: () => AddWorkHours() },
   {
     accessorKey: "type_of_work_day",
     header: "Day",
@@ -25,5 +27,4 @@ export const workDayTableCols: ColumnDef<WorkDayType>[] = [
   { accessorKey: "end_of_work", header: "End" },
   { accessorKey: "location", header: "Location" },
   { accessorKey: "comment", header: "Comment" },
-  { id: "action", header: "Action" },
 ];

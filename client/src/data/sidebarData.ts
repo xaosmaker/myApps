@@ -1,4 +1,12 @@
-import { AlarmClock, AlarmClockPlus, ClockPlus, FileClock, IdCard, ListPlus, ListTodo, Plus } from "lucide-react";
+import {
+  AlarmClock,
+  ClockPlus,
+  FileClock,
+  IdCard,
+  ListPlus,
+  ListTodo,
+  Plus,
+} from "lucide-react";
 import { type data } from "../types/dataTypes";
 
 const WORKHOURS_SIDEBAR_DATA: data[] = [
@@ -7,7 +15,6 @@ const WORKHOURS_SIDEBAR_DATA: data[] = [
     to: "work-hours/show-work-time",
     name: "Show Work Time",
   },
-  { icon: AlarmClockPlus, to: "work-hours/add-work-time", name: "Add Work Hours" },
   { icon: FileClock, to: "work-hours/sum-work-time", name: "Sum Work Time" },
   { icon: ClockPlus, to: "work-hours/work-shifts", name: "Set Work Time" },
 ];

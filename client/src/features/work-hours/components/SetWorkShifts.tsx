@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import Input from "../../../components/Input";
-import Button from "../../../ui/Button";
+import { Button } from "@/components/ui/button";
 import type { WorkShiftFormType } from "../types/WorkHoursTypes";
 import { useMutation } from "@tanstack/react-query";
 import { createWorkShift } from "../services/workHoursServices";
@@ -28,7 +28,6 @@ export default function SetWorkShifts() {
       onSubmit={handleSubmit(sumbitHandler)}
       className="flex flex-col gap-10"
     >
-      <span className="text-center text-2xl uppercase">Add Shift</span>
       <Input
         htmlType="text"
         register={register("company")}

@@ -8,11 +8,24 @@ import { useGetWorkShifts } from "../hooks/useGetworkShifts";
 import { DateRange } from "@/components/DateRange";
 import SelectSearch from "@/components/selectSearch/SelectSearch";
 import { DatePicker } from "@/components/DatePicker";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { dateToUtcYYYYMMDD } from "../helpers/utils";
 import { selectDayData } from "../data/selectDayData";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Plus } from "lucide-react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 // TODO: validation of form and for every time on form
 // TODO: make workday start from last inport add the shift to the data
@@ -81,73 +94,82 @@ export default function AddWorkHours() {
   }
 
   return (
-    <div className="mx-auto mt-10">
-      <Card>
-        <CardHeader>
-          <CardTitle>Add work Day</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <form
-            className="flex flex-col gap-10"
-            onSubmit={handleSubmit(onHandleSubmit)}
-          >
-            <SelectSearch<AddWorkDayData>
-              label="Select Day..."
-              name="day"
-              data={selectDayData}
-              control={control}
-            />
+    <Dialog>
+      <DialogTrigger className="text-green-500 capitalize hover:cursor-pointer">
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Plus />
+          </TooltipTrigger>
+          <TooltipContent className="uppercase">add work day</TooltipContent>
+        </Tooltip>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader className="mb-5">
+          <DialogTitle>Add Work Day</DialogTitle>
+          <DialogDescription className="hidden">
+            A form to register your work day
+          </DialogDescription>
+        </DialogHeader>
+        <form
+          className="flex flex-col gap-10"
+          onSubmit={handleSubmit(onHandleSubmit)}
+        >
+          <SelectSearch<AddWorkDayData>
+            label="Select Day..."
+            name="day"
+            data={selectDayData}
+            control={control}
+          />
 
-            {day === "Travel" ? (
-              <>
-                <DateRange<AddWorkDayData> name="date" control={control} />
-                <Input
-                  htmlType="text"
-                  name="location"
-                  register={register("location")}
-                  error={errors.location}
-                />
-              </>
-            ) : (
-              <DatePicker<AddWorkDayData> control={control} name="date.from" />
-            )}
+          {day === "Travel" ? (
+            <>
+              <DateRange<AddWorkDayData> name="date" control={control} />
+              <Input
+                htmlType="text"
+                name="location"
+                register={register("location")}
+                error={errors.location}
+              />
+            </>
+          ) : (
+            <DatePicker<AddWorkDayData> control={control} name="date.from" />
+          )}
 
-            {souldRender && (
-              <>
-                <SelectSearch<AddWorkDayData>
-                  control={control}
-                  required={true}
-                  name="work_day_shift"
-                  data={workDayShiftDataSelect}
-                  label="Select Shift..."
-                />
-                <Input
-                  htmlType="time"
-                  name="start of work"
-                  error={errors.startOfWork}
-                  register={register("startOfWork")}
-                />
-                <Input
-                  htmlType="time"
-                  name="end of work"
-                  register={register("endOfWork")}
-                  error={errors.endOfWork}
-                />
+          {souldRender && (
+            <>
+              <SelectSearch<AddWorkDayData>
+                control={control}
+                required={true}
+                name="work_day_shift"
+                data={workDayShiftDataSelect}
+                label="Select Shift..."
+              />
+              <Input
+                htmlType="time"
+                name="start of work"
+                error={errors.startOfWork}
+                register={register("startOfWork")}
+              />
+              <Input
+                htmlType="time"
+                name="end of work"
+                register={register("endOfWork")}
+                error={errors.endOfWork}
+              />
 
-                <Input
-                  htmlType="text"
-                  name="comment"
-                  register={register("comment")}
-                  error={errors.comment}
-                  required={false}
-                />
-              </>
-            )}
+              <Input
+                htmlType="text"
+                name="comment"
+                register={register("comment")}
+                error={errors.comment}
+                required={false}
+              />
+            </>
+          )}
 
-            <Button type="submit">Add Work Day</Button>
-          </form>
-        </CardContent>
-      </Card>
-    </div>
+          <Button type="submit">Add Work Day</Button>
+        </form>
+      </DialogContent>
+    </Dialog>
   );
 }

@@ -10,7 +10,6 @@ import NutritionList from "./features/nutrition/pages/NutritionList";
 import AddFoodIntake from "./features/nutrition/pages/AddFoodIntake";
 import UserWeightData from "./features/nutrition/pages/UserWeightData";
 import ShowWorkDays from "./features/work-hours/pages/ShowWorkDays";
-import AddWorkHours from "./features/work-hours/pages/AddWorkHours";
 import UnAuthLayout from "./features/authentication/UnAuthLayout";
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import Activate from "./features/authentication/Activate";
@@ -115,7 +114,6 @@ export const router = createBrowserRouter([
                 path: "show-work-time",
                 Component: ShowWorkDays,
               },
-              { path: "add-work-time", Component: AddWorkHours },
               { path: "work-shifts", Component: Shifts },
             ],
           },
