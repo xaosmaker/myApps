@@ -1,5 +1,9 @@
+import axios from "@/services/axiosInstance";
 import { baseGet, basePost } from "../../../services/baseServices";
-import type { WorkDayFormType, WorkShiftFormType } from "../types/WorkHoursTypes";
+import type {
+  WorkDayFormType,
+  WorkShiftFormType,
+} from "../types/WorkHoursTypes";
 
 const getWorkShifts = async () => {
   return await baseGet("/api/work-shifts/", "", "Can't get shifts");
@@ -13,6 +17,16 @@ const getWorkDays = async () => {
 };
 async function addWorkDays(data: WorkDayFormType) {
   return await basePost("/api/work-day/", data, "Can't create Work Day");
+}
+
+export async function deleteWorkDay(id: string) {
+  try {
+    const res = await axios.delete(`/api/work-day/${id}/`);
+    const data = await res.data;
+    return data;
+  } catch {
+    return;
+  }
 }
 
 export { getWorkShifts, createWorkShift, getWorkDays, addWorkDays };

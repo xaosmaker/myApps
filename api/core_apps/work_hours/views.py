@@ -18,7 +18,12 @@ class WorkShiftViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, GenericVi
         return WorkShift.objects.filter(profile=user.profile)
 
 
-class WorkDayViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, GenericViewSet):
+class WorkDayViewSet(
+    mixins.ListModelMixin,
+    mixins.CreateModelMixin,
+    mixins.DestroyModelMixin,
+    GenericViewSet,
+):
     pagination_class = None
     serializer_class = WorkDaySerializer
     queryset = WorkDay.objects.all()

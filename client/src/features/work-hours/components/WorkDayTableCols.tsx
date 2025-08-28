@@ -2,9 +2,36 @@ import type { ColumnDef } from "@tanstack/react-table";
 import type { WorkDayType } from "../types/WorkHoursTypes";
 import { dateToGRformat } from "@/utils/helperFunctions";
 import AddWorkHours from "./AddWorkHours";
+import { EllipsisVertical, Pencil } from "lucide-react";
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+} from "@/components/ui/popover";
+import Delete from "@/components/Delete";
+import { deleteWorkDay } from "../services/workHoursServices";
 
 export const workDayTableCols: ColumnDef<WorkDayType>[] = [
-  { id: "action", header: () => AddWorkHours() },
+  {
+    id: "action",
+    header: () => AddWorkHours(),
+    cell: ({ row: { original } }) => (
+      <Popover>
+        <PopoverTrigger>
+          <EllipsisVertical />
+        </PopoverTrigger>
+        <PopoverContent className="flex flex-col gap-4">
+          <Delete
+            titleMessage="a Work Day"
+            mutFunc={() => deleteWorkDay(original.pkid.toString())}
+            toURL="/work-hours"
+            mainMessage={`Deleting the ${original.date_start} ${original.date_end || ""} work Day`}
+          />
+          <Pencil />
+        </PopoverContent>
+      </Popover>
+    ),
+  },
   {
     accessorKey: "type_of_work_day",
     header: "Day",
