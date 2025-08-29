@@ -31,7 +31,7 @@ export default function Delete({
 
   return (
     <Dialog>
-      <DialogTrigger className="flex gap-4">
+      <DialogTrigger className="flex gap-4 hover:cursor-pointer">
         <Trash2 /> Delete
       </DialogTrigger>
 

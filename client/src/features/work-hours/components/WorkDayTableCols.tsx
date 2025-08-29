@@ -1,7 +1,7 @@
 import type { ColumnDef } from "@tanstack/react-table";
 import type { WorkDayType } from "../types/WorkHoursTypes";
 import AddWorkHours from "./AddWorkHours";
-import { EllipsisVertical, Pencil } from "lucide-react";
+import { EllipsisVertical } from "lucide-react";
 import {
   Popover,
   PopoverTrigger,
@@ -16,7 +16,7 @@ export const workDayTableCols: ColumnDef<WorkDayType>[] = [
     header: () => AddWorkHours(),
     cell: ({ row: { original } }) => (
       <Popover>
-        <PopoverTrigger>
+        <PopoverTrigger className="hover:cursor-pointer">
           <EllipsisVertical />
         </PopoverTrigger>
         <PopoverContent className="flex flex-col gap-4">
@@ -26,7 +26,6 @@ export const workDayTableCols: ColumnDef<WorkDayType>[] = [
             toURL="/work-hours"
             mainMessage={`Deleting the ${original.date_start} work Day`}
           />
-          <Pencil />
         </PopoverContent>
       </Popover>
     ),
