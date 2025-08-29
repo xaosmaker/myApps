@@ -5,8 +5,15 @@ import {
   getFilteredRowModel,
   useReactTable,
   type ColumnDef,
+  type VisibilityState,
 } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 import {
   Table,
@@ -22,13 +29,17 @@ import { Input } from "../ui/input";
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  defaultHidden?: VisibilityState;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  defaultHidden = {},
 }: DataTableProps<TData, TValue>) {
   const [globalFilter, setGlobalFilter] = useState<string>("");
+  const [columnVisibility, SetColumnVisibility] =
+    useState<VisibilityState>(defaultHidden);
   const table = useReactTable({
     data,
     columns,
@@ -37,10 +48,14 @@ export function DataTable<TData, TValue>({
     getFilteredRowModel: getFilteredRowModel(),
     globalFilterFn: "includesString",
     onGlobalFilterChange: setGlobalFilter,
+    onColumnVisibilityChange: SetColumnVisibility,
     state: {
       globalFilter,
+      columnVisibility,
     },
   });
+
+  console.log(columnVisibility);
 
   return (
     <div>
@@ -53,6 +68,32 @@ export function DataTable<TData, TValue>({
           }
           className="max-w-sm"
         />
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="outline" className="ml-auto">
+              Columns
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            {table
+              .getAllColumns()
+              .filter((column) => column.getCanHide())
+              .map((column) => {
+                return (
+                  <DropdownMenuCheckboxItem
+                    key={column.id}
+                    className="capitalize"
+                    checked={column.getIsVisible()}
+                    onCheckedChange={(value) =>
+                      column.toggleVisibility(!!value)
+                    }
+                  >
+                    {column.id}
+                  </DropdownMenuCheckboxItem>
+                );
+              })}
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
       <div className="overflow-hidden rounded-md border">
         <Table>
