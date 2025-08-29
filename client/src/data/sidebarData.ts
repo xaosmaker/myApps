@@ -1,7 +1,7 @@
 import {
   AlarmClock,
   ClockPlus,
-  FileClock,
+  // FileClock,
   IdCard,
   ListPlus,
   ListTodo,
@@ -15,7 +15,7 @@ const WORKHOURS_SIDEBAR_DATA: data[] = [
     to: "work-hours/show-work-time",
     name: "Show Work Time",
   },
-  { icon: FileClock, to: "work-hours/sum-work-time", name: "Sum Work Time" },
+  // { icon: FileClock, to: "work-hours/sum-work-time", name: "Sum Work Time" },
   { icon: ClockPlus, to: "work-hours/work-shifts", name: "Set Work Time" },
 ];
 
