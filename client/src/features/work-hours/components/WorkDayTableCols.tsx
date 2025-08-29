@@ -1,6 +1,5 @@
 import type { ColumnDef } from "@tanstack/react-table";
 import type { WorkDayType } from "../types/WorkHoursTypes";
-import { dateToGRformat } from "@/utils/helperFunctions";
 import AddWorkHours from "./AddWorkHours";
 import { EllipsisVertical, Pencil } from "lucide-react";
 import {
@@ -25,7 +24,7 @@ export const workDayTableCols: ColumnDef<WorkDayType>[] = [
             titleMessage="a Work Day"
             mutFunc={() => deleteWorkDay(original.pkid.toString())}
             toURL="/work-hours"
-            mainMessage={`Deleting the ${original.date_start} ${original.date_end || ""} work Day`}
+            mainMessage={`Deleting the ${original.date_start} work Day`}
           />
           <Pencil />
         </PopoverContent>
@@ -37,21 +36,23 @@ export const workDayTableCols: ColumnDef<WorkDayType>[] = [
     header: "Day",
   },
   {
-    accessorKey: "date_end",
+    accessorKey: "date_start",
     header: "date",
+  },
+  {
+    accessorKey: "start_of_work",
+    header: "start",
     cell: ({ row }) => {
-      const date_start: string = row.original.date_start;
-      const date_end: string = row.getValue("date_end");
-
-      const date = date_end
-        ? `${dateToGRformat(date_start)}-${dateToGRformat(date_end)}`
-        : `${dateToGRformat(date_start)}`;
-
-      return <div>{date}</div>;
+      return <div>{row.original.start_of_work?.slice(0, 5)}</div>;
     },
   },
-  { accessorKey: "start_of_work", header: "start" },
-  { accessorKey: "end_of_work", header: "End" },
+  {
+    accessorKey: "end_of_work",
+    header: "End",
+    cell: ({ row }) => {
+      return <div>{row.original.end_of_work?.slice(0, 5)}</div>;
+    },
+  },
   { accessorKey: "location", header: "Location" },
   { accessorKey: "comment", header: "Comment" },
 ];

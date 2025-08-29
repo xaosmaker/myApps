@@ -5,7 +5,6 @@ import type { AddWorkDayData, WorkDayFormType } from "../types/WorkHoursTypes";
 import { useMutation } from "@tanstack/react-query";
 import { addWorkDays } from "../services/workHoursServices";
 import { useGetWorkShifts } from "../hooks/useGetworkShifts";
-import { DateRange } from "@/components/DateRange";
 import SelectSearch from "@/components/selectSearch/SelectSearch";
 import { DatePicker } from "@/components/DatePicker";
 import { Button } from "@/components/ui/button";
@@ -27,14 +26,8 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
-// change the dateRange to Date and remove the travel functio or leave it as
-// show in the days and then make it without day start and day end only have date
 // TODO: validation of form and for every time on form
 // TODO: make workday start from last inport add the shift to the data
-// TODO: make search from date to date
-// WARN: the date should be a string
-// i change the ui and then i refactor this
-//
 
 export default function AddWorkHours() {
   const { workShiftsData, isWorkShiftsDataLoading } = useGetWorkShifts();
@@ -65,7 +58,6 @@ export default function AddWorkHours() {
 
   const onHandleSubmit: SubmitHandler<AddWorkDayData> = (data) => {
     const from = dateToUtcYYYYMMDD(data.date.from);
-    const to = dateToUtcYYYYMMDD(data.date.to);
 
     const postData: WorkDayFormType = {
       type_of_work_day: data.day,
@@ -75,7 +67,6 @@ export default function AddWorkHours() {
       work_day_shift: data.work_day_shift,
       end_of_work: data.endOfWork || null,
       date_start: from!,
-      date_end: to,
     };
 
     mutate(postData);
@@ -123,9 +114,9 @@ export default function AddWorkHours() {
             control={control}
           />
 
-          {day === "Travel" ? (
+          <DatePicker<AddWorkDayData> control={control} name="date.from" />
+          {day === "Travel" && (
             <>
-              <DateRange<AddWorkDayData> name="date" control={control} />
               <Input
                 htmlType="text"
                 name="location"
@@ -133,10 +124,7 @@ export default function AddWorkHours() {
                 error={errors.location}
               />
             </>
-          ) : (
-            <DatePicker<AddWorkDayData> control={control} name="date.from" />
           )}
-
           {souldRender && (
             <>
               <SelectSearch<AddWorkDayData>
