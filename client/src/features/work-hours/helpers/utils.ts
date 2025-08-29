@@ -5,7 +5,6 @@ export function dateToUtcYYYYMMDD(date: Date | undefined): string | null {
     const day = date.getDate();
 
     const some = `${year}-${month.toLocaleString("en-US", { minimumIntegerDigits: 2 })}-${day.toLocaleString("en-US", { minimumIntegerDigits: 2 })}`;
-    console.log(some);
 
     return some;
   }

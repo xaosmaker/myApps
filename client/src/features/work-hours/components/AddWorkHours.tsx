@@ -25,6 +25,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 
 // TODO: validation of form and for every time on form
 // TODO: make workday start from last inport add the shift to the data
@@ -38,7 +39,7 @@ export default function AddWorkHours() {
 
   const navigate = useNavigate();
   const [souldRender, setShouldRender] = useState<boolean>(true);
-  const { mutate } = useMutation({
+  const { mutate, error } = useMutation({
     mutationFn: addWorkDays,
     onSuccess: () => navigate("/work-hours"),
   });
@@ -47,17 +48,29 @@ export default function AddWorkHours() {
     register,
     formState: { errors },
     handleSubmit,
+    setError,
     control,
     watch,
   } = useForm<AddWorkDayData>({
     mode: "onChange",
-    defaultValues: { date: { from: new Date() }, day: "Work Day" },
+    defaultValues: { date: new Date(), day: "Work Day" },
   });
 
   const day = watch("day");
+  useEffect(() => {
+    if (error && typeof error === "object") {
+      const values = Object.values(error);
+
+      if (Array.isArray(values[0])) {
+        setError("root", { message: values[0][0] });
+      } else {
+        setError("root", { message: values[0] });
+      }
+    }
+  }, [error, setError]);
 
   const onHandleSubmit: SubmitHandler<AddWorkDayData> = (data) => {
-    const from = dateToUtcYYYYMMDD(data.date.from);
+    const from = dateToUtcYYYYMMDD(data.date);
 
     const postData: WorkDayFormType = {
       type_of_work_day: data.day,
@@ -66,7 +79,7 @@ export default function AddWorkHours() {
       start_of_work: data.startOfWork || null,
       work_day_shift: data.work_day_shift,
       end_of_work: data.endOfWork || null,
-      date_start: from!,
+      date: from!,
     };
 
     mutate(postData);
@@ -112,9 +125,10 @@ export default function AddWorkHours() {
             name="day"
             data={selectDayData}
             control={control}
+            error={errors.day}
           />
 
-          <DatePicker<AddWorkDayData> control={control} name="date.from" />
+          <DatePicker<AddWorkDayData> control={control} name="date" />
           {day === "Travel" && (
             <>
               <Input
@@ -133,6 +147,7 @@ export default function AddWorkHours() {
                 name="work_day_shift"
                 data={workDayShiftDataSelect}
                 label="Select Shift..."
+                error={errors.work_day_shift}
               />
               <Input
                 htmlType="time"
@@ -155,6 +170,14 @@ export default function AddWorkHours() {
                 required={false}
               />
             </>
+          )}
+
+          {errors.root && (
+            <Alert variant="destructive" className="z-10 mt-1.5">
+              <AlertDescription className="capitalize">
+                {errors.root.message}
+              </AlertDescription>
+            </Alert>
           )}
 
           <Button type="submit">Add Work Day</Button>

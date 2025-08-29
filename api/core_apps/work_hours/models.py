@@ -37,15 +37,14 @@ class WorkDay(TimeStampedModel):
         WorkShift, on_delete=models.CASCADE, null=True, blank=True
     )
     type_of_work_day = models.CharField(max_length=50, choices=WorkDayType.choices)
-    date_start = models.DateField(unique=True)
-    date_end = models.DateField(null=True, blank=True, unique=True)
+    date = models.DateField(unique=True)
     location = models.CharField(max_length=150, null=True, blank=True)
     start_of_work = models.TimeField(null=True, blank=True)
     end_of_work = models.TimeField(null=True, blank=True)
     comment = models.CharField(max_length=255, null=True, blank=True)
 
     class Meta:
-        ordering = ["-date_start"]
+        ordering = ["-date"]
 
     def __str__(self) -> str:
-        return f"{self.date_start}-{self.date_end}, {self.start_of_work}-{self.end_of_work}"
+        return f"{self.date}, {self.start_of_work}-{self.end_of_work}"

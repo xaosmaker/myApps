@@ -24,7 +24,7 @@ export const workDayTableCols: ColumnDef<WorkDayType>[] = [
             titleMessage="a Work Day"
             mutFunc={() => deleteWorkDay(original.pkid.toString())}
             toURL="/work-hours"
-            mainMessage={`Deleting the ${original.date_start} work Day`}
+            mainMessage={`Deleting the ${original.date} work Day`}
           />
         </PopoverContent>
       </Popover>
@@ -35,7 +35,7 @@ export const workDayTableCols: ColumnDef<WorkDayType>[] = [
     header: "Day",
   },
   {
-    accessorKey: "date_start",
+    accessorKey: "date",
     header: "date",
   },
   {
