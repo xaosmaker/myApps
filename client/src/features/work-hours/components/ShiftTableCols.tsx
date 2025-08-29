@@ -1,6 +1,6 @@
 import type { ColumnDef } from "@tanstack/react-table";
 import type { WorkShiftType } from "../types/WorkHoursTypes";
-import { Plus } from "lucide-react";
+import { EllipsisVertical, Plus } from "lucide-react";
 import SetWorkShifts from "./SetWorkShifts";
 import {
   Tooltip,
@@ -15,6 +15,13 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { DialogTitle } from "@radix-ui/react-dialog";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import Delete from "@/components/Delete";
+import { deleteWorkShift } from "../services/workHoursServices";
 
 export const workShiftsTableCols: ColumnDef<WorkShiftType>[] = [
   {
@@ -42,6 +49,22 @@ export const workShiftsTableCols: ColumnDef<WorkShiftType>[] = [
           <SetWorkShifts />
         </DialogContent>
       </Dialog>
+    ),
+    cell: ({ row: { original } }) => (
+      <Popover>
+        <PopoverTrigger className="hover:cursor-pointer">
+          <EllipsisVertical />
+        </PopoverTrigger>
+        <PopoverContent className="flex flex-col gap-4">
+          <Delete
+            titleMessage="a Work Shift"
+            queryName="WorkShifts"
+            mutFunc={() => deleteWorkShift(original.pkid.toString())}
+            toURL="/work-hours/work-shifts"
+            mainMessage={`Deleting the ${original.company} ( ${original.start_of_shift} ${original.end_of_shift}) work Day`}
+          />
+        </PopoverContent>
+      </Popover>
     ),
   },
   {

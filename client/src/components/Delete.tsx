@@ -4,24 +4,34 @@ import { Dialog, DialogTrigger, DialogContent } from "./ui/dialog";
 import { AlertCircleIcon, Trash2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import type { FormEvent } from "react";
+import { useState, type FormEvent } from "react";
 import { DialogDescription, DialogTitle } from "@radix-ui/react-dialog";
+import { queryClient } from "@/queryClient";
 
 export default function Delete({
   titleMessage,
   mutFunc,
   toURL,
+  queryName,
   mainMessage = "",
 }: {
   titleMessage: string;
   mutFunc: MutationFunction;
   toURL: string;
   mainMessage?: string;
+  queryName?: string;
 }) {
   const navigate = useNavigate();
+  const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
   const { mutate } = useMutation({
     mutationFn: mutFunc,
-    onSuccess: () => navigate(toURL),
+    onSuccess: () => {
+      setIsDialogOpen(false);
+      if (queryName) {
+        queryClient.invalidateQueries({ queryKey: [queryName] });
+      }
+      navigate(toURL, { replace: true });
+    },
   });
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
@@ -30,7 +40,7 @@ export default function Delete({
   }
 
   return (
-    <Dialog>
+    <Dialog onOpenChange={setIsDialogOpen} open={isDialogOpen}>
       <DialogTrigger className="flex gap-4 hover:cursor-pointer">
         <Trash2 /> Delete
       </DialogTrigger>

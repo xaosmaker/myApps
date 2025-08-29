@@ -8,7 +8,12 @@ from core_apps.work_hours.serializers import WorkDaySerializer, WorkShiftSeriali
 # Create your views here.
 
 
-class WorkShiftViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, GenericViewSet):
+class WorkShiftViewSet(
+    mixins.ListModelMixin,
+    mixins.CreateModelMixin,
+    mixins.DestroyModelMixin,
+    GenericViewSet,
+):
     pagination_class = None
     serializer_class = WorkShiftSerializer
     queryset = WorkShift.objects.all()

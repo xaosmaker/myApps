@@ -29,4 +29,14 @@ export async function deleteWorkDay(id: string) {
   }
 }
 
+export async function deleteWorkShift(id: string) {
+  try {
+    const res = await axios.delete(`/api/work-shifts/${id}/`);
+    const data = await res.data;
+    return data;
+  } catch {
+    return;
+  }
+}
+
 export { getWorkShifts, createWorkShift, getWorkDays, addWorkDays };
