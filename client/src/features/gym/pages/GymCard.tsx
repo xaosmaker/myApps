@@ -1,9 +1,6 @@
 import usePagePaginationParams from "../../../hooks/usePagePaginationParams";
-import CardLayout from "../../../components/card/CardLayout";
-import Card from "../../../components/card/Card";
-import { dateToGRformat } from "../../../utils/helperFunctions";
-import Pagination from "../../../components/Pagination";
 import { useGetGymDay } from "../hooks/useGetGymDay";
+import WorkoutCard from "../components/WorkoutCard";
 
 export default function GymCard() {
   const pageParams = usePagePaginationParams();
@@ -13,51 +10,15 @@ export default function GymCard() {
     return <div className="animate-bounce"> Loading ....</div>;
   }
   return (
-    <CardLayout>
-      <CardLayout.Header>
-        <CardLayout.Title>Gym</CardLayout.Title>
-      </CardLayout.Header>
-      <CardLayout.Body className="h-3/5 md:h-4/6 md:grid-cols-3">
-        {gymListData?.results?.map((item) => (
-          <Card key={item.created_at} link="#">
-            <Card.Title className="text-center">
-              {dateToGRformat(item.created_at)}
-            </Card.Title>
-            <Card.Body>
-              {item.gym_day.map((gym_day, index) => (
-                <div
-                  key={index}
-                  className="grid grid-cols-[1.5fr_1fr_auto_1fr] items-center gap-4 justify-self-start"
-                >
-                  {gym_day.gym_machine.is_tracked_by_time ? (
-                    <>
-                      <p className="text-sm font-semibold uppercase">
-                        {gym_day.gym_machine.machine_name}
-                      </p>
-                      <p>dificulty: {gym_day.gym_dificulty} </p>
-                      <p>mins: {gym_day.gym_workout_time} </p>
-                    </>
-                  ) : (
-                    <>
-                      <p className="text-sm font-semibold uppercase">
-                        {gym_day.gym_machine.machine_name}
-                      </p>
-                      <p>sets: {gym_day.gym_sets}</p>
-                      <p>reps: {gym_day.gym_reps}</p>
-                      <p>weight: {gym_day.gym_weight}</p>
-                    </>
-                  )}
-                </div>
-              ))}
-            </Card.Body>
-          </Card>
+    <div className="h-full overflow-y-auto">
+      <p className="sticky top-0 z-10 bg-slate-900 p-10 text-center text-4xl uppercase">
+        gym WorkOuts
+      </p>
+      <div className="mb-4 grid w-full auto-rows-min grid-cols-[repeat(auto-fill,_minmax(19rem,_1fr))] gap-4 p-4">
+        {gymListData?.results.map((workouts) => (
+          <WorkoutCard data={workouts} />
         ))}
-      </CardLayout.Body>
-
-      <Pagination
-        currentPage={gymListData?.current_page || 1}
-        totalPages={gymListData?.total_pages || 1}
-      />
-    </CardLayout>
+      </div>
+    </div>
   );
 }
