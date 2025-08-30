@@ -4,11 +4,6 @@ import LoginRegPage from "./features/authentication/LoginRegPage";
 import MainLayout from "./layouts/MainLayout";
 import Error404 from "./pages/Error404";
 import AuthLayout from "./features/authentication/AuthLayout";
-import GymCard from "./features/gym/pages/GymCard";
-import AddGymWorkout from "./features/gym/pages/AddGymWorkout";
-import NutritionList from "./features/nutrition/pages/NutritionList";
-import AddFoodIntake from "./features/nutrition/pages/AddFoodIntake";
-import UserWeightData from "./features/nutrition/pages/UserWeightData";
 import UnAuthLayout from "./features/authentication/UnAuthLayout";
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import Activate from "./features/authentication/Activate";
@@ -25,6 +20,18 @@ const Shifts = lazy(() => import("./features/work-hours/pages/Shifts"));
 const TodoList = lazy(() => import("./features/todo/pages/TodoList"));
 const AddEditTodo = lazy(() => import("./features/todo/pages/AddEditTodo"));
 const AddTodo = lazy(() => import("./features/todo/pages/AddTodo"));
+
+const GymCard = lazy(() => import("./features/gym/pages/GymCard"));
+const AddGymWorkout = lazy(() => import("./features/gym/pages/AddGymWorkout"));
+const NutritionList = lazy(
+  () => import("./features/nutrition/pages/NutritionList"),
+);
+const AddFoodIntake = lazy(
+  () => import("./features/nutrition/pages/AddFoodIntake"),
+);
+const UserWeightData = lazy(
+  () => import("./features/nutrition/pages/UserWeightData"),
+);
 
 export const router = createBrowserRouter([
   {
