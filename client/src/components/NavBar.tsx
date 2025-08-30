@@ -64,17 +64,17 @@ export default function NavBar() {
           </NavLink>
         </li>
 
-        {/* <li> */}
-        {/*   <NavLink */}
-        {/*     to="/timer" */}
-        {/*     onClick={closeMenu} */}
-        {/*     className={({ isActive }) => */}
-        {/*       (isActive ? active : undefined) + navLingDecoration */}
-        {/*     } */}
-        {/*   > */}
-        {/*     Timer */}
-        {/*   </NavLink> */}
-        {/* </li> */}
+        <li>
+          <NavLink
+            to="/timer"
+            onClick={closeMenu}
+            className={({ isActive }) =>
+              (isActive ? active : undefined) + navLingDecoration
+            }
+          >
+            Timer
+          </NavLink>
+        </li>
 
         <li>
           <NavLink

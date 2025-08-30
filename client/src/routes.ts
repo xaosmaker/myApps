@@ -20,6 +20,7 @@ const Shifts = lazy(() => import("./features/work-hours/pages/Shifts"));
 const TodoList = lazy(() => import("./features/todo/pages/TodoList"));
 const AddEditTodo = lazy(() => import("./features/todo/pages/AddEditTodo"));
 const AddTodo = lazy(() => import("./features/todo/pages/AddTodo"));
+const NewTimer = lazy(() => import("./features/timer/NewTimer"));
 
 const GymCard = lazy(() => import("./features/gym/pages/GymCard"));
 const AddGymWorkout = lazy(() => import("./features/gym/pages/AddGymWorkout"));
@@ -73,18 +74,18 @@ export const router = createBrowserRouter([
             ],
           },
 
-          // {
-          //   path: "/timer",
-          //   children: [
-          //     {
-          //       index: true,
-          //       Component: () =>
-          //         Navigate({ replace: true, to: "count-down-timer" }),
-          //     },
-          //
-          //     { path: "count-down-timer", Component: NewTimer },
-          //   ],
-          // },
+          {
+            path: "/timer",
+            children: [
+              {
+                index: true,
+                Component: () =>
+                  Navigate({ replace: true, to: "count-down-timer" }),
+              },
+
+              { path: "count-down-timer", Component: NewTimer },
+            ],
+          },
 
           {
             path: "/nutritions",
