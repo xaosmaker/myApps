@@ -11,7 +11,6 @@ import { workoutTableCols } from "./workoutTablecols";
 
 export default function WorkoutCard({ data }: { data: GymDayType }) {
   const { gym_day, created_at } = data;
-  console.log(gym_day);
 
   return (
     <Card className={`min-h-48 w-full bg-slate-800 p-2`}>
@@ -28,9 +27,6 @@ export default function WorkoutCard({ data }: { data: GymDayType }) {
           columns={workoutTableCols}
           data={gym_day}
         />
-        {/* {todo_tasks.slice(0, 10).map((item) => ( */}
-        {/*   <TodoCardItem key={item.pkid} todo={item} /> */}
-        {/* ))} */}
       </CardContent>
     </Card>
   );
