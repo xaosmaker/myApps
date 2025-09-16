@@ -87,7 +87,7 @@ services:
 
 networks:
   myApps_nw:
-    internal: true
+    external: true
   prod-nginx-net:
     external: true
 
